@@ -9,7 +9,7 @@ Java desktop application for **Object Oriented Analysis and Design / System Anal
 - **Run the app:** double-click [start-app.cmd](start-app.cmd).
 - **Explore the clickable prototype:** open [prototype/index.html](prototype/index.html) in a browser. No installation needed.
 - **Read the reports:** open the PDFs in [output/pdf](output/pdf).
-- **Present the Java app.** Open the [OOAD PowerPoint](output/presentation/CCMS-OOAD-presentation.pptx) and use the [demo guide](presentation-guide.md) for the live walkthrough.
+- **Present the Java app.** Open the [OOAD PowerPoint](output/presentation/CCMS-OOAD-presentation.pptx) and use the [demo guide](presentation-guide.md) for the live walkthrough. The deck has 13 main slides and four hidden UML backup slides, with assigned speakers and matching scripts in Presenter View.
 
 ## Interactive prototype
 

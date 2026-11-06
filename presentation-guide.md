@@ -1,10 +1,10 @@
 # CCMS presentation script
 
-Open the [13-slide PowerPoint](output/presentation/CCMS-OOAD-presentation.pptx) in Presenter View. Each slide’s notes contain its speaker and spoken lines. Use this sheet during the live demo, when the Java window is on screen.
+Open the [PowerPoint](output/presentation/CCMS-OOAD-presentation.pptx) in Presenter View. The deck contains **13 main slides and four hidden UML backup slides**. Slides 1–13 keep the original speaking assignments. Each slide has its speaker, spoken lines and pointing cues in its notes. Use the live cue sheet below while the Java window is on screen.
 
-Allow six to eight minutes for the slides and two to three minutes for the demo. These are speaking assignments for the presentation.
+Allow six to eight minutes for the main slides and two to three minutes for the demo. These are rehearsal estimates, not a time limit supplied by the instructor. Backup slides are for questions. These assignments describe who presents each topic, not who originally implemented it.
 
-| Speaker | Slides | Topic | Live part |
+| Speaker | Main slides | Topic | Live part |
 |---|---|---|---|
 | **Khaled Alkhawaldeh** | 1–3 | Problem, competition formats and actors | Introduce the live scenario and close on the student result. |
 | **Abdulrahman Alnaqbi** | 4–6 | Domain model, Strategy and lifecycle | Explain certification and publication as Ahmed operates the organizer account. |
@@ -32,23 +32,35 @@ Allow six to eight minutes for the slides and two to three minutes for the demo.
 
 “These are the three events in the app. In the hackathon, judges review a project. In programming, solved problems and time penalties determine the ranking. In robotics, a team has to win its matches to advance.”
 
-**Slide 3 · Actors and permissions**
+**Slide 3 · Actors and use cases**
 
-“A captain enters a team. An assigned judge can decide a match, but publishing the result takes the owning organizer or an administrator. Once it’s published, all four roles can see it. Abdulrahman, how do those rules appear in the model?”
+“At the top left, Campus user represents capabilities shared by all four roles. Below it, students manage teams and captains register or submit work. Judges evaluate entries or record match winners. The owning organizer or an administrator advances the event and publishes results. Abdulrahman will connect these actions to the domain model.”
+
+**Point or click**
+Point to Campus user, then Student, Judge and Configure / advance event.
 
 ## Abdulrahman Alnaqbi · slides 4–6
 
-**Slide 4 · A registration links a team to an event**
+**Slide 4 · Conceptual domain model**
 
-“Follow the top row from Team to Competition. Each registration links exactly one team to one event. A team can enter other events through other registrations. For a project, the entry can hold one current submission, and several judges can review it.”
+“Start with Team in the upper middle, then follow the line down to Registration. Each registration links one team to one competition. For project and programming entries, it can have one current submission. Judges evaluate that submission. The Match class supports the separate knockout workflow.”
+
+**Point or click**
+Point to Team, Registration, Competition, then Submission, Evaluation and Match.
 
 **Slide 5 · Competition rules as strategies**
 
-“CampusService asks for the policy that matches the event’s format. ProjectRules computes a weighted score. ProgrammingRules checks solved count and penalties. A knockout uses match winners instead of a rubric, and the service creates the next round.”
+“On the right, CampusService depends on the CompetitionRules interface. The three implementations below supply different validation and scoring behavior. That is our use of polymorphism. ProjectRules calculates a weighted rubric. ProgrammingRules interprets solved problems and penalties. KnockoutRules requires no submission, while CampusService manages the rounds.”
+
+**Point or click**
+Point to CampusService, the interface, and each of the three implementations.
 
 **Slide 6 · Competition lifecycle**
 
-“Look at the move from Active to Judging. For a project, every registered team must have submitted. For a knockout, the final needs a winner. The organizer requests the change, and the service checks that condition. Yousif will show what those differences mean for the teams.”
+“Follow the top row from Draft to Active, then down to Judging. Projects and programming contests need every registered team's submission before judging. A knockout needs a completed bracket. The owner or administrator requests each transition, and the service enforces its guard. Yousif will explain the different scoring rules.”
+
+**Point or click**
+Follow Draft, Registration and Active, then the downward arrow to Judging and left to Published.
 
 ## Yousif Alhammadi · slides 7–9
 
@@ -62,13 +74,19 @@ Allow six to eight minutes for the slides and two to three minutes for the demo.
 
 **Slide 9 · The knockout final opens after both semifinals**
 
-“In Robotics Challenge, the first semifinal fills one place in the final. The other place stays open until the second winner is recorded. Then the service creates exactly one final. We’ll show that moment live. Ahmed, what does the application check before it saves an action?”
+“After the first semifinal, we know one winner but the final does not exist yet. Once both winners are recorded, the service creates exactly one final. We will show that moment live. Ahmed, what does the application check before it saves an action?”
+
+**Point or click**
+Point to the two semifinal matches and the waiting final column.
 
 ## Ahmed Alsamma · slides 10–13
 
-**Slide 10 · What happens when a captain registers?**
+**Slide 10 · Team registration sequence**
 
-“When a captain clicks Register my team, the form sends the team and event IDs to CampusService. The service checks the captain, registration phase and roster before asking the repository to save. If the write fails, the previous state is restored.”
+“Read this from top to bottom. The captain selects a team in CampusApp, which calls register on CampusService. The service checks authority, phase, deadline, capacity and roster conflicts. It then updates the state and calls Repository.save. Success refreshes the view. If saving fails, the service restores the previous state.”
+
+**Point or click**
+Trace the call from Captain to CampusApp, then CampusService and Repository. Finish on the dashed return messages.
 
 **Slide 11 · Prototype and Java application**
 
@@ -80,7 +98,10 @@ Allow six to eight minutes for the slides and two to three minutes for the demo.
 
 **Slide 13 · Live demo**
 
-“Let’s run Robotics Challenge. We’ll decide the matches as a judge, publish as the organizer, then see what a student sees. I’ll drive the app. Yousif, talk us through the bracket.”
+“Let's run Robotics Challenge. We will decide the matches as a judge, publish as the organizer, then see what a student sees. I will drive the app while the team explains each step.”
+
+**Point or click**
+Switch to the prepared Java window. Khaled introduces the scenario, then Yousif narrates the matches.
 
 ## Live demo cue sheet
 
@@ -88,49 +109,119 @@ Ahmed performs every click. The named speaker delivers the line. Reopen **Bracke
 
 ### 1. Open the bracket
 
-**Ahmed clicks** — Switch from slide 13 to the prepared Java window. Show Robotics Challenge on its **Bracket** tab.
+**Ahmed clicks**
+Switch from slide 13 to the prepared Java window. Show Robotics Challenge on its **Bracket** tab.
 
-**Khaled says** — “Watch who can decide a match and who can make the result public.”
+**Khaled says**
+“Watch who can decide a match and who can make the result public.”
 
 ### 2. First semifinal
 
-**Ahmed clicks** — In the Team Alpha / Code Warriors semifinal, click **Record winner**. Choose **Team Alpha** and click **OK**. Click **Bracket** again. Point to **Awaiting round winners** in the final column.
+**Ahmed clicks**
+In the Team Alpha / Code Warriors semifinal, click **Record winner**. Choose **Team Alpha** and click **OK**. Click **Bracket** again. Point to **Awaiting round winners** in the final column.
 
-**Yousif says** — “Team Alpha beats Code Warriors. The final still has to wait for another winner.”
+**Yousif says**
+“Team Alpha beats Code Warriors. The final still has to wait for another winner.”
 
 ### 3. Second semifinal
 
-**Ahmed clicks** — In the Innovators / Circuit Breakers semifinal, click **Record winner**. Choose **Innovators** and click **OK**. Reopen **Bracket**. Point to the new **FINAL** match.
+**Ahmed clicks**
+In the Innovators / Circuit Breakers semifinal, click **Record winner**. Choose **Innovators** and click **OK**. Reopen **Bracket**. Point to the new **FINAL** match.
 
-**Yousif says** — “Innovators wins the other semifinal. Now both opponents are known, and the final appears.”
+**Yousif says**
+“Innovators wins the other semifinal. Now both opponents are known, and the final appears.”
 
 ### 4. Final
 
-**Ahmed clicks** — In the **FINAL** column, click **Record winner**. Choose **Team Alpha**, click **OK**, and reopen **Bracket** to show the **CHAMPION** panel.
+**Ahmed clicks**
+In the **FINAL** column, click **Record winner**. Choose **Team Alpha**, click **OK**, and reopen **Bracket** to show the **CHAMPION** panel.
 
-**Yousif says** — “Team Alpha wins the final. The champion is decided, but the organizer still has to publish the results.”
+**Yousif says**
+“Team Alpha wins the final. The champion is decided, but the organizer still has to publish the results.”
 
 ### 5. Certify
 
-**Ahmed clicks** — Click **Sign out**. Sign in as **organizer1@campus.test**. Click **Competitions**, then **Explore competition** on **Robotics Challenge**. Click **Certify bracket** and confirm **OK**. Point to **Judging**.
+**Ahmed clicks**
+Click **Sign out**. Sign in as **organizer1@campus.test**. Click **Competitions**, then **Explore competition** on **Robotics Challenge**. Click **Certify bracket** and confirm **OK**. Point to **Judging**.
 
-**Abdulrahman says** — “The final now has a winner, so the organizer can certify the bracket and move it into Judging.”
+**Abdulrahman says**
+“The final now has a winner, so the organizer can certify the bracket and move it into Judging.”
 
 ### 6. Publish
 
-**Ahmed clicks** — Click **Publish results** and confirm **OK**. Show the **Published** phase.
+**Ahmed clicks**
+Click **Publish results** and confirm **OK**. Show the **Published** phase.
 
-**Abdulrahman says** — “Certification and publication are separate steps. This one makes the standings official.”
+**Abdulrahman says**
+“Certification and publication are separate steps. This one makes the standings official.”
 
 ### 7. View and close
 
-**Ahmed clicks** — Click **Sign out**. Sign in as **student1@campus.test**. Click **Results** in the sidebar. Scroll to **Robotics Challenge** and point to Team Alpha and Innovators.
+**Ahmed clicks**
+Click **Sign out**. Sign in as **student1@campus.test**. Click **Results** in the sidebar. Scroll to **Robotics Challenge** and point to Team Alpha and Innovators.
 
-**Khaled says** — “As a student, I can see Team Alpha first with two wins and Innovators second with one. All three formats share this publication step, even though they produce a winner differently. Thank you. We’re ready for questions.”
+**Khaled says**
+“As a student, I can see Team Alpha first with two wins and Innovators second with one. All three formats share this publication step, even though they produce a winner differently. Thank you. We’re ready for questions.”
+
+## UML backup slides for questions
+
+The normal slide show skips slides 14–17. Do not advance through them during the main talk. For a question, return to PowerPoint and open the relevant slide from the thumbnail pane. The named speaker gives the short answer below.
+
+| Slide | Diagram | Speaker | Use when asked about |
+|---|---|---|---|
+| 14 | Format-specific workflow | Yousif Alhammadi | Differences in format workflows |
+| 15 | Software architecture | Ahmed Alsamma | Separation of responsibilities |
+| 16 | Final domain relationships | Abdulrahman Alnaqbi | Record attributes and relationships |
+| 17 | Package dependencies | Ahmed Alsamma | Code organization and dependencies |
+
+**Slide 14 · Format-specific workflow**
+
+“This activity diagram shows where the workflows separate. The left branch receives submissions and collects scores. The right branch generates a bracket and records winners until there is a champion. Both branches check completeness before publishing results.”
+
+**Point**
+Point to the Format decision, trace each branch, then the merge before publication.
+
+**Slide 15 · Software architecture**
+
+“The Swing interface calls CampusService. The service controls use cases and permissions, uses the domain rules, and asks Repository to save state. Keeping these responsibilities separate lets us test business rules without opening the UI. This is one local Java process, with a snapshot file for storage.”
+
+**Point**
+Trace Presentation to CampusService, then Domain and Repository, and finally Local Storage.
+
+**Slide 16 · Final domain relationships**
+
+“This view adds types to the conceptual model. Records connect through identifiers. A registration refers to one team and competition, and a match stores its participants and optional winner. These are selected attributes. The implementation uses immutable Java records and replacement values for updates.”
+
+**Point**
+Point to the typed IDs in Registration and the winner field in Match.
+
+**Slide 17 · Package dependencies**
+
+“The packages separate interface code, application services, rule strategies and persistence. Passwords belongs in util. The persisted domain records keep their original Model names so existing data remains readable. This diagram shows the main dependencies. The UI also reads rule explanations, and CampusApp constructs Repository at startup.”
+
+**Point**
+Follow ui to service and its dependencies, then point to Model / model.
+
+## What the professor is likely expecting
+
+His approval message explicitly asks for clear object-oriented analysis and design, different competition formats, and differences in their rules and workflows. The supplied assignment outlines specify analysis models, software design, implementation and testing reports. They do not specify a separate presentation rubric or a speaking time limit. The priorities below are preparation advice based on that evidence.
+
+- Explain the problem and the three formats briefly. Use the formats to show why registration alone is insufficient.
+- Connect a requirement to UML and then to code. For example, captain registration becomes the sequence diagram and CampusService.register.
+- Explain the object-oriented decisions. Cover the CompetitionRules interface and polymorphism, immutable records, service authorization, and separation of UI from persistence.
+- Demonstrate one complete workflow. The planned judge, organizer and student demo shows progression and publication. Keep the programming tie-break and a rejected invalid action ready if asked.
+- Explain the test evidence and limits honestly. The recorded 3 November Windows runs passed 70 service checks and 16 Swing checks. Linux/macOS execution and a formal usability study remain unverified.
+- Be ready to explain your own work accurately. Speaking assignments do not establish historical contributions, and everyone should understand the design decisions they discuss.
+
+During rehearsal, each person should answer “Why did we design it this way?” without reading. Explain one meaningful relationship on a diagram rather than reading every box. Keep the demonstration focused and avoid clicking through every screen.
+
+Likely follow-up questions include why Strategy fits this problem, why roles use an enum, where authorization is enforced, what changes for a fourth format, and how the service recovers after a failed save.
+
+Sources for preparation are the instructor approval message supplied in the conversation and the original outlines in `requirements/system-analysis-requirements.txt`, `requirements/system-design-requirements.txt`, `requirements/implementation-report-requirements.txt` and `requirements/testing-requirements.txt`.
 
 ## Extra examples for questions
 
-The following walkthroughs are available if the instructor wants more detail. The planned live demo ends with the published Robotics Challenge standings.
+Use these only if the instructor requests more detail. The planned demo ends with the published Robotics Challenge standings.
 
 ## 1. Explain the design (2 minutes)
 
