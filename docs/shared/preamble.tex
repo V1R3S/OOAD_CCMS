@@ -16,9 +16,7 @@
 \usepackage{tabularx}
 \usepackage{enumitem}
 \usepackage{booktabs}
-% Additional packages for real UML diagrams and multipage test tables.
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning,shapes.geometric,fit,calc}
+% Vector UML artwork and multipage test tables.
 \usepackage{longtable}
 \usepackage{pdflscape}
 \definecolor{aauRed}{RGB}{164,22,35}
@@ -37,6 +35,19 @@
 \newcommand{\blankline}{\rule{\linewidth}{0.35pt}}
 \newcommand{\insertfigure}[3]{\begin{figure}[H]\centering\fbox{\parbox[c][#2][c]{0.88\textwidth}{\centering\textcolor{black!50}{\Large #1}}}\caption{#3}\end{figure}}
 \newcommand{\screen}[3][0.98]{\begin{figure}[H]\centering\includegraphics[width=#1\linewidth]{../assets/#2}\caption{#3}\end{figure}}
+% Give wide UML models a dedicated landscape page with readable labels.
+\newenvironment{umlpage}{%
+\newgeometry{margin=0.65in}\begin{landscape}\pagestyle{empty}%
+\AddToHook{shipout/foreground}[ccms/umlfooter]{%
+\begin{tikzpicture}[remember picture,overlay]
+\node[rotate=90,anchor=south,inner sep=0pt] at ([xshift=-23pt]current page.east)
+{\normalfont\normalsize\thepage};
+\end{tikzpicture}}%
+}{\end{landscape}\RemoveFromHook{shipout/foreground}[ccms/umlfooter]\pagestyle{fancy}\restoregeometry}
+\newcommand{\umlfigure}[2]{\begin{figure}[H]\centering
+\includegraphics[width=\linewidth,height=13cm,keepaspectratio]{../assets/uml/#1.pdf}
+\caption{#2}\end{figure}}
+\providecommand{\reportdate}{3 November 2026}
 % Two intentionally sized figures fit together with a heading on an A4 page.
 \newcommand{\screenpair}[5][0.30]{%
 \begin{figure}[H]\centering
@@ -90,6 +101,5 @@ Khaled Alkhawaldeh&202410091\\Abdulrahman Alnaqbi&202340042\\Yousif Alhammadi&20
 \begin{tcolorbox}[colback=gray!5,colframe=black!70,title=\textbf{Project Summary},fonttitle=\bfseries,width=0.95\textwidth,boxrule=0.4mm,arc=3mm,left=7pt,right=7pt,top=4pt,bottom=4pt]
 A Java desktop workspace for organizing campus competitions, coordinating teams, collecting submissions, evaluating work, and publishing results. Project showcases, programming contests, and knockout brackets demonstrate distinct rules and workflows through object-oriented design.
 \end{tcolorbox}
-\vfill{\normalsize Fall, 2026--2027\par}{\small Version 1.1 \;|\; 3 November 2026\par}
+\vfill{\normalsize Fall, 2026--2027\par}{\small Version 1.1 \;|\; \reportdate\par}
 \end{titlepage}\pagenumbering{roman}\hypersetup{pageanchor=true}\tableofcontents\clearpage\pagenumbering{arabic}}
-\tikzset{box/.style={draw=darkGray!70,rounded corners=2pt,fill=softGray,align=center,minimum height=9mm,font=\small},flow/.style={-{Stealth},thick,draw=darkGray},rel/.style={thick,draw=darkGray},note/.style={font=\scriptsize,fill=white,inner sep=2pt,align=center}}

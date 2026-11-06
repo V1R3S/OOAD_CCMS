@@ -9,9 +9,11 @@ CCMS translates campus competition processes into an executable object model. It
 \item Make the project buildable with a JDK alone and understandable during an OOAD demonstration.
 \end{itemize}
 
-\clearpage\section{Software Architecture}
+\begin{umlpage}
+\section{Software Architecture}
 \subsection{Subsystem Decomposition}
-\begin{figure}[H]\centering\resizebox{0.86\linewidth}{!}{\input{../shared/diagrams/architecture}}\caption{Logical layers and dependency direction.}\end{figure}
+\umlfigure{06_software_architecture}{Logical layers and their main responsibilities.}
+\end{umlpage}
 \textbf{Boundary: ui package.} CampusApp owns the frame and navigation. AppDialogs owns forms; CompetitionViews builds cards, brackets, and leaderboards; UiComponents supplies shared controls; CampusTheme defines the visual identity. It does not calculate official scores or directly mutate persisted records. UI work is scheduled on the Swing event-dispatch thread.
 
 \textbf{Control: CampusService.} Owns the active session and implements use cases. It validates role, ownership, phase, and domain constraints, delegates score policy to a strategy, and performs durable updates through Repository.
@@ -57,7 +59,7 @@ This is a local coursework security boundary, not internet-facing account securi
 \item Incomplete judging or missing submissions: block the stage transition. Automatic forfeits and cancellation are future features.
 \end{itemize}
 
-\section{Subsystem Services}
+\clearpage\section{Subsystem Services}
 \subsection{User Management Subsystem}
 \code{login(email,password)} clears the prior session before verification. Account creation requires an administrator and a unique email address.
 
@@ -73,7 +75,7 @@ This is a local coursework security boundary, not internet-facing account securi
 \subsection{Results Management Subsystem}
 \code{standings(cid)} enforces visibility, computes the selected format's scores, applies tie policies, and returns immutable Standing values. \code{standingsCsv(cid)} uses the same ordered values, quotes text cells, doubles embedded quotes, and neutralizes leading formula characters. Export does not maintain a second, potentially inconsistent ranking calculation.
 
-\section{Low-Level Design}
+\clearpage\section{Low-Level Design}
 \subsection{Object Design Trade-offs}
 \textbf{Composition over a user subclass hierarchy.} A User contains a Role enum because all roles share identity fields. Different permissions are checked by service operations. Artificial Student/Organizer subclasses would add little behavior in this implementation.
 
@@ -82,11 +84,16 @@ This is a local coursework security boundary, not internet-facing account securi
 \textbf{Strategies plus explicit workflow branching.} CompetitionRules encapsulates scoring validation, score calculation, explanations, and submission requirements. The service still contains explicit format branches for aggregation, penalty tie-breaking, and bracket generation. Adding a fourth format therefore requires changes to both the enum/factory and relevant service guards; the implementation does not claim completely modification-free extension.
 
 \textbf{Snapshot persistence over SQL.} A local object snapshot avoids dependencies and setup. It is suitable for a small demonstration, but each write serializes the entire dataset. A future multi-user version should introduce a transactional database and server-side sessions.
-\clearpage\subsection{Final Object Design}
-\begin{figure}[H]\centering\resizebox{\linewidth}{!}{\input{../shared/diagrams/strategy}}\caption{Detailed rule strategy interface, implementations, and control-class dependency. UML realization uses a dashed line with an open triangular arrowhead.}\end{figure}
-\begin{figure}[H]\centering\resizebox{\linewidth}{!}{\input{../shared/diagrams/domain}}\caption{Final domain relationships. The attribute catalogue below expands each record.}\end{figure}
-\clearpage\subsection{Packages and Dependencies}
-\begin{figure}[H]\centering\resizebox{0.9\linewidth}{!}{\input{../shared/diagrams/packages}}\caption{Physical packages and their dependency direction.}\end{figure}
+\begin{umlpage}
+\subsection{Final Object Design}
+\umlfigure{07_strategy_class}{Rule strategy interface, its three implementations, and the CampusService dependency.}
+\clearpage\subsubsection*{Final Object Relationships}
+\umlfigure{08_final_domain}{Final domain relationships with selected attributes. The class catalogue gives the exact Java fields and responsibilities.}
+\end{umlpage}
+\begin{umlpage}
+\subsection{Packages and Dependencies}
+\umlfigure{09_package_dependencies}{Main package dependencies. The UI also reads rule explanations, and CampusApp.main constructs Repository at startup.}
+\end{umlpage}
 Production sources are under \code{src/main/java/edu/aau/ccms}; tests use \code{src/test/java/edu/aau/ccms}. The application has no external runtime library. Maven uses JUnit Jupiter and Surefire to execute the existing lifecycle suites; the native scripts remain a JDK-only alternative. The ui, service, repository, rules, util, and model packages separate responsibilities. Existing serialized domain records intentionally retain their names under edu.aau.ccms.Model so version-one data stays readable; TC-69 verifies a pre-refactor fixture.
 \subsection{Class Interfaces: Attributes, Methods, Responsibilities}
 \small

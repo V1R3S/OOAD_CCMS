@@ -24,7 +24,7 @@ Saves validate size and readability before replacing the current snapshot, creat
 
 Maven now runs the existing acceptance suites through JUnit Jupiter and Surefire. The native scripts remain usable with a JDK alone. The shell script has LF endings, respects `JAVA_HOME`, and handles POSIX versus Windows-shell classpaths. Git attributes preserve line endings. PowerShell builds clean only their verified compiled-output directories and fall back correctly when `JAVA_HOME` is invalid.
 
-All eight UML sources were reviewed. Seven were corrected; the accurate Strategy diagram was retained. Changes include inherited common use cases for every actor (including published results), organizer/admin audit and management associations, domain cardinalities, activity start/end and branch merge, valid publication guards, realistic save wording, and the new physical packages. Relationship lines represent ID associations, not invented composition.
+The 3 November audit reviewed the eight original UML sources. Seven were corrected; the accurate Strategy diagram was retained. Changes included inherited common use cases for every actor (including published results), organizer/admin audit and management associations, domain cardinalities, activity start/end and branch merge, valid publication guards, realistic save wording, and the new physical packages. Relationship lines represent ID associations, not invented composition. On 6 November, these illustrations were replaced at the team's request with nine supplied SVG diagrams, including separate conceptual and final domain models. Their vector PDF versions are embedded on landscape pages in the analysis and design reports.
 
 All five LaTeX reports were revised and rebuilt with the supplied AAU logo. The analysis and interface reports now embed actual browser-prototype captures. The interface report includes four prototype screens, eight Java screens, and four wireframes. The prototype's role switch, temporary data, and illustrative events are distinguished from Java authentication and persistence. Proposed individual responsibilities remain explicitly unverified.
 
@@ -74,7 +74,7 @@ OOAD_CCMS/
   docs/
     system-analysis/, system-design/, implementation-report/
     testing-report/, interface-mockups/
-    shared/                      # AAU preamble, references, eight UML sources
+    shared/                      # AAU preamble and references
     assets/                      # Java/prototype screenshots and wireframes
     evidence/                    # Executed CSV results and summaries
   output/pdf/                    # Five submission-ready report exports
@@ -161,6 +161,6 @@ These are engineering judgments against the supplied coursework scope, not a pre
 
 **Technically ready for university evaluation on Windows, subject to the group's final academic review.** Confirm actual contributions and review the reports before handing them in. Commit and push the prepared source if a repository URL is part of the submission. No additional in-scope software feature is currently blocked.
 
-The clean extraction used for the Java audit passed 70 service checks and 16 Swing checks with the native build. Its default Maven run passed the 70 service checks and skipped the optional UI suite. The package was subsequently rebuilt to include the OOAD PowerPoint. It contains 96 project files plus a SHA-256 manifest, including five reports and the presentation. The Java source, tests, build scripts, POM, logo, and compatibility fixture match the independently tested extraction.
+The clean extraction used for the Java audit passed 70 service checks and 16 Swing checks with the native build. Its default Maven run passed the 70 service checks and skipped the optional UI suite. The package was subsequently rebuilt to include the OOAD PowerPoint and the supplied UML artwork. It contains 108 project files plus a SHA-256 manifest, including five reports and the presentation. The Java source, tests, application build scripts, POM, logo, and compatibility fixture are unchanged by the 6 November diagram replacement.
 
 Git preparation: the reviewed project snapshot is staged for the group's own commit. The five assignment-file relocations are detected as unchanged-content renames. Build outputs and local tools remain ignored. No files necessary to build or read the reports are left untracked, and no commits or pushes were made.

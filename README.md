@@ -71,8 +71,9 @@ The PowerShell scripts require only a JDK and build `build/campus.jar`. For macO
 | `prototype` | Editable HTML, CSS, and JavaScript prototype |
 | `docs/system-analysis`, `docs/system-design`, `docs/implementation-report` | Main LaTeX reports |
 | `docs/testing-report`, `docs/interface-mockups` | Testing and interface documents |
-| `docs/shared` | AAU theme and UML diagrams |
-| `docs/assets` | Java screenshots, browser-prototype captures, and wireframes embedded in the reports |
+| `docs/shared` | AAU theme and references |
+| `docs/assets` | Java screenshots, browser-prototype captures, wireframes, and UML illustrations embedded in the reports |
+| `docs/assets/uml` | Nine supplied SVG diagrams and their vector PDF versions for LaTeX |
 | `docs/evidence` | Test results used by the testing report |
 | `output/pdf` | Five final PDFs |
 | `requirements` | Original assignment outlines, with descriptive file names |
@@ -88,6 +89,8 @@ Build the documents with:
 ```
 
 Alternatively, compile each `main.tex` from its own folder twice using pdfLaTeX. `.tools`, `build`, and `data` contain local tools or generated files and are excluded from Git.
+
+To rebuild just the reports containing UML, use `.\scripts\build-reports.ps1 -CachedOnly -Report system-analysis,system-design`. The nine supplied diagrams appear on dedicated landscape pages. Their SVG originals are preserved unchanged. The included vector PDFs omit only the poster titles and footers so the reports can use their own headings, captions, and page numbers. No SVG conversion is needed for an ordinary report build. See `docs/assets/uml/README.md` to regenerate artwork after editing an SVG.
 
 This is a single-computer coursework application. It does not include cloud synchronization, email, automatic code execution, or bracket forfeits. Detailed scope and design decisions are in the reports.
 

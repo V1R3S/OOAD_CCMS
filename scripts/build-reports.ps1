@@ -1,4 +1,8 @@
-param([switch]$CachedOnly)
+param(
+    [switch]$CachedOnly,
+    [ValidateSet('system-analysis','system-design','implementation-report','testing-report','interface-mockups')]
+    [string[]]$Report
+)
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path $PSScriptRoot -Parent
 $compiler = Join-Path $projectRoot '.tools\tectonic\tectonic.exe'
@@ -16,6 +20,7 @@ try {
         'interface-mockups' = '05-interface-mockups.pdf'
     }
     foreach ($name in $reports.Keys) {
+        if ($Report -and $name -notin $Report) { continue }
         $buildDir = Join-Path $projectRoot "build\latex\$name"
         New-Item -ItemType Directory -Force $buildDir | Out-Null
         $flags = @('--keep-logs','--outdir',$buildDir)

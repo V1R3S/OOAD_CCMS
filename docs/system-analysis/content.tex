@@ -13,7 +13,7 @@ Included: local account management; four roles; team creation and self-service m
 
 Excluded from this release: institutional single sign-on, email delivery, cloud synchronization, automatic code execution, payment processing, venue reservations, file uploads, automatic disqualification, and a production deployment. Competition deadlines and bracket rounds are supported; a calendar with resource-conflict scheduling is not implemented.
 \subsection{Proposed Technologies}
-Java 17 language/API compatibility, Java Swing/AWT for the desktop interface, Java NIO for local storage and file locking, Java cryptography for salted password derivation, and LaTeX/TikZ for documentation. A portable JDK 21 was used to compile with \command{--release 17}. Build and test scripts require no external application libraries.
+Java 17 language/API compatibility, Java Swing/AWT for the desktop interface, Java NIO for local storage and file locking, Java cryptography for salted password derivation, and LaTeX with vector UML illustrations for documentation. A portable JDK 21 was used to compile with \command{--release 17}. Build and test scripts require no external application libraries.
 \subsection{Team Members}
 \begin{tabularx}{\linewidth}{Yr}\toprule Name & Student ID\\\midrule
 Khaled Alkhawaldeh & 202410091\\ Abdulrahman Alnaqbi & 202340042\\ Yousif Alhammadi & 202310707\\ Ahmed Alsamma & 202320192\\\bottomrule\end{tabularx}
@@ -81,9 +81,11 @@ This is an intentionally simplified coursework policy, not a claim to implement 
 \subsection{Maintainability}
 \textbf{NFR-05:} business policies shall be testable without the UI. Strategies shall encapsulate format validation and scoring. Requirements shall map to executable checks.
 
+\begin{umlpage}
 \section{System Models}
 \subsection{Use Case Model}
-\begin{figure}[H]\centering\resizebox{\linewidth}{!}{\input{../shared/diagrams/use-case}}\caption{Actor and use-case overview. Authentication is a precondition for protected use cases.}\end{figure}
+\umlfigure{01_use_case}{Actor and use-case overview. All four roles share Campus user capabilities. Authentication is a precondition for protected use cases.}
+\end{umlpage}
 \begin{contentbox}[UC-01: Register a team]
 \textbf{Actor:} student captain. \textbf{Preconditions:} signed in, team exists, registration open, deadline not reached.\\
 \textbf{Main flow:} choose competition; choose own team; service verifies captain, phase, capacity, size, and overlapping members; store entry and audit event; refresh teams.\\
@@ -108,13 +110,18 @@ This is an intentionally simplified coursework policy, not a claim to implement 
 \textbf{Alternatives:} incomplete reviews leave the competition in Judging.\\
 \textbf{Postcondition:} published evaluations cannot be modified; CSV export is available.
 \end{contentbox}
-\clearpage\subsection{Dynamic Models}
-\begin{figure}[H]\centering\resizebox{0.85\linewidth}{!}{\input{../shared/diagrams/sequence}}\caption{Successful registration sequence. Validation failure returns before mutation; persistence failure restores the snapshot.}\end{figure}
-\begin{figure}[H]\centering\resizebox{0.92\linewidth}{!}{\input{../shared/diagrams/state}}\caption{Competition state machine and transition guards.}\end{figure}
-\clearpage
-\begin{figure}[H]\centering\resizebox{0.70\linewidth}{!}{\input{../shared/diagrams/activity}}\caption{Activity overview showing the submission and bracket branches.}\end{figure}
+\begin{umlpage}
+\subsection{Dynamic Models}
+\umlfigure{02_registration_sequence}{Successful team registration. Validation failure returns before mutation; persistence failure restores the snapshot.}
+\clearpage\subsubsection*{Competition Lifecycle}
+\umlfigure{03_competition_state}{Competition state machine and transition guards.}
+\clearpage\subsubsection*{Format-Specific Workflow}
+\umlfigure{04_competition_activity}{Activity overview showing the submission and bracket branches.}
+\end{umlpage}
+\begin{umlpage}
 \subsection{Object and Class Model}
-\begin{figure}[H]\centering\resizebox{0.92\linewidth}{!}{\input{../shared/diagrams/domain}}\caption{Conceptual domain model. Stored relationships use stable identifiers.}\end{figure}
+\umlfigure{05_conceptual_domain}{Conceptual domain model. Stored relationships use stable identifiers. Each captain belongs to the team's members.}
+\end{umlpage}
 \clearpage\subsection{User Interface}
 The primary navigation is Sign in $\rightarrow$ Overview $\rightarrow$ Competitions $\rightarrow$ Competition workspace. A workspace contains Teams, Submissions/Reviews or Bracket, and Leaderboard. My teams and Results are global destinations; People is administrator-only and Activity is available to organizers and administrators. Role-specific action buttons reflect, but do not replace, service authorization.
 The separate Interface Mock-ups document includes the complete wireframe set, four browser-prototype captures, and eight rendered application screens.

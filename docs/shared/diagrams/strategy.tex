@@ -1,9 +1,0 @@
-\begin{tikzpicture}[x=1cm,y=1cm]
-\node[box,text width=6.1cm] (interface) at (0,0) {\textit{\guillemotleft interface\guillemotright}\\\textbf{CompetitionRules}\\\rule{5.5cm}{0.3pt}\\+ explanation(): String\\+ validate(a,b,c): void\\+ score(Evaluation): double\\+ detail(List): String\\+ requiresSubmission(): boolean\\+ forFormat(Format): CompetitionRules};
-\node[box,text width=3.8cm] (project) at (-4.5,-4) {\textbf{ProjectRules}\\40/35/25 weighted rubric\\0--100 per criterion};
-\node[box,text width=3.8cm] (program) at (0,-4) {\textbf{ProgrammingRules}\\solved count; penalty\\10 problems / 300 minutes};
-\node[box,text width=3.8cm] (knockout) at (4.5,-4) {\textbf{KnockoutRules}\\no rubric / submission\\match workflow};
-\draw[dashed,-{Triangle[open]}] (project.north)--(interface.south);\draw[dashed,-{Triangle[open]}] (program.north)--(interface.south);\draw[dashed,-{Triangle[open]}] (knockout.north)--(interface.south);
-\node[box,text width=4.8cm] (service) at (7,0) {\textbf{CampusService}\\- state: State\\- session: String\\- repository: Repository\\- clock: Clock\\\rule{4.2cm}{0.3pt}\\+ evaluate(...): void\\+ advance(cid): void\\+ standings(cid): List\\+ recordWinner(...): void};
-\draw[flow,dashed] (service)--node[note,above]{uses}(interface);
-\end{tikzpicture}

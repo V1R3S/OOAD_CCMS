@@ -12,7 +12,7 @@ ROOT_FILES = (
 )
 TREES = ('src', 'docs', 'requirements', 'sample-data', 'prototype', 'scripts', 'output/pdf')
 EXTENSIONS = {'.java', '.bin', '.md', '.tex', '.png', '.svg', '.csv', '.txt',
-              '.pdf', '.py', '.ps1', '.html', '.css', '.js'}
+              '.pdf', '.py', '.ps1', '.html', '.css', '.js', '.cjs'}
 
 
 def collect_files():
