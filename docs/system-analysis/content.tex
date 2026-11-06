@@ -1,0 +1,132 @@
+\section{Introduction}
+\subsection{Project Background and Problem Statement}
+Campus competitions bring together students, organizers, and judges, but a collection of registration forms and spreadsheets does not express how different competitions actually operate. A hackathon needs a project submission and independent rubric reviews. A programming contest needs an official solved-problem count and a time penalty. A robotics tournament needs opponents, winners, and progression through rounds.
+
+The Campus Competition Management System (CCMS), presented as \textbf{Campus}, provides one coherent workspace for those variations. The instructor accepted the idea and specifically requested a scope beyond basic registration and scheduling. This analysis therefore treats format-dependent rules, guarded workflows, and fair result calculation as the central problem.
+\subsection{Project Objectives}
+\begin{objectivebox}
+Deliver a runnable Java application that coordinates teams, validates entries, collects work, supports three competition formats, and publishes reproducible results. Demonstrate encapsulation, immutable domain objects, polymorphic rule strategies, explicit lifecycle states, and separation of interface, application logic, and persistence.
+\end{objectivebox}
+The implementation must reject invalid actions in the application service even when the graphical interface is bypassed. Its reports must describe the delivered implementation and distinguish executed tests from future validation.
+\subsection{Project Scope}
+Included: local account management; four roles; team creation and self-service membership; captain-led registration and withdrawal; configurable draft rules; submission links and descriptions; assigned judging; three scoring/workflow formats; publication; CSV export; persistent storage; audit history; and supporting UML and interface artifacts.
+
+Excluded from this release: institutional single sign-on, email delivery, cloud synchronization, automatic code execution, payment processing, venue reservations, file uploads, automatic disqualification, and a production deployment. Competition deadlines and bracket rounds are supported; a calendar with resource-conflict scheduling is not implemented.
+\subsection{Proposed Technologies}
+Java 17 language/API compatibility, Java Swing/AWT for the desktop interface, Java NIO for local storage and file locking, Java cryptography for salted password derivation, and LaTeX/TikZ for documentation. A portable JDK 21 was used to compile with \command{--release 17}. Build and test scripts require no external application libraries.
+\subsection{Team Members}
+\begin{tabularx}{\linewidth}{Yr}\toprule Name & Student ID\\\midrule
+Khaled Alkhawaldeh & 202410091\\ Abdulrahman Alnaqbi & 202340042\\ Yousif Alhammadi & 202310707\\ Ahmed Alsamma & 202320192\\\bottomrule\end{tabularx}
+Course names: Object Oriented Analysis and Design / System Analysis \& Design. Course codes: 0103430 / 0102331. Section: 61D. Instructor: Dr. Yazeed Ghadi.
+
+\section{Overview}
+\subsection{System Description}
+A user signs into a single-machine competition workspace. Organizers configure draft competitions, assign judges, open registration, and advance the lifecycle. Students form teams and captains enter competitions. Depending on the selected format, work is submitted and evaluated, or matches are decided and winners advance. Published results are visible to every authenticated role.
+\subsection{Target Users and Stakeholders}
+\begin{tabularx}{\linewidth}{lY}\toprule Stakeholder & Interest and responsibility\\\midrule
+Student & Find events, collaborate, enter as a team, submit work, and see official results.\\
+Captain & A student who created a team; registers, withdraws, and submits for that team.\\
+Organizer & Own competitions, set rules and judges, enforce readiness, and publish results.\\
+Judge & Review only assigned competitions and record scores or match winners.\\
+Administrator & Create accounts and manage any competition; inspect audit history.\\
+Instructor & Assess completeness and the connection between models, code, and tests.\\\bottomrule\end{tabularx}
+\subsection{System Features}
+\begin{tabularx}{\linewidth}{lYYY}\toprule Variation & Project showcase & Programming contest & Knockout bracket\\\midrule
+Input & Project URL and description & Solution URL and description & Registered teams\\
+Decision & Every assigned judge scores each entry & One assigned judge owns each team's official result & Assigned judge declares each match winner\\
+Ranking & Mean weighted rubric & Solved count, then penalty & Match wins; champion identified\\
+Completion & All expected reviews & One official result per entry & Final winner recorded\\\bottomrule\end{tabularx}
+\subsection{Assumptions and Constraints}
+The application is used by one process on one trusted computer. Different people sign in sequentially; it is not a multi-client server. Local operating-system access controls protect the data file. Competition deadlines use the computer's local time; documents use the team's UAE context. Roster membership is voluntary self-joining and is frozen once a team has any registration. Team size is a maximum, not an exact minimum. Each competition needs at least two teams to start.
+
+\section{Functional Requirements}
+\subsection{User Management}
+\textbf{FR-01 Authentication.} The system shall verify an email/password pair, support sign-out, and clear an existing session after a failed login. Email matching shall be case insensitive.\par
+\textbf{FR-02 Accounts and credentials.} Only administrators shall create accounts and assign roles. Email addresses shall be unique, passwords shall have at least eight characters, and authenticated users shall be able to change their own password after verifying the old password.
+\subsection{Competition Management}
+\textbf{FR-03 Competition lifecycle.} Organizers and administrators shall create draft competitions with title, description, format, maximum entries, maximum team size, deadline, and assigned judges. Only the owning organizer or an administrator shall edit or advance a competition. Rule editing shall stop when registration opens. Stages shall advance in order: Draft, Registration, Active, Judging, Published, Archived.
+
+\textbf{Acceptance guards:} registration must open before the deadline; starting requires at least two entries; non-knockout contests must start before the submission deadline; judging requires every registered team's submission, or a completed bracket; publication requires the format's complete evaluation set.
+\subsection{Registration and Team Management}
+\textbf{FR-04 Entry validation.} Only a team captain shall register or withdraw a team during registration. The system shall reject a full competition, an oversized team, repeated team registration, or a student appearing in two teams within the same competition. Entry after the deadline shall be rejected.\par
+\textbf{FR-05 Team membership.} Students shall create uniquely named teams, join unregistered teams, and leave teams they do not captain. A team shall contain at most eight members. Registered rosters shall be locked to preserve eligibility. Captains cannot leave their own team in this release.
+\subsection{Submission Management}
+\textbf{FR-06 Submissions.} Captains of registered teams shall submit a title, description, and HTTP(S) project link during the Active phase and strictly before the deadline. Resubmission shall replace that entry's earlier submission. Knockout formats shall reject submissions. Students shall only see submissions belonging to their own teams; assigned judges and competition managers shall see all entries in their competition.
+\subsection{Judging and Evaluation}
+\textbf{FR-07 Assigned review.} Only assigned judges shall record evaluations during Judging. The system shall require a submission, score ranges appropriate to the format, and nonempty feedback. A judge may revise their own score before publication. Published scores shall be immutable.\par
+\textbf{FR-09 Programming results.} A result shall contain solved problems from 0--10, elapsed minutes from 0--300, and wrong attempts from 0--100. One assigned judge owns the official result for each team; a second judge cannot replace it. No submitted code is executed.\par
+\textbf{FR-10 Knockout workflow.} Starting shall require exactly 2, 4, 8, or 16 registered teams, seeded by registration order. Assigned judges shall record winners only while Active. A winner must be a participant in that match. Results are final; when every match in a round is complete, winners are paired for the next round.
+\subsection{Results and Leaderboard}
+\textbf{FR-08 Results and export.} The system shall publish rankings only after the relevant completeness checks. Organizers and administrators may preview provisional standings; other roles wait for publication. Equal scores share a rank, using competition ranking (1, 1, 3). Export shall produce CSV and neutralize leading spreadsheet formula characters in text cells.\par
+\textbf{FR-11 Audit.} Successful changes shall record actor, local timestamp, and action. Administrators and organizers shall see the most recent 2,000 events. Failed operations shall not appear as successful events.
+
+\subsection*{Scoring Policies}
+For a project scored by judge $j$, with three scores between 0 and 100:
+\[S_j=0.40I_j+0.35E_j+0.25P_j,\qquad S_{team}=\frac{1}{n}\sum_{j=1}^{n}S_j.\]
+All assigned judges must score all entries before publication. Scores are averaged without rounding internally and displayed to two decimal places. Equality uses a $10^{-6}$ tolerance.
+
+For programming, sort solved count descending and penalty ascending:
+\[\mathrm{penalty}=\mathrm{elapsed\ minutes}+20\times\mathrm{wrong\ attempts}.\]
+This is an intentionally simplified coursework policy, not a claim to implement all ICPC rules. Tied solved counts and penalties share a rank. Knockout standings use total wins; equal elimination depth shares rank and the final winner is marked Champion.
+
+\section{Nonfunctional Requirements}
+\subsection{Performance}
+\textbf{NFR-01:} interactive operation is intended for small campus datasets (up to 64 teams per non-knockout competition). A target of under one second for routine navigation is a design goal, not a measured benchmark. Password derivation and disk writes can briefly block the Swing thread; large-scale performance testing remains future work.
+\subsection{Security}
+\textbf{NFR-02:} passwords shall be stored as salted PBKDF2-HMAC-SHA256 derivations, never plaintext; service methods shall enforce roles and ownership. Serialized reads shall use class and size limits. The local file is not encrypted and protection against a malicious user who can modify it is outside scope.
+\subsection{Usability}
+\textbf{NFR-03:} visible phase indicators, consistent navigation, labeled controls, clear empty states, and actionable validation errors shall support users without technical knowledge. The application shall support a minimum 1280 by 800 window. Visual checks at the default size are recorded; formal accessibility and participant usability studies have not been performed.
+\subsection{Reliability}
+\textbf{NFR-04:} successful updates shall persist; failed saves shall restore the in-memory state; an exclusive file lock shall reject a second process. Corrupt data shall trigger an error rather than silently reset. Atomic replacement is used where the filesystem supports it, with normal replacement as fallback.
+\subsection{Maintainability}
+\textbf{NFR-05:} business policies shall be testable without the UI. Strategies shall encapsulate format validation and scoring. Requirements shall map to executable checks.
+
+\section{System Models}
+\subsection{Use Case Model}
+\begin{figure}[H]\centering\resizebox{\linewidth}{!}{\input{../shared/diagrams/use-case}}\caption{Actor and use-case overview. Authentication is a precondition for protected use cases.}\end{figure}
+\begin{contentbox}[UC-01: Register a team]
+\textbf{Actor:} student captain. \textbf{Preconditions:} signed in, team exists, registration open, deadline not reached.\\
+\textbf{Main flow:} choose competition; choose own team; service verifies captain, phase, capacity, size, and overlapping members; store entry and audit event; refresh teams.\\
+\textbf{Alternatives:} duplicate, full, oversized, overlapping, or late entry produces an error and no mutation. A save failure restores the previous state.\\
+\textbf{Postcondition:} one registration exists and the roster is locked.
+\end{contentbox}
+\begin{contentbox}[UC-02: Evaluate a project]
+\textbf{Actor:} assigned judge. \textbf{Preconditions:} Judging phase; registered entry has submitted.\\
+\textbf{Main flow:} read submission; select team; enter three criteria and feedback; validate ranges; replace only this judge's previous evaluation; save.\\
+\textbf{Alternatives:} unassigned judge, missing work, invalid score, or wrong phase is rejected.\\
+\textbf{Postcondition:} exactly one evaluation for this judge and entry; results remain private until publication.
+\end{contentbox}
+\begin{contentbox}[UC-03: Decide a knockout match]
+\textbf{Actor:} assigned judge. \textbf{Preconditions:} Active knockout; undecided match.\\
+\textbf{Main flow:} choose one competing team as winner; confirm the final result; save winner; if the round is complete, pair winners into the next round.\\
+\textbf{Alternatives:} unrelated team, unassigned judge, already decided match, or wrong phase is rejected.\\
+\textbf{Postcondition:} winner is immutable; at most one next round is generated.
+\end{contentbox}
+\begin{contentbox}[UC-04: Publish results]
+\textbf{Actor:} owner or administrator. \textbf{Preconditions:} Judging phase.\\
+\textbf{Main flow:} request publication; verify every required review or certified bracket; advance phase; display official standings to all signed-in users.\\
+\textbf{Alternatives:} incomplete reviews leave the competition in Judging.\\
+\textbf{Postcondition:} published evaluations cannot be modified; CSV export is available.
+\end{contentbox}
+\clearpage\subsection{Dynamic Models}
+\begin{figure}[H]\centering\resizebox{0.85\linewidth}{!}{\input{../shared/diagrams/sequence}}\caption{Successful registration sequence. Validation failure returns before mutation; persistence failure restores the snapshot.}\end{figure}
+\begin{figure}[H]\centering\resizebox{0.92\linewidth}{!}{\input{../shared/diagrams/state}}\caption{Competition state machine and transition guards.}\end{figure}
+\clearpage
+\begin{figure}[H]\centering\resizebox{0.70\linewidth}{!}{\input{../shared/diagrams/activity}}\caption{Activity overview showing the submission and bracket branches.}\end{figure}
+\subsection{Object and Class Model}
+\begin{figure}[H]\centering\resizebox{0.92\linewidth}{!}{\input{../shared/diagrams/domain}}\caption{Conceptual domain model. Stored relationships use stable identifiers.}\end{figure}
+\clearpage\subsection{User Interface}
+The primary navigation is Sign in $\rightarrow$ Overview $\rightarrow$ Competitions $\rightarrow$ Competition workspace. A workspace contains Teams, Submissions/Reviews or Bracket, and Leaderboard. My teams and Results are global destinations; People is administrator-only and Activity is available to organizers and administrators. Role-specific action buttons reflect, but do not replace, service authorization.
+The separate Interface Mock-ups document includes the complete wireframe set, four browser-prototype captures, and eight rendered application screens.
+\screenpair{prototype/01-overview.png}{Clickable browser prototype dashboard. Demo data resets on refresh.}{screenshots/04-competition.png}{Implemented competition workspace with format policy and lifecycle indicator.}
+
+\clearpage\section{Glossary \& References}
+\begin{tabularx}{\linewidth}{lY}\toprule Term & Meaning\\\midrule
+Entry & One team's registration in one competition.\\
+Captain & Student responsible for registering and submitting for a team.\\
+Strategy & Interchangeable object encapsulating format-specific behavior.\\
+Phase guard & Condition checked before the lifecycle advances.\\
+Official result & The single judge-owned programming score for a team.\\
+Provisional standings & Manager-only rankings before publication.\\
+Atomic replacement & Replacing the saved file in one filesystem operation where supported.\\\bottomrule\end{tabularx}
+\input{../shared/references}

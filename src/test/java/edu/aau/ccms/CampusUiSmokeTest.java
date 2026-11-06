@@ -1,0 +1,451 @@
+package edu.aau.ccms;
+
+import edu.aau.ccms.repository.Repository;
+import edu.aau.ccms.service.CampusService;
+import edu.aau.ccms.ui.CampusApp;
+import edu.aau.ccms.ui.CampusTheme;
+import java.awt.*;
+import java.nio.file.*;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import javax.swing.*;
+
+/** Exercises real Swing controls on the event thread, using an isolated repository. */
+public final class CampusUiSmokeTest {
+  private static CampusApp app;
+  private static CampusService service;
+  private static int passed, failed;
+  private static final List<String> results = new ArrayList<>();
+
+  private static void check(boolean condition, String message) {
+    if (!condition) throw new AssertionError(message);
+  }
+
+  private static List<Component> children(Container parent) {
+    List<Component> result = new ArrayList<>();
+    for (Component child : parent.getComponents()) {
+      result.add(child);
+      if (child instanceof Container container) result.addAll(children(container));
+    }
+    return result;
+  }
+
+  private static <T extends Component> T find(
+      Container parent, Class<T> type, Predicate<T> predicate) {
+    return children(parent).stream()
+        .filter(type::isInstance)
+        .map(type::cast)
+        .filter(predicate)
+        .findFirst()
+        .orElseThrow(() -> new AssertionError("Control not found: " + type.getSimpleName()));
+  }
+
+  private static JButton button(String text) {
+    return find(app, JButton.class, b -> b.getText().equals(text));
+  }
+
+  private static boolean hasButton(String text) {
+    return children(app).stream().anyMatch(c -> c instanceof JButton b && b.getText().equals(text));
+  }
+
+  private static void login(String account) {
+    find(app, JTextField.class, f -> "login-email".equals(f.getName()))
+        .setText(account + "@campus.test");
+    find(app, JPasswordField.class, f -> "login-password".equals(f.getName()))
+        .setText("Campus@2026");
+    button("Sign in  →").doClick();
+    app.validate();
+  }
+
+  private static long cards() {
+    return children(app).stream()
+        .filter(
+            c ->
+                c instanceof JButton
+                    && c.getName() != null
+                    && c.getName().startsWith("open-competition-"))
+        .count();
+  }
+
+  private static void openCompetition(String id) {
+    find(app, JButton.class, b -> ("open-competition-" + id).equals(b.getName())).doClick();
+  }
+
+  private static void modal(Runnable open, Consumer<JDialog> interaction) {
+    AtomicReference<Throwable> error = new AtomicReference<>();
+    Timer timer = new Timer(80, null);
+    Timer timeout =
+        new Timer(
+            8000,
+            event -> {
+              error.compareAndSet(
+                  null, new AssertionError("Dialog did not complete within eight seconds"));
+              for (Window window : Window.getWindows())
+                if (window instanceof JDialog) window.dispose();
+            });
+    timeout.setRepeats(false);
+    timer.addActionListener(
+        event -> {
+          for (Window window : Window.getWindows()) {
+            if (window instanceof JDialog dialog && dialog.isVisible()) {
+              timer.stop();
+              try {
+                interaction.accept(dialog);
+              } catch (Throwable failure) {
+                error.set(failure);
+                dialog.dispose();
+              }
+              break;
+            }
+          }
+        });
+    timer.start();
+    timeout.start();
+    try {
+      open.run();
+    } finally {
+      timer.stop();
+      timeout.stop();
+    }
+    if (error.get() != null) throw new AssertionError("Dialog interaction failed", error.get());
+  }
+
+  private static void test(String id, String description, Runnable action) throws Exception {
+    AtomicReference<Throwable> failure = new AtomicReference<>();
+    SwingUtilities.invokeAndWait(
+        () -> {
+          try {
+            action.run();
+          } catch (Throwable error) {
+            failure.set(error);
+          }
+        });
+    if (failure.get() == null) {
+      passed++;
+      results.add(id + ",PASS,\"" + description + "\"");
+      System.out.println("PASS " + id + " " + description);
+    } else {
+      failed++;
+      results.add(id + ",FAIL,\"" + description + "\"");
+      System.err.println("FAIL " + id + " " + description);
+      failure.get().printStackTrace();
+    }
+  }
+
+  public static void main(String[] args) throws Exception {
+    passed = 0;
+    failed = 0;
+    results.clear();
+    Files.createDirectories(Path.of("build"));
+    if (GraphicsEnvironment.isHeadless())
+      throw new IllegalStateException("UI tests need a graphical Windows/macOS/Linux session.");
+    Path root = Files.createTempDirectory(Path.of("build"), "ui-smoke-");
+    try (Repository repository = new Repository(root.resolve("campus.bin"))) {
+      service = new CampusService(repository, true);
+      SwingUtilities.invokeAndWait(
+          () -> {
+            app = new CampusApp(service);
+            app.setVisible(true);
+          });
+      try {
+        test(
+            "UI-01",
+            "Sign-in controls and packaged university artwork are available",
+            () -> {
+              check(
+                  CampusTheme.class.getResource("/aau.png") != null,
+                  "Logo missing from application classpath");
+              check(
+                  find(app, JPasswordField.class, f -> "login-password".equals(f.getName()))
+                          .getPassword()
+                          .length
+                      == 0,
+                  "Password not empty");
+            });
+        test(
+            "UI-02",
+            "Organizer signs in through the real form and sees permitted navigation",
+            () -> {
+              login("organizer1");
+              check(
+                  hasButton("Activity") && !hasButton("People"), "Incorrect organizer navigation");
+              check(cards() == 3, "Dashboard should contain three competition cards");
+            });
+        test(
+            "UI-03",
+            "Search handles no results and restores cards when cleared",
+            () -> {
+              button("Competitions").doClick();
+              JTextField search =
+                  find(app, JTextField.class, f -> "competition-search".equals(f.getName()));
+              search.setText("does-not-exist");
+              check(cards() == 0, "Search did not filter cards");
+              search.setText("");
+              check(cards() == 3, "Clearing search did not restore cards");
+            });
+        test(
+            "UI-04",
+            "Format filter and competition card navigate to the correct event",
+            () -> {
+              find(app, JComboBox.class, c -> "competition-format-filter".equals(c.getName()))
+                  .setSelectedIndex(3);
+              check(cards() == 1, "Knockout filter should show one card");
+              openCompetition("robotics");
+              check(
+                  find(app, JLabel.class, l -> "page-heading".equals(l.getName()))
+                      .getText()
+                      .equals("Robotics Challenge"),
+                  "Wrong competition opened");
+            });
+        test(
+            "UI-05",
+            "Bracket tab displays the seeded round",
+            () -> {
+              JTabbedPane tabs = find(app, JTabbedPane.class, t -> true);
+              tabs.setSelectedIndex(tabs.indexOfTab("Bracket"));
+              check(
+                  children(app).stream()
+                      .anyMatch(c -> c instanceof JLabel l && l.getText().equals("SEMIFINALS")),
+                  "Round missing");
+            });
+        test(
+            "UI-06",
+            "Results page shows published standings",
+            () -> {
+              button("Results").doClick();
+              check(
+                  find(app, JTable.class, t -> true).getRowCount() == 3,
+                  "Published standings missing");
+            });
+        test(
+            "UI-07",
+            "Sign-out returns to an empty sign-in form",
+            () -> {
+              button("Sign out").doClick();
+              check(
+                  find(app, JTextField.class, f -> "login-email".equals(f.getName()))
+                      .getText()
+                      .isEmpty(),
+                  "Email retained after sign-out");
+              check(
+                  find(app, JPasswordField.class, f -> true).getPassword().length == 0,
+                  "Password retained after sign-out");
+            });
+        test(
+            "UI-08",
+            "Student navigation hides organizer and judge functions",
+            () -> {
+              login("student1");
+              check(
+                  !hasButton("Activity") && !hasButton("People") && !hasButton("Judging studio"),
+                  "Unauthorized navigation visible");
+              button("Competitions").doClick();
+              check(!hasButton("+  Create competition"), "Student sees competition creation");
+            });
+        test(
+            "UI-09",
+            "Create-team dialog saves through the service and refreshes the roster",
+            () -> {
+              button("My teams").doClick();
+              int before = service.teams().size();
+              modal(
+                  () -> button("+  Create a team").doClick(),
+                  dialog -> {
+                    find(dialog, JTextField.class, f -> true).setText("UI Smoke Team");
+                    find(
+                            dialog,
+                            JButton.class,
+                            b -> b.getText().equals(UIManager.getString("OptionPane.okButtonText")))
+                        .doClick();
+                  });
+              check(service.teams().size() == before + 1, "Team was not created");
+              check(
+                  children(app).stream()
+                      .anyMatch(c -> c instanceof JLabel l && l.getText().equals("UI Smoke Team")),
+                  "New team not rendered");
+            });
+        test(
+            "UI-10",
+            "Judging studio lists only the current judge's assignments",
+            () -> {
+              button("Sign out").doClick();
+              login("judge3");
+              button("Judging studio").doClick();
+              check(cards() == 1, "Unassigned competition shown");
+              openCompetition("robotics");
+              JTabbedPane tabs = find(app, JTabbedPane.class, t -> true);
+              tabs.setSelectedIndex(tabs.indexOfTab("Bracket"));
+              check(hasButton("Record winner"), "Active bracket judging action missing");
+            });
+        test(
+            "UI-11",
+            "Match-winner dialog persists the selected team",
+            () -> {
+              modal(
+                  () -> button("Record winner").doClick(),
+                  dialog ->
+                      find(
+                              dialog,
+                              JButton.class,
+                              b ->
+                                  b.getText()
+                                      .equals(UIManager.getString("OptionPane.okButtonText")))
+                          .doClick());
+              check(
+                  service.matches("robotics").stream().anyMatch(m -> m.winnerId() != null),
+                  "Winner was not recorded");
+            });
+        test(
+            "UI-12",
+            "Administrator opens the account directory",
+            () -> {
+              button("Sign out").doClick();
+              login("admin");
+              button("People").doClick();
+              check(
+                  find(app, JTable.class, t -> true).getRowCount() == 16,
+                  "Account directory incomplete");
+            });
+        test(
+            "UI-13",
+            "Canceling account creation leaves stored users unchanged",
+            () -> {
+              int before = service.users().size();
+              modal(
+                  () -> button("+  Add account").doClick(),
+                  dialog ->
+                      find(dialog, JButton.class, b -> b.getText().equals("Cancel")).doClick());
+              check(service.users().size() == before, "Cancel changed users");
+            });
+        test(
+            "UI-14",
+            "Competition cards remain within the viewport at minimum window size",
+            () -> {
+              app.setSize(1280, 800);
+              button("Competitions").doClick();
+              app.validate();
+              JScrollPane scroll =
+                  find(app, JScrollPane.class, s -> s.getViewport().getView() instanceof JPanel);
+              check(
+                  scroll.getViewport().getView().getWidth() <= scroll.getViewport().getWidth(),
+                  "Horizontal layout overflow");
+              check(cards() == 3, "Cards missing at minimum size");
+            });
+        test(
+            "UI-15",
+            "Project scoring dialog calculates a live total and saves the review",
+            () -> {
+              // Prepare a ready-to-judge fixture through the service, then exercise the UI.
+              service.login("organizer1@campus.test", "Campus@2026");
+              service.advance("hackathon");
+              String[] accounts = {"student1", "student3", "student5"};
+              String[] teams = {"alpha", "warriors", "innovators"};
+              for (int i = 0; i < accounts.length; i++) {
+                service.login(accounts[i] + "@campus.test", "Campus@2026");
+                service.submit(
+                    "hackathon",
+                    teams[i],
+                    "UI review project",
+                    "Project prepared for the scoring dialog test.",
+                    "https://example.com/project");
+              }
+              service.login("organizer1@campus.test", "Campus@2026");
+              service.advance("hackathon");
+              button("Sign out").doClick();
+              login("judge1");
+              button("Judging studio").doClick();
+              openCompetition("hackathon");
+              modal(
+                  () -> button("Evaluate a submission").doClick(),
+                  dialog -> {
+                    find(
+                            dialog,
+                            JSpinner.class,
+                            s ->
+                                s.getAccessibleContext()
+                                    .getAccessibleName()
+                                    .startsWith("Innovation"))
+                        .setValue(90);
+                    find(
+                            dialog,
+                            JSpinner.class,
+                            s ->
+                                s.getAccessibleContext()
+                                    .getAccessibleName()
+                                    .startsWith("Execution"))
+                        .setValue(80);
+                    find(
+                            dialog,
+                            JSpinner.class,
+                            s ->
+                                s.getAccessibleContext()
+                                    .getAccessibleName()
+                                    .startsWith("Presentation"))
+                        .setValue(70);
+                    check(
+                        find(dialog, JLabel.class, l -> "evaluation-total".equals(l.getName()))
+                            .getText()
+                            .equals("81.50 / 100"),
+                        "Incorrect live weighted total");
+                    find(dialog, JTextArea.class, a -> a.isEditable())
+                        .setText(
+                            "Clear concept, strong execution, and a well-structured presentation.");
+                    find(dialog, JButton.class, b -> b.getText().equals("Save")).doClick();
+                  });
+              check(service.evaluations("hackathon").size() == 1, "Review was not saved");
+            });
+        test(
+            "UI-16",
+            "User-supplied markup remains literal in names and table cells",
+            () -> {
+              String literal = "<html><b>Literal name</b></html>";
+              button("Sign out").doClick();
+              login("admin");
+              service.createUser(literal, "literal@campus.test", Model.Role.STUDENT, "Campus@2026");
+              button("People").doClick();
+              JTable table = find(app, JTable.class, t -> true);
+              int row = 0;
+              while (row < table.getRowCount() && !literal.equals(table.getValueAt(row, 0))) row++;
+              check(row < table.getRowCount(), "Literal account missing from directory");
+              JLabel cell = (JLabel) table.prepareRenderer(table.getCellRenderer(row, 0), row, 0);
+              check(literal.equals(cell.getText()), "Account name was changed");
+              check(cell.getClientProperty("html") == null, "Table interpreted user HTML");
+              check(
+                  cell.getToolTipText().contains("&lt;html&gt;"),
+                  "Tooltip failed to escape markup");
+              button("Sign out").doClick();
+              login("student1");
+              service.createTeam(literal);
+              button("My teams").doClick();
+              JLabel name = find(app, JLabel.class, l -> literal.equals(l.getText()));
+              check(name.getClientProperty("html") == null, "Team label interpreted user HTML");
+            });
+      } finally {
+        SwingUtilities.invokeAndWait(
+            () -> {
+              for (Window window : Window.getWindows()) window.dispose();
+            });
+      }
+    }
+    Files.writeString(
+        Path.of("build/ui-test-results.csv"),
+        "Test ID,Status,Description\n" + String.join("\n", results) + "\n");
+    String summary =
+        "Executed "
+            + (passed + failed)
+            + " Swing UI checks: "
+            + passed
+            + " passed, "
+            + failed
+            + " failed.\nExecuted at: "
+            + Instant.now()
+            + "\n";
+    Files.writeString(Path.of("build/ui-test-summary.txt"), summary);
+    System.out.print(summary);
+    if (failed > 0) throw new AssertionError(failed + " UI checks failed");
+  }
+}

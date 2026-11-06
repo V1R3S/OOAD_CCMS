@@ -1,0 +1,22 @@
+\begin{tikzpicture}[x=1cm,y=1cm]
+\node[box,text width=3cm] (user) at (0,0) {\textbf{User}\\id, name, email, role};
+\node[box,text width=3cm] (team) at (5,0) {\textbf{Team}\\id, captainId, members};
+\node[box,text width=3.4cm] (comp) at (10,0) {\textbf{Competition}\\format, phase, judgeIds};
+\node[box,text width=3cm] (reg) at (5,-3) {\textbf{Registration}\\competitionId, teamId};
+\node[box,text width=3.4cm] (sub) at (10,-3) {\textbf{Submission}\\title, URL, submittedAt};
+\node[box,text width=3.4cm] (eval) at (10,-6) {\textbf{Evaluation}\\judgeId, scores, feedback};
+\node[box,text width=3cm] (match) at (5,-6) {\textbf{Match}\\round, participants, winner};
+\draw[rel] (user)--node[note,above,pos=.15]{1..8}node[note,above,pos=.85]{0..*}node[note,below]{members}(team);
+\draw[rel] (user.north)--++(0,1.2)-|node[note,pos=.25,above]{owner: 1 User / 0..* Competitions}(comp.north);
+\draw[rel] (user.north west)--++(0,2.1)-|node[note,pos=.25,above]{assigned judges: 1..* Users / 0..* Competitions}(comp.north east);
+\draw[rel] (team)--node[note,left,pos=.2]{1}node[note,left,pos=.8]{0..*}(reg);
+\draw[rel] (comp.south west)--node[note,above,pos=.2]{1}node[note,above,pos=.8]{0..*}(reg.north east);
+\draw[rel] (reg)--node[note,above,pos=.15]{1}node[note,above,pos=.85]{0..1}(sub);
+\draw[rel] (sub)--node[note,right,pos=.2]{1}node[note,right,pos=.8]{0..*}(eval);
+\draw[rel] (user.south)--(0,-8)-|(eval.south);
+\node[note] at (5,-8) {judge: 1 User / 0..* Evaluations};
+\draw[rel] (comp.east)--++(1,0)--(13,-7.3)-|(match.south);
+\node[note] at (12.9,-5) {1 Competition\\0..* Matches};
+\draw[rel] (team.west)--(2.8,0)--node[note,left]{2 Teams\\0..* Matches}(2.8,-6)--(match.west);
+\node[note,text width=13cm] at (6,-9) {ID-based associations, not composition. Each captain belongs to the team's members.\\A match winner is absent or one of its two participants. Each submission/evaluation belongs\\to the registered team and competition; project reviews are unique per judge and entry.};
+\end{tikzpicture}

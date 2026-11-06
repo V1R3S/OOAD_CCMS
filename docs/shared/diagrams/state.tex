@@ -1,0 +1,15 @@
+\begin{tikzpicture}[node distance=1.6cm]
+\node[circle,fill=darkGray,minimum size=3mm,inner sep=0] (start) {};
+\node[box,right=0.7cm of start] (draft) {Draft};
+\node[box,right=2.2cm of draft] (reg) {Registration};
+\node[box,right=2.2cm of reg] (active) {Active};
+\node[box,below=2.4cm of active] (judge) {Judging};
+\node[box,left=2.2cm of judge] (pub) {Published};
+\node[box,left=2.2cm of pub] (archive) {Archived};
+\draw[flow] (start)--(draft);\draw[flow] (draft)--node[note,above=7mm]{open\\valid deadline}(reg);
+\draw[flow] (reg)--node[note,above=7mm]{start\\valid entry count}(active);
+\draw[flow] (active)--node[note,right]{all submissions received\\or bracket complete}(judge);
+\draw[flow] (judge)--node[note,above=7mm]{publish\\reviews complete\\or bracket certified}(pub);
+\draw[flow] (pub)--node[note,above=7mm]{archive}(archive);
+\node[note,below=0.6cm of pub] {Only the owner or administrator advances stages. No reverse transitions.};
+\end{tikzpicture}

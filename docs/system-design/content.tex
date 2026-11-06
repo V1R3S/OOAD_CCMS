@@ -1,0 +1,122 @@
+\section{Introduction}
+\subsection{Purpose of the System}
+CCMS translates campus competition processes into an executable object model. Its design places correctness in a Java application service and uses a Swing boundary to present those operations. Different formats share accounts, teams, registration, persistence, and publication while retaining distinct validation, evaluation, and progression policies.
+\subsection{Design Goals}
+\begin{itemize}
+\item Make illegal operations fail before persistence: authorization, eligibility, stage readiness, and score bounds are explicit invariants.
+\item Demonstrate object-oriented variation through a rule interface and three concrete implementations, rather than one generic score field.
+\item Keep models immutable and persist complete, internally consistent updates.
+\item Make the project buildable with a JDK alone and understandable during an OOAD demonstration.
+\end{itemize}
+
+\clearpage\section{Software Architecture}
+\subsection{Subsystem Decomposition}
+\begin{figure}[H]\centering\resizebox{0.86\linewidth}{!}{\input{../shared/diagrams/architecture}}\caption{Logical layers and dependency direction.}\end{figure}
+\textbf{Boundary: ui package.} CampusApp owns the frame and navigation. AppDialogs owns forms; CompetitionViews builds cards, brackets, and leaderboards; UiComponents supplies shared controls; CampusTheme defines the visual identity. It does not calculate official scores or directly mutate persisted records. UI work is scheduled on the Swing event-dispatch thread.
+
+\textbf{Control: CampusService.} Owns the active session and implements use cases. It validates role, ownership, phase, and domain constraints, delegates score policy to a strategy, and performs durable updates through Repository.
+
+\textbf{Domain: Model and CompetitionRules.} Immutable records represent domain facts. Three strategies implement validation and scoring policy. Phase is an enum with guarded forward transitions; this is an explicit state machine, not an implementation of the GoF State pattern.
+
+\textbf{Infrastructure: Repository and Passwords.} Repository handles filtered serialization, file locking, and replacement. Passwords handles random salt generation and credential derivation. DemoData provides fictional fixtures only for an absent database.
+\subsection{Hardware/Software Mapping}
+One JVM process runs on a desktop with a graphical display, keyboard, mouse, a writable data directory, and JDK/JRE 17 or newer. The tested build used Windows and a portable JDK 21 with Java 17 compilation compatibility. No database server, web server, or network connection is required at runtime. Cross-platform Swing compatibility is an implementation goal; Linux/macOS runtime behavior has not been tested here.
+\subsection{Persistent Data Management}
+\code{Model.State} stores maps keyed by stable string IDs: users, teams, competitions, registrations, submissions, evaluations, and matches, plus an audit list and schema version. Records refer to one another by ID, avoiding recursive object graphs and accidental duplicate ownership. Insertion-ordered maps make registration order deterministic for bracket seeding.
+
+Repository opens an exclusive operating-system lock on a companion file. It accepts schema version 1, checks the file's 20 MB limit, and filters deserialization by application model classes and Java base classes, with depth, reference, and array limits. It does not accept arbitrary uploaded databases.
+
+Each service mutation follows this transaction sequence:
+\begin{enumerate}
+\item Validate the request and serialize an in-memory rollback snapshot.
+\item Apply the domain mutation and append a successful audit event.
+\item Validate serialized size and readability, create a new temporary file, flush it, and replace the current file atomically where supported. A pre-existing temporary path is preserved and causes the update to fail.
+\item If the operation or save fails, restore the in-memory snapshot and return an error.
+\end{enumerate}
+The repository is not a relational database. Schema migrations, write-ahead logging, encryption, backup rotation, and protection from sudden power loss are not provided. Copy the data file while the application is closed for a consistent manual backup. A corrupt existing file is preserved and startup stops.
+\subsection{Access Control and Security}
+\begin{tabularx}{\linewidth}{Ycccc}\toprule Operation & Student & Judge & Organizer & Admin\\\midrule
+Browse / published results & Yes & Yes & Yes & Yes\\
+Create/join a team & Yes & No & No & No\\
+Register / submit & Captain & No & No & No\\
+Create competition & No & No & Yes & Yes\\
+Edit / advance & No & No & Owner & Any\\
+Evaluate / decide match & No & Assigned & No & No\\
+Create accounts & No & No & No & Yes\\
+Read audit & No & No & Yes & Yes\\\bottomrule\end{tabularx}
+Administrators manage competitions but do not impersonate judges. The service has a private session ID set by password verification; UI controls cannot supply an arbitrary actor for a mutation. Password records contain the iteration count, a random 16-byte salt, and a 256-bit PBKDF2-HMAC-SHA256 derivation using 120,000 iterations. Comparison uses \code{MessageDigest.isEqual}.
+
+This is a local coursework security boundary, not internet-facing account security. There is no login throttling, reset email, institutional identity verification, or encrypted storage. All demo accounts use the documented initial password and should be changed if the dataset is used beyond a demonstration. URLs are validated as HTTP(S) and are not automatically opened or fetched. User-supplied names are displayed as literal text in labels, tables, and selection controls; intentional wrapped labels and tooltips escape markup.
+\subsection{Boundary Conditions}
+\begin{itemize}
+\item First start: seed fictional accounts, teams, and competitions only if the data file does not exist.
+\item Existing data: load without reseeding or resetting deadlines.
+\item Duplicate process: fail with a lock error rather than permit concurrent writes.
+\item Invalid action: show a message, preserve the form where possible, and keep the domain unchanged.
+\item Closing: release the file lock. There is no unsaved-change prompt because every successful mutation is saved.
+\item Incomplete judging or missing submissions: block the stage transition. Automatic forfeits and cancellation are future features.
+\end{itemize}
+
+\section{Subsystem Services}
+\subsection{User Management Subsystem}
+\code{login(email,password)} clears the prior session before verification. Account creation requires an administrator and a unique email address.
+
+\code{changePassword(old,new)} verifies the current credential and persists the new derivation. User directory views expose names, emails, and roles in the UI; credential hashes are never returned by account APIs. Login, current-user, and account-creation responses use the four-field UserSummary record. The full account directory is administrator-only; a separate organizer/admin judge picker returns only judge summaries.
+\subsection{Competition Management Subsystem}
+\code{createCompetition(...)} validates capacity, roster maximum, future deadline, and judge identities. \code{editCompetition(...)} is draft-only. \code{advance(cid)} applies guards before moving to the next enum value. The knockout start operation generates first-round matches inside the same transaction as the phase change.
+\subsection{Registration Subsystem}
+\code{register(cid,tid)} checks the captain, phase, deadline, capacity, size, duplicate team, and overlapping members. \code{withdraw(cid,tid)} removes an entry only during registration. \code{joinTeam} and \code{leaveTeam} refuse changes to any registered roster. Students can belong to multiple teams globally but cannot enter the same competition twice.
+\subsection{Submission and Evaluation Subsystem}
+\code{submit(...)} replaces the one submission for a registered entry while Active and before its deadline. \code{evaluate(...)} replaces only the calling judge's review; other judges' reviews remain independent. Project scoring requires all assigned judges, while programming permits one official score owner per team.
+
+\code{recordWinner(matchId,winnerId)} validates assignment and participant identity, stores the final winner, and creates the next round only once all current-round winners exist. No bye logic is required because the number of registered teams must be a supported power of two.
+\subsection{Results Management Subsystem}
+\code{standings(cid)} enforces visibility, computes the selected format's scores, applies tie policies, and returns immutable Standing values. \code{standingsCsv(cid)} uses the same ordered values, quotes text cells, doubles embedded quotes, and neutralizes leading formula characters. Export does not maintain a second, potentially inconsistent ranking calculation.
+
+\section{Low-Level Design}
+\subsection{Object Design Trade-offs}
+\textbf{Composition over a user subclass hierarchy.} A User contains a Role enum because all roles share identity fields. Different permissions are checked by service operations. Artificial Student/Organizer subclasses would add little behavior in this implementation.
+
+\textbf{Immutable records over mutable entity setters.} Team membership, judge sets, and competition fields are defensively copied. Changes create replacement records inside a service transaction. This reduces accidental state changes and makes rollback straightforward.
+
+\textbf{Strategies plus explicit workflow branching.} CompetitionRules encapsulates scoring validation, score calculation, explanations, and submission requirements. The service still contains explicit format branches for aggregation, penalty tie-breaking, and bracket generation. Adding a fourth format therefore requires changes to both the enum/factory and relevant service guards; the implementation does not claim completely modification-free extension.
+
+\textbf{Snapshot persistence over SQL.} A local object snapshot avoids dependencies and setup. It is suitable for a small demonstration, but each write serializes the entire dataset. A future multi-user version should introduce a transactional database and server-side sessions.
+\clearpage\subsection{Final Object Design}
+\begin{figure}[H]\centering\resizebox{\linewidth}{!}{\input{../shared/diagrams/strategy}}\caption{Detailed rule strategy interface, implementations, and control-class dependency. UML realization uses a dashed line with an open triangular arrowhead.}\end{figure}
+\begin{figure}[H]\centering\resizebox{\linewidth}{!}{\input{../shared/diagrams/domain}}\caption{Final domain relationships. The attribute catalogue below expands each record.}\end{figure}
+\clearpage\subsection{Packages and Dependencies}
+\begin{figure}[H]\centering\resizebox{0.9\linewidth}{!}{\input{../shared/diagrams/packages}}\caption{Physical packages and their dependency direction.}\end{figure}
+Production sources are under \code{src/main/java/edu/aau/ccms}; tests use \code{src/test/java/edu/aau/ccms}. The application has no external runtime library. Maven uses JUnit Jupiter and Surefire to execute the existing lifecycle suites; the native scripts remain a JDK-only alternative. The ui, service, repository, rules, util, and model packages separate responsibilities. Existing serialized domain records intentionally retain their names under edu.aau.ccms.Model so version-one data stays readable; TC-69 verifies a pre-refactor fixture.
+\subsection{Class Interfaces: Attributes, Methods, Responsibilities}
+\small
+\begin{longtable}{p{0.23\linewidth}p{0.69\linewidth}}\toprule Class & Contract and responsibility\\\midrule\endhead
+User & id, name, email, Role, password derivation; internal persisted account, never a service response.\\
+UserSummary & id, name, email, Role; immutable credential-free account response.\\
+Team & id, name, captainId, immutable member IDs; one captain is a member.\\
+Competition & id, title, description, Format, Phase, organizerId, capacity, teamSize, deadline, immutable judge IDs; \code{withPhase(next)} returns a replacement.\\
+Registration & id, competitionId, teamId; one entry linking a competition to a team.\\
+Submission & id, competitionId, teamId, title, description, URL, submittedAt; the current submission for an entry.\\
+Evaluation & id, competitionId, teamId, judgeId, integers a/b/c, feedback; interpreted by the selected strategy.\\
+Match & id, competitionId, round, leftTeamId, rightTeamId, winnerId; \code{winner(team)} returns a decided record.\\
+Standing & rank, teamId, team, score, detail; derived view, not persisted.\\
+Audit & time, actor, action; successful change history.\\
+Model.State & schema, eight domain collections; repository aggregate with explicit serial version.\\
+CompetitionRules & \code{explanation()}, \code{validate(a,b,c)}, \code{score(e)}, \code{detail(list)}, \code{requiresSubmission()}; static factory chooses concrete policy.\\
+CampusService & state, repository, clock, private session; user and team operations, registration, submissions, evaluations, stage transitions, match progression, rankings, CSV, read filters, and transaction helper.\\
+Repository & data path, channel, lock; \code{load()}, \code{save(state)}, \code{encode/decode}, \code{close()}; storage only, no UI or role policy.\\
+Passwords & static hash, verify, and derivation helpers; no persisted plaintext.\\
+DemoData & \code{populate(state,now)}; deterministic identities, relative sample deadlines, and fictional results.\\
+CampusTheme & Shared palette, serif headings, rounded controls, format icons, logo and tab styling used by CampusApp.\\
+AppDialogs / CompetitionViews & Forms and reusable competition views; call service operations through the UI controller.\\
+UiComponents & Shared tables, buttons, labels, and empty-state helpers.\\
+CampusApp & JFrame, navigation, page composition; translates user gestures into service calls. \code{main} selects data path; \code{capture} renders documentation screens.\\\bottomrule
+\end{longtable}\normalsize
+\subsection*{Invariants and Extension Example}
+For every registration, the team and competition exist. A student's membership overlaps no other entry in that competition. For every scored entry, a submission exists unless the format is knockout. For each project entry there is at most one evaluation per judge. For programming there is at most one official evaluation per entry. Every match winner belongs to its match. A published competition cannot accept updated scores.
+
+To add a poster format, define a new Format value and strategy with its rubric, map it in the factory, decide whether its review completeness matches projects, add its UI labels, and extend acceptance tests. To add round-robin play, a new scheduling/progression policy is required; it cannot be represented honestly by changing a rubric alone.
+
+\clearpage\section{Glossary \& References}
+\textbf{Facade:} a single application-level entry point for use cases. \textbf{Strategy:} an interchangeable rule implementation. \textbf{Record:} an immutable Java data carrier. \textbf{Guard:} a precondition for a transition. \textbf{Rollback snapshot:} a serialized copy used to restore memory after a failed write. \textbf{EDT:} Swing event-dispatch thread.
+\input{../shared/references}

@@ -1,0 +1,10 @@
+\begin{tikzpicture}[node distance=1.3cm]
+\node[box,text width=11cm] (ui) {\textbf{Presentation: ui}\\CampusApp navigation, AppDialogs forms, CompetitionViews,\\UiComponents and CampusTheme};
+\node[box,text width=11cm,below=of ui] (service) {\textbf{Application control: CampusService}\\Session, permissions, use cases, phase guards, transaction rollback};
+\node[box,text width=5cm,below left=1.3cm and -5.3cm of service] (model) {\textbf{Domain: Model / rules}\\Immutable records, format strategies};
+\node[box,text width=5cm,below right=1.3cm and -5.3cm of service] (repo) {\textbf{Persistence: Repository}\\Filtered reads, locking, validated saves};
+\node[box,text width=5cm,below=of repo] (disk) {\textbf{Local storage}\\campus.bin + process lock};
+\node[box,text width=5cm,below=of model] (util) {\textbf{Supporting services}\\Passwords: derivation / verification\\DemoData: fictional first-run records};
+\draw[flow] (ui)--(service);\draw[flow] (service)--(model);\draw[flow] (service)--(repo);\draw[flow] (repo)--(disk);
+\draw[flow] (service.west)--++(-0.6,0)|-(util.west);
+\end{tikzpicture}

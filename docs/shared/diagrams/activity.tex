@@ -1,0 +1,19 @@
+\begin{tikzpicture}[node distance=0.7cm]
+\node[circle,fill=darkGray,minimum size=3mm,inner sep=0] (start) {};
+\node[box,below=of start] (open) {Open registration};
+\node[box,below=of open] (validate) {Validate entries; lock registered rosters};
+\node[diamond,draw,aspect=3,below=of validate,font=\small] (format) {Format?};
+\node[box,below left=0.8cm and 0.4cm of format,text width=4cm] (submit) {Start Active; receive every submission};
+\node[box,below right=0.8cm and 0.4cm of format,text width=4cm] (bracket) {Start Active; generate seeded bracket};
+\node[box,below=of submit,text width=4cm] (evaluate) {Enter Judging; collect required rubric / official scores};
+\node[box,below=of bracket,text width=4cm] (match) {Record round winners; generate rounds until champion};
+\node[box,below=of match,text width=4cm] (certify) {Enter Judging; certify completed bracket};
+\node[diamond,draw,aspect=2.8,below=6.2cm of format,font=\small] (merge) {};
+\node[box,below=of merge] (publish) {Verify completeness; publish results};
+\node[circle,double,fill=darkGray,minimum size=3mm,inner sep=0,below=of publish] (end) {};
+\draw[flow] (start)--(open);\draw[flow] (open)--(validate);\draw[flow] (validate)--(format);
+\draw[flow] (format)--node[note,above left]{project / programming}(submit);\draw[flow] (format)--node[note,above right]{knockout}(bracket);
+\draw[flow] (submit)--(evaluate);\draw[flow] (bracket)--(match);\draw[flow] (match)--(certify);
+\draw[flow] (evaluate.south)|-(merge.west);\draw[flow] (certify.south)|-(merge.east);
+\draw[flow] (merge)--(publish);\draw[flow] (publish)--(end);
+\end{tikzpicture}
