@@ -1,38 +1,45 @@
-# Campus Competition Management System
+# Arena
 
-Java desktop application for **Object Oriented Analysis and Design / System Analysis & Design** at Al Ain University.
+Java desktop project for **Object Oriented Analysis and Design / System Analysis & Design**, Al Ain University.
 
-**Dr. Yazeed Ghadi · Section 61D · 0103430 / 0102331**
+Dr. Yazeed Ghadi · Section 61D · Courses 0103430 / 0102331
 
 ## Start here
 
-- **Run the app:** double-click [start-app.cmd](start-app.cmd).
-- **Explore the clickable prototype:** open [prototype/index.html](prototype/index.html) in a browser. No installation needed.
-- **Read the reports:** open the PDFs in [output/pdf](output/pdf).
-- **Present the Java app.** Open the [OOAD PowerPoint](output/presentation/CCMS-OOAD-presentation.pptx) and use the [demo guide](presentation-guide.md) for the live walkthrough. The deck has 13 main slides and four hidden UML backup slides, with assigned speakers and matching scripts in Presenter View.
+- **Run Java:** double-click [start-app.cmd](start-app.cmd).
+- **Read the five reports:** open [reports](reports).
+- **Present:** open [the PowerPoint](presentation/Arena-presentation.pptx) and [speaking script / live-demo instructions](presentation/speaking-script-and-demo.md). The presentation follows the supplied redesigned deck: 20 main slides and four technical backup slides.
+- **Explore the prototype:** open [prototype/index.html](prototype/index.html).
+- **Understand every file:** read [PROJECT-FILES.md](PROJECT-FILES.md), including what to edit, keep, and rebuild.
 
-## Interactive prototype
+## Build, run, and test
 
-The prototype includes an overview, searchable competition cards, team registration, project submissions, a judging rubric, programming scores, a knockout bracket, and published results. Use **Explore as** to switch between Student, Organizer, and Judge.
-
-Try these walkthroughs:
-
-1. **Project:** register as Student → switch to Organizer and move to Active → submit as Student → open Judging as Organizer → score as Judge → publish as Organizer.
-2. **Programming:** open Code Sprint as Judge → enter an official score → inspect the updated ranking → publish as Organizer.
-3. **Knockout:** open Robotics Cup as Judge → choose both semifinal winners → choose the champion → move to Judging as Organizer to certify the bracket → publish.
-
-This is a browser design prototype with its own sample data. Refreshing the page or choosing **Reset demo** clears its changes. The Java application stores its data separately.
-
-## Java application
-
-Requires **JDK 17 or later**. Set `JAVA_HOME` or put Java on `PATH`. Scripts also detect an optional portable JDK under `.tools/java`; tools are excluded from the submission ZIP.
+Requires **JDK 17 or later**, configured through `JAVA_HOME` or `PATH`. Windows scripts also detect the optional portable JDK in `.tools/java`; local tools are excluded from the submission.
 
 ```powershell
 .\start-app.ps1
 .\build-app.ps1 -Test -UiTest
+# Fresh demo: choose a filename that does not already exist.
+.\start-app.ps1 -DataFile data/rehearsal-01.bin
 ```
 
-All demo passwords are **Campus@2026**.
+Native builds produce `build/arena.jar`. Maven is also supported:
+
+```sh
+mvn clean compile
+mvn test
+mvn test -Pui-tests
+mvn package
+java -jar target/arena.jar
+```
+
+`mvn test` runs 98 service checks (70 original checks and 28 Arena regressions). The UI profile adds 22 real Swing checks and requires a graphical desktop. Maven reports three wrapper methods around these suites, with the Swing wrapper skipped by default. The 120 checks are not 120 independent JUnit methods. The first Maven build downloads build/test dependencies; the app has no external runtime libraries.
+
+Use `sh build-app.sh test` or `sh build-app.sh ui-test` on a POSIX shell. This route was verified through Git shell on Windows; native Linux/macOS runtime behavior remains unverified. Java targets release 17; recorded builds used JDK 21.
+
+## Demo accounts and behavior
+
+All seeded passwords are **Campus@2026**.
 
 | Role | Account |
 |---|---|
@@ -40,90 +47,83 @@ All demo passwords are **Campus@2026**.
 | Administrator | admin@campus.test |
 | Project judges | judge1@campus.test, judge2@campus.test |
 | Knockout judge | judge3@campus.test |
-| Student captain | student1@campus.test |
+| Team Alpha captain | student1@campus.test |
 
-Additional students are `student2@campus.test` through `student10@campus.test`. The app seeds five teams and three competitions on first launch. Local data is stored in `data/campus.bin`.
+See [demo accounts and sample data](project-notes/demo-accounts-and-data.md) for all 16 fictional accounts, five teams, and five events. Missing data triggers the seed; existing files retain changes and original deadlines. New installations use `data/arena.bin`. When `data/campus.bin` already exists, the launcher and application reuse it without deleting or reseeding it.
 
-The three formats use different rules: weighted project rubrics (40/35/25), programming ranks by solved problems then time penalties, and single-elimination brackets. Service checks enforce roles, roster locking, submissions, evaluation completeness, and publication.
+- **Projects:** 40/35/25 weighted rubric; all assigned judges review every entry.
+- **Programming:** rank solved count first, then lower time penalty; judges enter results manually.
+- **Quiz:** one official points result per team, from zero to a configured maximum; equal scores share ranks.
+- **Knockout:** 2–16 teams; byes fill a bracket where needed, winners progress automatically, then the owner certifies and publishes.
+- **Round robin:** every pair meets once; wins earn 3 points, draws 1, losses 0. Ties compare wins, score difference, scores for, team name, then stable ID.
 
-Verified on **3 November 2026**: **70 service checks and 16 Swing UI checks passed**. The UI suite opens temporary windows and uses isolated test data. CSV results and timestamped summaries are in [docs/evidence](docs/evidence).
+Competition type describes the activity; tournament format controls progression. Supported combinations:
 
-Maven 3.9+ is the standard build route (internet access is needed on first use):
+| Type | Score ranking | Knockout | Round robin |
+|---|---|---|---|
+| Project | Yes | No | No |
+| Programming | Yes | No | No |
+| Quiz / academic | Yes | Yes | Yes |
+| General match | No | Yes | Yes |
 
-```sh
-mvn clean compile
-mvn test                 # 70 service checks; Swing wrapper skipped
-mvn test -Pui-tests       # 70 service + 16 Swing checks; graphical desktop required
-mvn package
-java -jar target/campus-ccms.jar
-```
+Quiz knockout requires decisive scores; tied matches need an external tie-break before entry. General knockout preserves winner selection. League matches permit draws. Score competitions accept 2–64 teams; match tournaments accept 2–16. No automatic quiz question engine or code execution is included.
 
-Surefire reports two JUnit wrapper methods around the existing ordered lifecycle suites. The 86 checks are assertions/scenarios logged by those suites, not 86 independently runnable JUnit methods. Failures propagate to Maven.
+Service checks enforce roles, ownership, roster locks, deadlines, score bounds, and completeness. This local single-process app excludes cloud synchronization, email, automatic code grading, venue scheduling, and forfeits.
 
-The PowerShell scripts require only a JDK and build `build/campus.jar`. For macOS/Linux, use `sh build-app.sh test` or `sh build-app.sh ui-test` with a graphical session. The shell file has LF endings enforced by `.gitattributes`; Both shell suites passed using the bundled Git shell on Windows. Linux/macOS execution remains unverified.
-
-## Reports and source files
+## Where everything belongs
 
 | Folder | Contents |
 |---|---|
-| `src/main/java` | Java application |
-| `src/test/java` | Service and Swing UI tests |
-| `prototype` | Editable HTML, CSS, and JavaScript prototype |
-| `docs/system-analysis`, `docs/system-design`, `docs/implementation-report` | Main LaTeX reports |
-| `docs/testing-report`, `docs/interface-mockups` | Testing and interface documents |
-| `docs/shared` | AAU theme and references |
-| `docs/assets` | Java screenshots, browser-prototype captures, wireframes, and UML illustrations embedded in the reports |
-| `docs/assets/uml` | Nine supplied SVG diagrams and their vector PDF versions for LaTeX |
-| `docs/evidence` | Test results used by the testing report |
-| `output/pdf` | Five final PDFs |
-| `requirements` | Original assignment outlines, with descriptive file names |
-| `sample-data` | Sample-data description |
-| `scripts` | Document build and asset helpers |
+| `reports/` | Five finished PDFs |
+| `reports/source/` | One named LaTeX source per report |
+| `reports/shared/` | AAU style and references |
+| `reports/assets/` | Necessary UML, Java/prototype screenshots, and wireframes |
+| `reports/test-evidence/` | Preserved CSV results, timestamps, and LaTeX result tables |
+| `presentation/` | One slide deck and its speaking/demo script |
+| `project-notes/` | Current verification notes and demo-data explanation |
+| `requirements/` | Original assignment outlines; only the product name in the sample-data brief was updated |
+| `src/` | Application, tests, and two historical compatibility fixtures |
+| `prototype/` | Browser prototype with temporary sample data |
+| `scripts/` | Report, asset, evidence, and packaging helpers |
 
-The original `.txt` assignment contents are preserved in `requirements`. Each report folder contains `main.tex` (the compilation entry point) and `content.tex` (the report text). Keep `aau.png` at the project root; the LaTeX covers and prototype use it, and the Java build packages it inside the app. The images in `docs/assets` are required report illustrations, not duplicate PDF-page renders. Browser-prototype screenshots appear in the analysis and interface mock-ups PDFs.
+The personal learning companion is kept in `study-guide/` in the working project and excluded from the submission ZIP. The file guide lists its contents.
 
-Build the documents with:
+The prototype's role switch does not authenticate users. Refresh resets its independent sample data. Java is the persistent implementation used for the live demonstration.
+
+## Edit and rebuild reports
+
+Edit a named file in `reports/source`, such as `system-analysis.tex`. Each contains both the compilation entry point and report text. The shared style is `reports/shared/aau-report-style.tex`. Keep `aau.png` at the root; the app, prototype, and covers use it.
 
 ```powershell
 .\scripts\build-reports.ps1 -CachedOnly
+.\scripts\build-reports.ps1 -CachedOnly -Report system-analysis,system-design
 ```
 
-Alternatively, compile each `main.tex` from its own folder twice using pdfLaTeX. `.tools`, `build`, and `data` contain local tools or generated files and are excluded from Git.
+The script uses local or installed Tectonic. On a fresh computer, omit `-CachedOnly` to obtain required TeX dependencies. Alternatively, compile a named source from `reports/source` twice using pdfLaTeX. Script-generated intermediates go in `build/latex`.
 
-To rebuild just the reports containing UML, use `.\scripts\build-reports.ps1 -CachedOnly -Report system-analysis,system-design`. The nine supplied diagrams appear on dedicated landscape pages. Their SVG originals are preserved unchanged. The included vector PDFs omit only the poster titles and footers so the reports can use their own headings, captions, and page numbers. No SVG conversion is needed for an ordinary report build. See `docs/assets/uml/README.md` to regenerate artwork after editing an SVG.
+Report images are required illustrations. SVGs are editable artwork; matching PDF/PNG versions are embedded by LaTeX. See [UML notes](reports/assets/uml/README.md). These are not duplicate screenshots of report pages.
 
-This is a single-computer coursework application. It does not include cloud synchronization, email, automatic code execution, or bracket forfeits. Detailed scope and design decisions are in the reports.
+Preserved evidence records 98 service checks, 22 Swing checks, and 17 additional browser-prototype checks passing on 10 November 2026. Fresh runs write results under `build`. `scripts/update-test-evidence.py` copies executed results into the reports. See [technical review](project-notes/technical-review.md) for commands and limits.
 
-## Review status
+Optional prototype verification requires Node.js and Playwright: `node scripts/test-prototype.cjs --browser "path/to/browser"`. Add `--capture` to rebuild its seven illustrations. Java report images come from `java -jar build/arena.jar --capture reports/assets/screenshots`.
 
-The supplied outlines are covered by the five reports: analysis (requirements and UML models), system design (architecture and class interfaces), implementation report (including the user guide), testing report, and interface mock-ups. The sample dataset and three distinct competition formats are included.
+Version-one serialized PROJECT and PROGRAMMING records map to score ranking, and KNOCKOUT maps to general match plus knockout. The persisted `edu.aau.ccms.Model` names and legacy filename are intentional compatibility identifiers, not visible product branding. Two genuine version-one fixtures test loading, continued operation, saving, and restarting. Never open upgraded data in the older application.
 
-Testing covers service rules and storage, plus selected real Swing controls and dialogs. Eight app screenshots and four browser-prototype captures were regenerated from the final interfaces. Formal accessibility/high-DPI testing, a user study, load testing, and macOS/Linux execution remain unverified. Cloud services, email, automatic code grading, venue scheduling, and bracket forfeits remain outside the documented scope.
+## Submission and Git
 
-Java packages separate responsibilities:
+```sh
+python scripts/package-submission.py
+```
 
-- `ui`: `CampusApp` navigation, `AppDialogs` forms, `CompetitionViews`, shared controls and theme.
-- `service`: `CampusService` authorization/workflows and `DemoData` first-run fixtures.
-- `rules`: the rule interface and three format strategies.
-- `repository`: file locking, filtered snapshots, validated saves.
-- `util`: password derivation and verification.
-- `model`: credential-free `UserSummary` responses.
+Python 3.10+ creates `dist/Arena-submission.zip` with the app source, tests, build configuration, logo, original outlines, reports and required sources/assets, prototype, presentation, notes, and SHA-256 manifest. Install a JDK separately to build it.
 
-The existing serialized records deliberately remain under `edu.aau.ccms.Model` to preserve saved-data compatibility. Their maps are held privately by the service/repository aggregate and are never returned by service APIs. TC-69 checks a pre-refactor fictional-data fixture. Account listings are administrator-only and never contain password hashes; organizers get a separate judge picker.
+`.tools`, `.local-archive`, `build`, `target`, `data`, and `dist` are ignored. The archive preserves the pre-cleanup files; it is not submitted. The group reviews changes and manages commits/pushes.
 
-## Submission package
-
-Run `python scripts/package-submission.py` with Python 3.10+ to create `dist/CCMS-submission.zip`. The archive includes the source, tests, build scripts, logo, assignment outlines, prototype, LaTeX sources, report assets, test evidence, five PDFs, and the PowerPoint presentation. It includes a SHA-256 manifest. Install a JDK separately to build the app from the ZIP.
-
-See [FINAL-REVIEW.md](FINAL-REVIEW.md) for the audit, executed validation, requirements coverage, limitations, and submission verdict. Actual individual contributions still require group confirmation; the reports label the proposed presentation allocation accordingly. The local source and reports should be committed by the group before submitting a GitHub URL.
-
-## Group
-
-| Name | Student ID |
+| Member | Student ID |
 |---|---|
 | Khaled Alkhawaldeh | 202410091 |
 | Abdulrahman Alnaqbi | 202340042 |
 | Yousif Alhammadi | 202310707 |
 | Ahmed Alsamma | 202320192 |
 
-Developed with AI assistance. Commits and pushes are managed by the group.
+Developed with AI assistance. Actual individual contributions require group confirmation; speaking assignments do not establish authorship.

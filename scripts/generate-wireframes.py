@@ -4,7 +4,7 @@ from html import escape
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / 'docs/assets/wireframes'
+OUT = ROOT / 'reports/assets/wireframes'
 OUT.mkdir(parents=True, exist_ok=True)
 FONT = Path('C:/Windows/Fonts/segoeui.ttf')
 FALLBACK = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
@@ -24,7 +24,7 @@ def render(name, heading, subtitle, kind):
         draw.line((x,y,x+w,y),fill='#d2d7d8',width=6)
         svg.append(f'<path d="M{x} {y} h{w}" stroke="#d2d7d8" stroke-width="6"/>')
     rect(0,0,230,960,'#ecefef')
-    text(28,34,'C / CAMPUS',27)
+    text(28,34,'A / ARENA',27)
     text(28,82,'INTERFACE SKELETON',13)
     for i,label in enumerate(['Overview','Competitions','My teams','Judging studio','Results','People','Activity']):
         if i == (0 if kind=='overview' else 1): rect(18,156+i*63,194,46,'#d6dcdc')
@@ -38,7 +38,7 @@ def render(name, heading, subtitle, kind):
         rect(274,190,1100,215,'#edf0f0');text(302,214,'Featured challenge / welcome message',28)
         line(302,276,640);line(302,310,520)
         rect(302,340,235,44,'#d4dbdb');text(323,350,'Explore competitions',18)
-        for i,(count,label) in enumerate([('03','Competitions'),('01','Open registration'),('05','Campus teams')]):
+        for i,(count,label) in enumerate([('05','Competitions'),('01','Open registration'),('05','Campus teams')]):
             rect(274+i*374,432,350,115);text(294+i*374,449,label,18);text(294+i*374,485,count,36)
         text(274,578,'Find your next challenge',25)
         for i,kind_name in enumerate(['Project showcase','Programming contest','Knockout bracket']):
@@ -47,7 +47,7 @@ def render(name, heading, subtitle, kind):
             line(x+20,758,295);text(x+20,781,'Status / team count',16)
             text(x+20,827,'Explore competition',18)
     elif kind=='competition':
-        rect(274,190,1100,208);text(300,213,'Description, format rules, team limit, deadline',24)
+        rect(274,190,1100,208);text(300,213,'Type, tournament format, rules, team limit, deadline',24)
         line(300,273,960)
         for i,label in enumerate(['Draft','Registration','Active','Judging','Published','Archived']):
             rect(300+i*175,322,160,45,'#dde2e2' if i==1 else '#f2f4f4');text(310+i*175,333,label,17)

@@ -1,0 +1,72 @@
+\small\begin{longtable}{p{0.12\linewidth}p{0.66\linewidth}p{0.1\linewidth}}\toprule ID & Requirement / executed check & Result\\\midrule\endhead
+TC-01 & FR-01: valid authentication & PASS\\
+TC-02 & FR-01: wrong password clears session & PASS\\
+TC-03 & FR-01: unknown account rejected & PASS\\
+TC-04 & FR-02: student cannot create accounts & PASS\\
+TC-05 & FR-02: administrator creates an account & PASS\\
+TC-06 & FR-02: duplicate email is case insensitive & PASS\\
+TC-07 & FR-02: short passwords rejected & PASS\\
+TC-08 & FR-03: student cannot create competitions & PASS\\
+TC-09 & FR-03: new competition is a draft & PASS\\
+TC-10 & FR-03: only owning organizer manages competition & PASS\\
+TC-11 & FR-04: draft registration rejected & PASS\\
+TC-12 & FR-03: rule edits blocked after opening & PASS\\
+TC-13 & FR-04: at least two entries required & PASS\\
+TC-14 & FR-04: captain registers team & PASS\\
+TC-15 & FR-04: duplicate registration rejected & PASS\\
+TC-16 & FR-04: noncaptain registration rejected & PASS\\
+TC-17 & FR-05: registered roster is locked & PASS\\
+TC-18 & FR-04: same student cannot enter twice & PASS\\
+TC-19 & FR-04: withdrawal during registration & PASS\\
+TC-20 & FR-06: missing submissions block judging & PASS\\
+TC-21 & FR-06: non-HTTP submission URL rejected & PASS\\
+TC-22 & FR-06: submission may be replaced before judging & PASS\\
+TC-23 & FR-06: student sees only own team's submissions & PASS\\
+TC-24 & FR-07: scores rejected outside judging & PASS\\
+TC-25 & FR-07: unassigned judge rejected & PASS\\
+TC-26 & FR-07: scores outside rubric rejected & PASS\\
+TC-27 & FR-07: replacing judge score does not duplicate it & PASS\\
+TC-28 & FR-08: unfinished reviews block publication & PASS\\
+TC-29 & FR-08: student cannot read unpublished leaderboard & PASS\\
+TC-30 & FR-08: equal project averages share rank & PASS\\
+TC-31 & FR-07: published scores cannot be modified & PASS\\
+TC-32 & FR-08: standings export has header and rows & PASS\\
+TC-33 & FR-03: archive is terminal & PASS\\
+TC-34 & FR-09: programming ranks solved then penalty & PASS\\
+TC-35 & FR-07: weighted project formula & PASS\\
+TC-36 & FR-10: only assigned judge records bracket results & PASS\\
+TC-37 & FR-10: winner must play in the selected match & PASS\\
+TC-38 & FR-10: semifinals create exactly one final & PASS\\
+TC-39 & FR-10: finalized match cannot be overwritten & PASS\\
+TC-40 & FR-10: unfinished bracket blocks certification & PASS\\
+TC-41 & FR-10: champion is published after final & PASS\\
+TC-42 & NFR-02: password changes invalidate old password & PASS\\
+TC-43 & NFR-02: salted hashes differ for equal passwords & PASS\\
+TC-44 & NFR-04: concurrent data access is locked & PASS\\
+TC-45 & FR-11: successful changes are audited & PASS\\
+TC-46 & FR-11: students cannot read administrative audit & PASS\\
+TC-47 & FR-06: submission at deadline is rejected & PASS\\
+TC-48 & NFR-04: failed disk write rolls back domain changes & PASS\\
+TC-49 & FR-03: knockout capacity cannot exceed the supported bracket limit & PASS\\
+TC-50 & FR-03: past deadlines rejected & PASS\\
+TC-51 & FR-03: nonjudge cannot be assigned as judge & PASS\\
+TC-52 & FR-09: one official programming result per team & PASS\\
+TC-53 & FR-09: programming results complete publication workflow & PASS\\
+TC-54 & FR-04: oversized teams rejected & PASS\\
+TC-55 & FR-05: student can create an unlocked team & PASS\\
+TC-56 & FR-05: unlocked membership changes persist & PASS\\
+TC-57 & FR-08: CSV formula injection escaped & PASS\\
+TC-58 & NFR-04: restart preserves accounts and published champion & PASS\\
+TC-59 & NFR-04: corrupt data is not silently reset & PASS\\
+TC-60 & SEC: account APIs return credential-free summaries & PASS\\
+TC-61 & SEC: account directory is administrator-only & PASS\\
+TC-62 & SEC: null credentials reject and clear the session & PASS\\
+TC-63 & FR-02: missing account role leaves accounts unchanged & PASS\\
+TC-64 & FR-06: relative URL rejects without a null-pointer error & PASS\\
+TC-65 & SEC: malformed and excessive password derivation parameters reject & PASS\\
+TC-66 & FR-08: multiline formula cells are escaped in exported CSV & PASS\\
+TC-67 & NFR-04: oversized snapshot preserves the last readable file & PASS\\
+TC-68 & NFR-04: closed repository rejects writes and permits repeated close & PASS\\
+TC-69 & NFR-04: pre-refactor version-one database remains readable & PASS\\
+TC-70 & FR-10: a null winner rejects without changing the bracket & PASS\\
+\bottomrule\end{longtable}\normalsize

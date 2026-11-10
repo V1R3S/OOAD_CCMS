@@ -1,4 +1,4 @@
-For your Campus Competition Management System, it could contain:
+For your Arena, it could contain:
 - Users: 10 students, 3 judges, 2 organizers, 1 admin.
 - Competitions: Hackathon 2026, Programming Contest, Robotics Challenge.
 - Teams: Team Alpha, Code Warriors, Innovators.

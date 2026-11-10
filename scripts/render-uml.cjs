@@ -14,28 +14,27 @@ async function main() {
   if (!fontPath || !fs.existsSync(fontPath)) {
     throw new Error('Provide --font followed by the path to DejaVuSans.ttf.');
   }
-  const directory = path.resolve(__dirname, '../docs/assets/uml');
+  const directory = path.resolve(__dirname, '../reports/assets/uml');
   const sources = fs.readdirSync(directory).filter(name => name.endsWith('.svg')).sort();
-  if (sources.length !== 9) throw new Error('Expected the nine supplied UML SVGs.');
+  if (!sources.includes('08_design_class.svg')) throw new Error('The source-checked Design Class Diagram is missing.');
   const fontData = fs.readFileSync(fontPath).toString('base64');
   const browser = await chromium.launch({ headless: true, executablePath: option('--browser') });
   try {
     const page = await browser.newPage();
     for (const name of sources) {
       const svg = fs.readFileSync(path.join(directory, name), 'utf8');
-      // Retain all diagram content. Only the surrounding poster title/footer is omitted.
-      // The original SVG remains byte-for-byte unchanged alongside the PDF.
+      // Retain diagram content; omit only the poster title/footer in report figures.
+      const dimensions = svg.match(/viewBox="0 0 (\d+) (\d+)"/);
+      if (!dimensions) throw new Error(`Unexpected SVG dimensions: ${name}`);
+      const width = Number(dimensions[1]), height = Number(dimensions[2]) - 265;
       const reportSvg = svg.replace(/<\?xml[^>]*\?>\s*/, '')
-        .replace('viewBox="0 0 1800 1120"', 'viewBox="60 175 1680 855"')
-        .replace('width="1800px"', 'width="1680px"')
-        .replace('height="1120px"', 'height="855px"');
-      if (reportSvg === svg || !reportSvg.includes('viewBox="60 175 1680 855"')) {
-        throw new Error(`Unexpected SVG dimensions: ${name}`);
-      }
+        .replace(dimensions[0], `viewBox="0 175 ${width} ${height}"`)
+        .replace(`width="${dimensions[1]}px"`, `width="${width}px"`)
+        .replace(`height="${dimensions[2]}px"`, `height="${height}px"`);
       await page.setContent(`<!doctype html><html><head><meta charset="utf-8"><style>
         @font-face { font-family: 'DejaVu Sans'; src: url(data:font/ttf;base64,${fontData}); }
-        @page { size: 1680px 855px; margin: 0; }
-        html, body { margin: 0; width: 1680px; height: 855px; overflow: hidden; }
+        @page { size: ${width}px ${height}px; margin: 0; }
+        html, body { margin: 0; width: ${width}px; height: ${height}px; overflow: hidden; }
         svg { display: block; }
       </style></head><body>${reportSvg}</body></html>`);
       await page.evaluate(() => document.fonts.ready);

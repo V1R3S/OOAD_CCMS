@@ -5,14 +5,13 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 ROOT_FILES = (
-    '.gitignore', '.gitattributes', 'README.md', 'FINAL-REVIEW.md',
-    'presentation-guide.md', 'aau.png', 'pom.xml', 'build-app.ps1',
+    '.gitignore', '.gitattributes', 'README.md', 'PROJECT-FILES.md',
+    'aau.png', 'pom.xml', 'build-app.ps1',
     'build-app.sh', 'start-app.ps1', 'start-app.cmd',
-    'output/presentation/CCMS-OOAD-presentation.pptx',
 )
-TREES = ('src', 'docs', 'requirements', 'sample-data', 'prototype', 'scripts', 'output/pdf')
+TREES = ('src', 'reports', 'presentation', 'project-notes', 'requirements', 'prototype', 'scripts')
 EXTENSIONS = {'.java', '.bin', '.md', '.tex', '.png', '.svg', '.csv', '.txt',
-              '.pdf', '.py', '.ps1', '.html', '.css', '.js', '.cjs'}
+              '.pdf', '.pptx', '.py', '.ps1', '.html', '.css', '.js', '.cjs'}
 
 
 def collect_files():
@@ -25,7 +24,8 @@ def collect_files():
                 raise ValueError(f'Unexpected link outside the source tree: {path}')
             if path.suffix not in EXTENSIONS:
                 raise ValueError(f'Review unexpected submission file: {path}')
-            if path.suffix == '.bin' and path.relative_to(ROOT).as_posix() != 'src/test/resources/legacy-campus-v1.bin':
+            if path.suffix == '.bin' and path.relative_to(ROOT).as_posix() not in {
+                'src/test/resources/legacy-campus-v1.bin', 'src/test/resources/legacy-active-v1.bin'}:
                 raise ValueError(f'User data must not be submitted: {path}')
             files.append(path)
     for path in files:
@@ -36,16 +36,16 @@ def collect_files():
 
 def main():
     files = collect_files()
-    destination = ROOT / 'dist' / 'CCMS-submission.zip'
+    destination = ROOT / 'dist' / 'Arena-submission.zip'
     destination.parent.mkdir(exist_ok=True)
     manifest = []
     with zipfile.ZipFile(destination, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
         for path in files:
             relative = path.relative_to(ROOT).as_posix()
             data = path.read_bytes()
-            archive.writestr('CCMS/' + relative, data)
+            archive.writestr('Arena/' + relative, data)
             manifest.append(f'{hashlib.sha256(data).hexdigest()}  {relative}')
-        archive.writestr('CCMS/submission-manifest.sha256', '\n'.join(manifest) + '\n')
+        archive.writestr('Arena/submission-manifest.sha256', '\n'.join(manifest) + '\n')
     with zipfile.ZipFile(destination) as archive:
         if archive.testzip() is not None:
             raise RuntimeError('ZIP integrity check failed.')

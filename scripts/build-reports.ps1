@@ -11,7 +11,7 @@ $cache = Join-Path $projectRoot '.tools\tex-cache'
 if (Test-Path -LiteralPath $cache) { $env:TECTONIC_CACHE_DIR = $cache }
 Push-Location $projectRoot
 try {
-    New-Item -ItemType Directory -Force output\pdf | Out-Null
+    New-Item -ItemType Directory -Force reports | Out-Null
     $reports = [ordered]@{
         'system-analysis' = '01-system-analysis.pdf'
         'system-design' = '02-system-design.pdf'
@@ -25,8 +25,8 @@ try {
         New-Item -ItemType Directory -Force $buildDir | Out-Null
         $flags = @('--keep-logs','--outdir',$buildDir)
         if ($CachedOnly) { $flags += '--only-cached' }
-        & $compiler @flags "docs\$name\main.tex"
+        & $compiler @flags "reports\source\$name.tex"
         if ($LASTEXITCODE -ne 0) { throw "LaTeX compilation failed: $name" }
-        Copy-Item -LiteralPath "$buildDir\main.pdf" -Destination (Join-Path 'output\pdf' $reports[$name]) -Force
+        Copy-Item -LiteralPath "$buildDir\$name.pdf" -Destination (Join-Path 'reports' $reports[$name]) -Force
     }
 } finally { Pop-Location }

@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400px" height="1500px" viewBox="0 0 2400 1500">
+<defs><marker id="arrow" markerWidth="14" markerHeight="14" refX="12" refY="7" orient="auto"><path d="M2 2 L12 7 L2 12" fill="none" stroke="#243043" stroke-width="1.5"/></marker><marker id="triangle" markerWidth="16" markerHeight="16" refX="14" refY="8" orient="auto"><path d="M2 2 L14 8 L2 14 Z" fill="white" stroke="#243043" stroke-width="1.5"/></marker></defs>
+<rect width="2400" height="1500" fill="white"/><rect width="2400" height="11" fill="#862C4C"/>
+<text x="75" y="64" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="700" fill="#5D6877" text-anchor="start">ARENA / AL AIN UNIVERSITY / SYSTEM DESIGN</text>
+<text x="75" y="130" font-family="DejaVu Sans, sans-serif" font-size="42" font-weight="700" fill="#243043" text-anchor="start">Activity Diagram · Type and Tournament Workflow</text>
+<polyline points="75,164 2325,164" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<polyline points="75,1425 2325,1425" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="75" y="1460" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" fill="#5D6877" text-anchor="start">AAU · OBJECT-ORIENTED ANALYSIS &amp; DESIGN · UNITED ARAB EMIRATES</text>
+<circle cx="1200" cy="215" r="12" fill="#243043"/>
+<rect x="900" y="260" width="600" height="90" rx="18" fill="#EAF5F1" stroke="#243043" stroke-width="2"/>
+<text x="1200.0" y="294" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="400" fill="#243043" text-anchor="middle">Open registration; validate entries</text>
+<text x="1200.0" y="325" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="400" fill="#243043" text-anchor="middle">At least 2 teams; lock rosters</text>
+<polyline points="1200,227 1200,260" fill="none" stroke="#243043" stroke-width="2" marker-end="url(#arrow)"/>
+<polygon points="1200,410 1360,480 1200,550 1040,480" fill="white" stroke="#243043" stroke-width="2"/>
+<text x="1200" y="486" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="400" fill="#243043" text-anchor="middle">Tournament format?</text>
+<polyline points="1200,350 1200,410" fill="none" stroke="#243043" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="420" y="590" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" fill="#862C4C" text-anchor="middle">[Score-based ranking]</text>
+<text x="1200" y="590" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" fill="#862C4C" text-anchor="middle">[Knockout]</text>
+<text x="1980" y="590" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" fill="#862C4C" text-anchor="middle">[Round robin]</text>
+<rect x="75" y="635" width="690" height="125" rx="18" fill="#EAF5F1" stroke="#243043" stroke-width="2"/>
+<text x="420.0" y="669" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="400" fill="#243043" text-anchor="middle">Start Active</text>
+<text x="420.0" y="700" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="400" fill="#243043" text-anchor="middle">Project / programming: receive all submissions</text>
+<text x="420.0" y="731" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="400" fill="#243043" text-anchor="middle">Quiz: questions administered outside Arena</text>
+<rect x="855" y="635" width="690" height="125" rx="18" fill="#EAF5F1" stroke="#243043" stroke-width="2"/>
+<text x="1200.0" y="669" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="400" fill="#243043" text-anchor="middle">Start Active</text>
+<text x="1200.0" y="700" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="400" fill="#243043" text-anchor="middle">Generate seeded bracket for 2–16 teams</text>
+<text x="1200.0" y="731" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="400" fill="#243043" text-anchor="middle">First-round byes advance automatically</text>
+<rect x="1635" y="635" width="690" height="125" rx="18" fill="#EAF5F1" stroke="#243043" stroke-width="2"/>
+<text x="1980.0" y="669" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="400" fill="#243043" text-anchor="middle">Start Active</text>
+<text x="1980.0" y="700" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="400" fill="#243043" text-anchor="middle">Generate every team pairing once</text>
+<text x="1980.0" y="731" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="400" fill="#243043" text-anchor="middle">Odd team counts include rest rounds</text>
+<polyline points="1040,480 420,480 420,635" fill="none" stroke="#243043" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="1200,550 1200,635" fill="none" stroke="#243043" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="1360,480 1980,480 1980,635" fill="none" stroke="#243043" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="75" y="845" width="690" height="125" rx="18" fill="#EAF5F1" stroke="#243043" stroke-width="2"/>
+<text x="420.0" y="879" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="400" fill="#243043" text-anchor="middle">Enter Judging</text>
+<text x="420.0" y="910" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="400" fill="#243043" text-anchor="middle">Projects: collect all assigned rubric reviews</text>
+<text x="420.0" y="941" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="400" fill="#243043" text-anchor="middle">Programming / quiz: one official result per team</text>
+<rect x="855" y="845" width="690" height="125" rx="18" fill="#EAF5F1" stroke="#243043" stroke-width="2"/>
+<text x="1200.0" y="879" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="400" fill="#243043" text-anchor="middle">Record winners or quiz match scores</text>
+<text x="1200.0" y="910" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="400" fill="#243043" text-anchor="middle">Generate next rounds until one champion</text>
+<text x="1200.0" y="941" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="400" fill="#243043" text-anchor="middle">Enter Judging to certify completed bracket</text>
+<rect x="1635" y="845" width="690" height="125" rx="18" fill="#EAF5F1" stroke="#243043" stroke-width="2"/>
+<text x="1980.0" y="879" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="400" fill="#243043" text-anchor="middle">Record scores; update 3 / 1 / 0 standings</text>
+<text x="1980.0" y="910" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="400" fill="#243043" text-anchor="middle">Complete every fixture</text>
+<text x="1980.0" y="941" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="400" fill="#243043" text-anchor="middle">Enter Judging to certify league results</text>
+<polyline points="420,760 420,845" fill="none" stroke="#243043" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="1200,760 1200,845" fill="none" stroke="#243043" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="1980,760 1980,845" fill="none" stroke="#243043" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="800" y="1145" width="800" height="90" rx="18" fill="#EAF5F1" stroke="#243043" stroke-width="2"/>
+<text x="1200.0" y="1179" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="400" fill="#243043" text-anchor="middle">Verify required results are complete</text>
+<text x="1200.0" y="1210" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="400" fill="#243043" text-anchor="middle">Publish official standings and allow CSV export</text>
+<polyline points="420,970 420,1080 1200,1080 1200,1145" fill="none" stroke="#243043" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="1200,970 1200,1145" fill="none" stroke="#243043" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="1980,970 1980,1080 1200,1080" fill="none" stroke="#243043" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="1200,1235 1200,1300" fill="none" stroke="#243043" stroke-width="2" marker-end="url(#arrow)"/>
+<circle cx="1200" cy="1318" r="18" fill="white" stroke="#243043" stroke-width="3"/><circle cx="1200" cy="1318" r="11" fill="#243043"/>
+<text x="75" y="1365" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#5D6877" text-anchor="start">Project and programming support ranking only. Quiz supports all three formats. General matches support knockout and round robin.</text>
+</svg>

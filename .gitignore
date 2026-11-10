@@ -25,6 +25,7 @@ replay_pid*
 
 # Local runtime, databases, and build products
 .tools/
+.local-archive/
 build/
 target/
 data/
@@ -55,3 +56,4 @@ node_modules/
 
 # Intentional fictional-data fixture for serialization compatibility
 !src/test/resources/legacy-campus-v1.bin
+!src/test/resources/legacy-active-v1.bin

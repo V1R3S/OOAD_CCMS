@@ -1,0 +1,340 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3600px" height="3480px" viewBox="0 0 3600 3480">
+<defs><marker id="arrow" markerWidth="14" markerHeight="14" refX="12" refY="7" orient="auto"><path d="M2 2 L12 7 L2 12" fill="none" stroke="#243043" stroke-width="1.5"/></marker><marker id="triangle" markerWidth="16" markerHeight="16" refX="14" refY="8" orient="auto"><path d="M2 2 L14 8 L2 14 Z" fill="white" stroke="#243043" stroke-width="1.5"/></marker></defs>
+<rect width="3600" height="3480" fill="white"/><rect width="3600" height="11" fill="#862C4C"/>
+<text x="75" y="64" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="700" fill="#5D6877" text-anchor="start">ARENA / AL AIN UNIVERSITY / SYSTEM DESIGN</text>
+<text x="75" y="130" font-family="DejaVu Sans, sans-serif" font-size="42" font-weight="700" fill="#243043" text-anchor="start">Design Class Diagram · Complete Production Type Overview</text>
+<polyline points="75,164 3525,164" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<polyline points="75,3405 3525,3405" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="75" y="3440" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" fill="#5D6877" text-anchor="start">AAU · OBJECT-ORIENTED ANALYSIS &amp; DESIGN · UNITED ARAB EMIRATES</text>
+<text x="75" y="212" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#862C4C" text-anchor="start">PRESENTATION  ·  edu.aau.arena.ui</text>
+<g data-class="ArenaApp"><rect x="60" y="245" width="550" height="220" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="61" y="246" width="548" height="72" rx="8" fill="#EAF5F1"/>
+<text x="335.0" y="271" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«class»</text>
+<text x="335.0" y="302" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">ArenaApp</text>
+<polyline points="60,319 610,319" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="78" y="350" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#243043" text-anchor="start">− service: ArenaService</text>
+<polyline points="60,369 610,369" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="78" y="399" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#243043" text-anchor="start">+ main(args): void</text>
+<text x="78" y="428" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#243043" text-anchor="start">~ showCompetition(cid): void</text>
+</g>
+<g data-class="AppDialogs"><rect x="640" y="245" width="550" height="220" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="641" y="246" width="548" height="72" rx="8" fill="#EAF5F1"/>
+<text x="915.0" y="271" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«class»</text>
+<text x="915.0" y="302" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">AppDialogs</text>
+<polyline points="640,319 1190,319" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="658" y="350" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#243043" text-anchor="start">− app: ArenaApp</text>
+<text x="658" y="379" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#243043" text-anchor="start">− service: ArenaService</text>
+<polyline points="640,398 1190,398" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="658" y="428" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#243043" text-anchor="start">~ competitionDialog(c): void</text>
+</g>
+<g data-class="CompetitionViews"><rect x="1220" y="245" width="550" height="220" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="1221" y="246" width="548" height="72" rx="8" fill="#EAF5F1"/>
+<text x="1495.0" y="271" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«class»</text>
+<text x="1495.0" y="302" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">CompetitionViews</text>
+<polyline points="1220,319 1770,319" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="1238" y="350" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#243043" text-anchor="start">− app: ArenaApp</text>
+<text x="1238" y="379" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#243043" text-anchor="start">− service: ArenaService</text>
+<polyline points="1220,398 1770,398" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="1238" y="428" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#243043" text-anchor="start">~ bracket(c), fixtures(c): JPanel</text>
+</g>
+<g data-class="ArenaTheme"><rect x="1800" y="245" width="550" height="220" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="1801" y="246" width="548" height="72" rx="8" fill="#EAF5F1"/>
+<text x="2075.0" y="271" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«class»</text>
+<text x="2075.0" y="302" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">ArenaTheme</text>
+<polyline points="1800,319 2350,319" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="1818" y="350" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#243043" text-anchor="start">~ ACCENT, GREEN, PAPER: Color</text>
+<polyline points="1800,369 2350,369" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="1818" y="399" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#243043" text-anchor="start">~ actionButton(text, primary): JButton</text>
+</g>
+<g data-class="UiComponents"><rect x="2380" y="245" width="550" height="220" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="2381" y="246" width="548" height="72" rx="8" fill="#EAF5F1"/>
+<text x="2655.0" y="271" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«class»</text>
+<text x="2655.0" y="302" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">UiComponents</text>
+<polyline points="2380,319 2930,319" fill="none" stroke="#243043" stroke-width="2"/>
+<polyline points="2380,340 2930,340" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="2398" y="370" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#243043" text-anchor="start">~ grid(columns, rows): JTable</text>
+<text x="2398" y="399" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#243043" text-anchor="start">~ paragraph(text, background): JTextArea</text>
+</g>
+<g data-class="WorkspacePanel"><rect x="2960" y="245" width="550" height="220" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="2961" y="246" width="548" height="72" rx="8" fill="#EAF5F1"/>
+<text x="3235.0" y="271" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«class»</text>
+<text x="3235.0" y="302" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">WorkspacePanel</text>
+<polyline points="2960,319 3510,319" fill="none" stroke="#243043" stroke-width="2"/>
+<polyline points="2960,340 3510,340" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="2978" y="370" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#243043" text-anchor="start">+ getScrollableTracksViewportWidth(): boolean</text>
+</g>
+<polyline points="335,465 335,505 990,505 990,465" fill="none" stroke="#243043" stroke-width="2" stroke-dasharray="10 7" marker-end="url(#arrow)"/>
+<polyline points="335,505 1570,505 1570,465" fill="none" stroke="#243043" stroke-width="2" stroke-dasharray="10 7" marker-end="url(#arrow)"/>
+<text x="660" y="495" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#5D6877" text-anchor="start">creates / delegates</text>
+<text x="75" y="565" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#862C4C" text-anchor="start">APPLICATION CONTROL, PERSISTENCE, AND SUPPORT</text>
+<g data-class="ArenaService"><rect x="60" y="600" width="660" height="345" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="61" y="601" width="658" height="72" rx="8" fill="#F9F1F4"/>
+<text x="390.0" y="626" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«class»</text>
+<text x="390.0" y="657" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">ArenaService</text>
+<polyline points="60,674 720,674" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="78" y="705" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− state: State</text>
+<text x="78" y="734" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− repository: Repository</text>
+<text x="78" y="763" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− session: String</text>
+<text x="78" y="792" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− clock: Clock</text>
+<polyline points="60,811 720,811" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="78" y="841" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">+ createCompetition(...): Competition</text>
+<text x="78" y="870" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">+ recordMatchScore(id, left, right): void</text>
+<text x="78" y="899" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">+ standings(cid): List&lt;Standing&gt;</text>
+</g>
+<g data-class="Repository"><rect x="760" y="600" width="660" height="345" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="761" y="601" width="658" height="72" rx="8" fill="#F9F1F4"/>
+<text x="1090.0" y="626" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«class»</text>
+<text x="1090.0" y="657" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">Repository</text>
+<polyline points="760,674 1420,674" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="778" y="705" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− file: Path</text>
+<text x="778" y="734" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− channel: FileChannel</text>
+<text x="778" y="763" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− lock: FileLock</text>
+<polyline points="760,782 1420,782" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="778" y="812" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">+ load(): State</text>
+<text x="778" y="841" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">+ save(state): void</text>
+<text x="778" y="870" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">+ close(): void</text>
+</g>
+<g data-class="DemoData"><rect x="1460" y="600" width="660" height="345" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="1461" y="601" width="658" height="72" rx="8" fill="#F9F1F4"/>
+<text x="1790.0" y="626" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«class»</text>
+<text x="1790.0" y="657" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">DemoData</text>
+<polyline points="1460,674 2120,674" fill="none" stroke="#243043" stroke-width="2"/>
+<polyline points="1460,695 2120,695" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="1478" y="725" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">+ populate(state, now): void</text>
+</g>
+<g data-class="Passwords"><rect x="2160" y="600" width="660" height="345" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="2161" y="601" width="658" height="72" rx="8" fill="#F9F1F4"/>
+<text x="2490.0" y="626" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«class»</text>
+<text x="2490.0" y="657" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">Passwords</text>
+<polyline points="2160,674 2820,674" fill="none" stroke="#243043" stroke-width="2"/>
+<polyline points="2160,695 2820,695" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="2178" y="725" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">+ hash(password): String</text>
+<text x="2178" y="754" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">+ verify(password, encoded): boolean</text>
+</g>
+<g data-class="UserSummary"><rect x="2860" y="600" width="660" height="345" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="2861" y="601" width="658" height="72" rx="8" fill="#F9F1F4"/>
+<text x="3190.0" y="626" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«record»</text>
+<text x="3190.0" y="657" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">UserSummary</text>
+<polyline points="2860,674 3520,674" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="2878" y="705" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− id, name, email: String</text>
+<text x="2878" y="734" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− role: Role</text>
+</g>
+<polyline points="335,505 30,505 30,770 60,770" fill="none" stroke="#243043" stroke-width="2" stroke-dasharray="10 7" marker-end="url(#arrow)"/>
+<polyline points="720,770 760,770" fill="none" stroke="#243043" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="724" y="750" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#243043" text-anchor="start">1</text>
+<polyline points="390,945 390,980 2470,980 2470,945" fill="none" stroke="#243043" stroke-width="2" stroke-dasharray="10 7" marker-end="url(#arrow)"/>
+<text x="75" y="1050" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#862C4C" text-anchor="start">SCORING STRATEGIES</text>
+<text x="1850" y="1050" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#862C4C" text-anchor="start">TOURNAMENT STRATEGIES</text>
+<g data-class="CompetitionRules"><rect x="60" y="1080" width="1620" height="215" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="61" y="1081" width="1618" height="72" rx="8" fill="#EAF5F1"/>
+<text x="870.0" y="1106" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«interface»</text>
+<text x="870.0" y="1137" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">CompetitionRules</text>
+<polyline points="60,1154 1680,1154" fill="none" stroke="#243043" stroke-width="2"/>
+<polyline points="60,1175 1680,1175" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="78" y="1205" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="400" fill="#243043" text-anchor="start">+ validate(a, b, c): void</text>
+<text x="78" y="1234" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="400" fill="#243043" text-anchor="start">+ score(e): double</text>
+<text x="78" y="1263" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="400" fill="#243043" text-anchor="start">+ requiresAllJudges(): boolean</text>
+</g>
+<g data-class="TournamentRules"><rect x="1850" y="1080" width="1620" height="215" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="1851" y="1081" width="1618" height="72" rx="8" fill="#EAF5F1"/>
+<text x="2660.0" y="1106" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«interface»</text>
+<text x="2660.0" y="1137" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">TournamentRules</text>
+<polyline points="1850,1154 3470,1154" fill="none" stroke="#243043" stroke-width="2"/>
+<polyline points="1850,1175 3470,1175" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="1868" y="1205" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="400" fill="#243043" text-anchor="start">+ start(cid, teamIds): List&lt;Match&gt;</text>
+<text x="1868" y="1234" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="400" fill="#243043" text-anchor="start">+ nextRound(cid, matches): List&lt;Match&gt;</text>
+<text x="1868" y="1263" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="400" fill="#243043" text-anchor="start">+ matchesComplete(matches): boolean</text>
+</g>
+<polyline points="390,980 390,1080" fill="none" stroke="#243043" stroke-width="2" stroke-dasharray="10 7" marker-end="url(#arrow)"/>
+<polyline points="390,980 2660,980 2660,1080" fill="none" stroke="#243043" stroke-width="2" stroke-dasharray="10 7" marker-end="url(#arrow)"/>
+<g data-class="ProjectRules"><rect x="60" y="1380" width="385" height="220" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="61" y="1381" width="383" height="72" rx="8" fill="#EAF5F1"/>
+<text x="252.5" y="1406" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«class»</text>
+<text x="252.5" y="1437" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">ProjectRules</text>
+<polyline points="60,1454 445,1454" fill="none" stroke="#243043" stroke-width="2"/>
+<polyline points="60,1475 445,1475" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="78" y="1505" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#243043" text-anchor="start">+ score(e): double</text>
+<text x="78" y="1534" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#243043" text-anchor="start">+ requiresAllJudges(): boolean</text>
+</g>
+<polyline points="252,1380 252,1335 870,1335 870,1295" fill="none" stroke="#243043" stroke-width="2" stroke-dasharray="10 7" marker-end="url(#triangle)"/>
+<g data-class="ProgrammingRules"><rect x="475" y="1380" width="385" height="220" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="476" y="1381" width="383" height="72" rx="8" fill="#EAF5F1"/>
+<text x="667.5" y="1406" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«class»</text>
+<text x="667.5" y="1437" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">ProgrammingRules</text>
+<polyline points="475,1454 860,1454" fill="none" stroke="#243043" stroke-width="2"/>
+<polyline points="475,1475 860,1475" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="493" y="1505" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#243043" text-anchor="start">+ validate(a, b, c): void</text>
+<text x="493" y="1534" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#243043" text-anchor="start">+ score(e): double</text>
+</g>
+<polyline points="667,1380 667,1335 870,1335 870,1295" fill="none" stroke="#243043" stroke-width="2" stroke-dasharray="10 7" marker-end="url(#triangle)"/>
+<g data-class="QuizRules"><rect x="890" y="1380" width="385" height="220" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="891" y="1381" width="383" height="72" rx="8" fill="#EAF5F1"/>
+<text x="1082.5" y="1406" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«class»</text>
+<text x="1082.5" y="1437" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">QuizRules</text>
+<polyline points="890,1454 1275,1454" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="908" y="1485" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#243043" text-anchor="start">− maximum: int</text>
+<polyline points="890,1504 1275,1504" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="908" y="1534" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#243043" text-anchor="start">+ validate(a, b, c): void</text>
+</g>
+<polyline points="1082,1380 1082,1335 870,1335 870,1295" fill="none" stroke="#243043" stroke-width="2" stroke-dasharray="10 7" marker-end="url(#triangle)"/>
+<g data-class="KnockoutRules"><rect x="1305" y="1380" width="385" height="220" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="1306" y="1381" width="383" height="72" rx="8" fill="#EAF5F1"/>
+<text x="1497.5" y="1406" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«class»</text>
+<text x="1497.5" y="1437" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">KnockoutRules</text>
+<polyline points="1305,1454 1690,1454" fill="none" stroke="#243043" stroke-width="2"/>
+<polyline points="1305,1475 1690,1475" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="1323" y="1505" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#243043" text-anchor="start">+ requiresSubmission(): boolean</text>
+</g>
+<polyline points="1497,1380 1497,1335 870,1335 870,1295" fill="none" stroke="#243043" stroke-width="2" stroke-dasharray="10 7" marker-end="url(#triangle)"/>
+<g data-class="ScoreRankingRules"><rect x="1850" y="1380" width="520" height="220" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="1851" y="1381" width="518" height="72" rx="8" fill="#EAF5F1"/>
+<text x="2110.0" y="1406" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«class»</text>
+<text x="2110.0" y="1437" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">ScoreRankingRules</text>
+<polyline points="1850,1454 2370,1454" fill="none" stroke="#243043" stroke-width="2"/>
+<polyline points="1850,1475 2370,1475" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="1868" y="1505" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">+ start(cid, teams): List&lt;Match&gt;</text>
+</g>
+<polyline points="2110,1380 2110,1335 2660,1335 2660,1295" fill="none" stroke="#243043" stroke-width="2" stroke-dasharray="10 7" marker-end="url(#triangle)"/>
+<g data-class="KnockoutTournamentRules"><rect x="2400" y="1380" width="520" height="220" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="2401" y="1381" width="518" height="72" rx="8" fill="#EAF5F1"/>
+<text x="2660.0" y="1406" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«class»</text>
+<text x="2660.0" y="1437" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">KnockoutTournamentRules</text>
+<polyline points="2400,1454 2920,1454" fill="none" stroke="#243043" stroke-width="2"/>
+<polyline points="2400,1475 2920,1475" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="2418" y="1505" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">+ nextRound(cid, matches): List&lt;Match&gt;</text>
+</g>
+<polyline points="2660,1380 2660,1335 2660,1335 2660,1295" fill="none" stroke="#243043" stroke-width="2" stroke-dasharray="10 7" marker-end="url(#triangle)"/>
+<g data-class="RoundRobinRules"><rect x="2950" y="1380" width="520" height="220" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="2951" y="1381" width="518" height="72" rx="8" fill="#EAF5F1"/>
+<text x="3210.0" y="1406" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«class»</text>
+<text x="3210.0" y="1437" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">RoundRobinRules</text>
+<polyline points="2950,1454 3470,1454" fill="none" stroke="#243043" stroke-width="2"/>
+<polyline points="2950,1475 3470,1475" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="2968" y="1505" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">+ table(teams, matches, name):</text>
+<text x="2968" y="1534" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">    List&lt;LeagueStanding&gt;</text>
+</g>
+<polyline points="3210,1380 3210,1335 2660,1335 2660,1295" fill="none" stroke="#243043" stroke-width="2" stroke-dasharray="10 7" marker-end="url(#triangle)"/>
+<text x="75" y="1680" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#862C4C" text-anchor="start">PERSISTED MODEL AND RESULT RECORDS  ·  edu.aau.ccms.Model (nested types; names retained for compatibility)</text>
+<g data-class="Model"><rect x="60" y="1720" width="550" height="440" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="61" y="1721" width="548" height="72" rx="8" fill="#F9F1F4"/>
+<text x="335.0" y="1746" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«class»</text>
+<text x="335.0" y="1777" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">Model</text>
+<polyline points="60,1794 610,1794" fill="none" stroke="#243043" stroke-width="2"/>
+<polyline points="60,1815 610,1815" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="78" y="1845" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">+ legacyType(format): CompetitionType</text>
+<text x="78" y="1874" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">+ legacyTournament(format): TournamentFormat</text>
+</g>
+<g data-class="State"><rect x="640" y="1720" width="550" height="440" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="641" y="1721" width="548" height="72" rx="8" fill="#F9F1F4"/>
+<text x="915.0" y="1746" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«class»</text>
+<text x="915.0" y="1777" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">State</text>
+<polyline points="640,1794 1190,1794" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="658" y="1825" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− schema: int</text>
+<text x="658" y="1854" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− users, teams, competitions: Map</text>
+<text x="658" y="1883" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− registrations, submissions: Map</text>
+<text x="658" y="1912" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− evaluations, matches: Map</text>
+<text x="658" y="1941" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− audit: List&lt;Audit&gt;</text>
+<polyline points="640,1960 1190,1960" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="658" y="1990" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">+ upgradeSchema(): void</text>
+</g>
+<g data-class="User"><rect x="1220" y="1720" width="550" height="440" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="1221" y="1721" width="548" height="72" rx="8" fill="#F9F1F4"/>
+<text x="1495.0" y="1746" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«record»</text>
+<text x="1495.0" y="1777" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">User</text>
+<polyline points="1220,1794 1770,1794" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="1238" y="1825" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− id, name, email: String</text>
+<text x="1238" y="1854" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− role: Role</text>
+<text x="1238" y="1883" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− password: String</text>
+</g>
+<g data-class="Team"><rect x="1800" y="1720" width="550" height="440" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="1801" y="1721" width="548" height="72" rx="8" fill="#F9F1F4"/>
+<text x="2075.0" y="1746" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«record»</text>
+<text x="2075.0" y="1777" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">Team</text>
+<polyline points="1800,1794 2350,1794" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="1818" y="1825" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− id, name, captainId: String</text>
+<text x="1818" y="1854" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− members: List&lt;String&gt;</text>
+</g>
+<g data-class="Competition"><rect x="2380" y="1720" width="550" height="440" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="2381" y="1721" width="548" height="72" rx="8" fill="#F9F1F4"/>
+<text x="2655.0" y="1746" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«record»</text>
+<text x="2655.0" y="1777" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">Competition</text>
+<polyline points="2380,1794 2930,1794" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="2398" y="1825" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− id, title, description: String</text>
+<text x="2398" y="1854" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− type: CompetitionType</text>
+<text x="2398" y="1883" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− tournamentFormat: TournamentFormat</text>
+<text x="2398" y="1912" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− phase: Phase; format: Format (legacy)</text>
+<text x="2398" y="1941" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− capacity, teamSize, quizMaxPoints: int</text>
+<text x="2398" y="1970" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− organizerId: String; judgeIds: Set&lt;String&gt;</text>
+<text x="2398" y="1999" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− deadline: LocalDateTime</text>
+<polyline points="2380,2018 2930,2018" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="2398" y="2048" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">+ withPhase(next): Competition</text>
+</g>
+<g data-class="Registration"><rect x="2960" y="1720" width="550" height="440" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="2961" y="1721" width="548" height="72" rx="8" fill="#F9F1F4"/>
+<text x="3235.0" y="1746" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«record»</text>
+<text x="3235.0" y="1777" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">Registration</text>
+<polyline points="2960,1794 3510,1794" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="2978" y="1825" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− id, competitionId, teamId: String</text>
+</g>
+<g data-class="Submission"><rect x="60" y="2200" width="550" height="440" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="61" y="2201" width="548" height="72" rx="8" fill="#F9F1F4"/>
+<text x="335.0" y="2226" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«record»</text>
+<text x="335.0" y="2257" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">Submission</text>
+<polyline points="60,2274 610,2274" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="78" y="2305" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− id, competitionId, teamId: String</text>
+<text x="78" y="2334" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− title, description, url: String</text>
+<text x="78" y="2363" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− submittedAt: LocalDateTime</text>
+</g>
+<g data-class="Evaluation"><rect x="640" y="2200" width="550" height="440" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="641" y="2201" width="548" height="72" rx="8" fill="#F9F1F4"/>
+<text x="915.0" y="2226" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«record»</text>
+<text x="915.0" y="2257" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">Evaluation</text>
+<polyline points="640,2274 1190,2274" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="658" y="2305" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− id, competitionId, teamId, judgeId: String</text>
+<text x="658" y="2334" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− a, b, c: int; feedback: String</text>
+</g>
+<g data-class="Match"><rect x="1220" y="2200" width="550" height="440" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="1221" y="2201" width="548" height="72" rx="8" fill="#F9F1F4"/>
+<text x="1495.0" y="2226" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«record»</text>
+<text x="1495.0" y="2257" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">Match</text>
+<polyline points="1220,2274 1770,2274" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="1238" y="2305" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− id, competitionId: String; round: int</text>
+<text x="1238" y="2334" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− leftTeamId, rightTeamId, winnerId: String</text>
+<text x="1238" y="2363" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− leftScore, rightScore: Integer</text>
+<text x="1238" y="2392" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− drawn: boolean</text>
+<polyline points="1220,2411 1770,2411" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="1238" y="2441" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">+ result(left, right): Match</text>
+<text x="1238" y="2470" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">+ bye(), decided(): boolean</text>
+</g>
+<g data-class="Standing"><rect x="1800" y="2200" width="550" height="440" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="1801" y="2201" width="548" height="72" rx="8" fill="#F9F1F4"/>
+<text x="2075.0" y="2226" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«record»</text>
+<text x="2075.0" y="2257" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">Standing</text>
+<polyline points="1800,2274 2350,2274" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="1818" y="2305" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− rank: int; teamId, team: String</text>
+<text x="1818" y="2334" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− score: double; detail: String</text>
+</g>
+<g data-class="LeagueStanding"><rect x="2380" y="2200" width="550" height="440" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="2381" y="2201" width="548" height="72" rx="8" fill="#F9F1F4"/>
+<text x="2655.0" y="2226" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«record»</text>
+<text x="2655.0" y="2257" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">LeagueStanding</text>
+<polyline points="2380,2274 2930,2274" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="2398" y="2305" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− rank, played, won, drawn, lost: int</text>
+<text x="2398" y="2334" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− scored, conceded, points: int</text>
+<text x="2398" y="2363" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− teamId, team: String</text>
+<polyline points="2380,2382 2930,2382" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="2398" y="2412" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">+ difference(): int</text>
+</g>
+<g data-class="Audit"><rect x="2960" y="2200" width="550" height="440" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="2961" y="2201" width="548" height="72" rx="8" fill="#F9F1F4"/>
+<text x="3235.0" y="2226" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«record»</text>
+<text x="3235.0" y="2257" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">Audit</text>
+<polyline points="2960,2274 3510,2274" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="2978" y="2305" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− time: LocalDateTime</text>
+<text x="2978" y="2334" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">− actor, action: String</text>
+</g>
+<g data-class="Role"><rect x="60" y="2680" width="550" height="440" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="61" y="2681" width="548" height="72" rx="8" fill="#EAF5F1"/>
+<text x="335.0" y="2706" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«enumeration»</text>
+<text x="335.0" y="2737" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">Role</text>
+<polyline points="60,2754 610,2754" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="78" y="2785" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">ADMIN, ORGANIZER, JUDGE, STUDENT</text>
+</g>
+<g data-class="Format"><rect x="640" y="2680" width="550" height="440" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="641" y="2681" width="548" height="72" rx="8" fill="#EAF5F1"/>
+<text x="915.0" y="2706" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«enumeration»</text>
+<text x="915.0" y="2737" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">Format</text>
+<polyline points="640,2754 1190,2754" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="658" y="2785" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">PROJECT, PROGRAMMING, KNOCKOUT</text>
+<text x="658" y="2814" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">Compatibility field for version-one data</text>
+</g>
+<g data-class="CompetitionType"><rect x="1220" y="2680" width="550" height="440" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="1221" y="2681" width="548" height="72" rx="8" fill="#EAF5F1"/>
+<text x="1495.0" y="2706" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«enumeration»</text>
+<text x="1495.0" y="2737" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">CompetitionType</text>
+<polyline points="1220,2754 1770,2754" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="1238" y="2785" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">PROJECT, PROGRAMMING, QUIZ, MATCH</text>
+<polyline points="1220,2804 1770,2804" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="1238" y="2834" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">+ supports(format): boolean</text>
+</g>
+<g data-class="TournamentFormat"><rect x="1800" y="2680" width="550" height="440" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="1801" y="2681" width="548" height="72" rx="8" fill="#EAF5F1"/>
+<text x="2075.0" y="2706" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«enumeration»</text>
+<text x="2075.0" y="2737" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">TournamentFormat</text>
+<polyline points="1800,2754 2350,2754" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="1818" y="2785" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">SCORE_BASED, KNOCKOUT, ROUND_ROBIN</text>
+</g>
+<g data-class="Phase"><rect x="2380" y="2680" width="550" height="440" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="2381" y="2681" width="548" height="72" rx="8" fill="#EAF5F1"/>
+<text x="2655.0" y="2706" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«enumeration»</text>
+<text x="2655.0" y="2737" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">Phase</text>
+<polyline points="2380,2754 2930,2754" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="2398" y="2785" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">DRAFT, REGISTRATION, ACTIVE,</text>
+<text x="2398" y="2814" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#243043" text-anchor="start">JUDGING, PUBLISHED, ARCHIVED</text>
+</g>
+<text x="75" y="3345" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#5D6877" text-anchor="start">All 37 named production types are shown. Compartments show selected real fields and operations; record fields are private with public generated accessors.</text>
+<text x="75" y="3371" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#5D6877" text-anchor="start">Solid arrow: navigable association. Dashed open arrow: dependency. Dashed hollow triangle: interface realization. See the focused sheets for readable detail and relationships.</text>
+</svg>

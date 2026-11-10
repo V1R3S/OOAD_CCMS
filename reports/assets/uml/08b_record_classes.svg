@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400px" height="1940px" viewBox="0 0 2400 1940">
+<defs><marker id="arrow" markerWidth="14" markerHeight="14" refX="12" refY="7" orient="auto"><path d="M2 2 L12 7 L2 12" fill="none" stroke="#243043" stroke-width="1.5"/></marker><marker id="triangle" markerWidth="16" markerHeight="16" refX="14" refY="8" orient="auto"><path d="M2 2 L14 8 L2 14 Z" fill="white" stroke="#243043" stroke-width="1.5"/></marker></defs>
+<rect width="2400" height="1940" fill="white"/><rect width="2400" height="11" fill="#862C4C"/>
+<text x="75" y="64" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="700" fill="#5D6877" text-anchor="start">ARENA / AL AIN UNIVERSITY / SYSTEM DESIGN</text>
+<text x="75" y="130" font-family="DejaVu Sans, sans-serif" font-size="42" font-weight="700" fill="#243043" text-anchor="start">Design Class Diagram · Records and Relationships</text>
+<polyline points="75,164 2325,164" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<polyline points="75,1865 2325,1865" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="75" y="1900" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" fill="#5D6877" text-anchor="start">AAU · OBJECT-ORIENTED ANALYSIS &amp; DESIGN · UNITED ARAB EMIRATES</text>
+<g data-class="User"><rect x="70" y="240" width="510" height="235" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="71" y="241" width="508" height="72" rx="8" fill="#EAF5F1"/>
+<text x="325.0" y="266" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«record»</text>
+<text x="325.0" y="297" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">User</text>
+<polyline points="70,314 580,314" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="88" y="345" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− id, name, email: String</text>
+<text x="88" y="374" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− role: Role</text>
+<text x="88" y="403" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− password: String</text>
+</g>
+<g data-class="Team"><rect x="800" y="240" width="600" height="235" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="801" y="241" width="598" height="72" rx="8" fill="#EAF5F1"/>
+<text x="1100.0" y="266" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«record»</text>
+<text x="1100.0" y="297" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">Team</text>
+<polyline points="800,314 1400,314" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="818" y="345" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− id, name, captainId: String</text>
+<text x="818" y="374" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− members: List&lt;String&gt;</text>
+</g>
+<g data-class="Competition"><rect x="1650" y="240" width="680" height="440" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="1651" y="241" width="678" height="72" rx="8" fill="#EAF5F1"/>
+<text x="1990.0" y="266" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«record»</text>
+<text x="1990.0" y="297" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">Competition</text>
+<polyline points="1650,314 2330,314" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="1668" y="345" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− id, title, description: String</text>
+<text x="1668" y="374" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− type: CompetitionType</text>
+<text x="1668" y="403" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− tournamentFormat: TournamentFormat</text>
+<text x="1668" y="432" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− phase: Phase; format: Format (legacy)</text>
+<text x="1668" y="461" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− capacity, teamSize, quizMaxPoints: int</text>
+<text x="1668" y="490" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− organizerId: String; judgeIds: Set&lt;String&gt;</text>
+<text x="1668" y="519" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− deadline: LocalDateTime</text>
+<polyline points="1650,538 2330,538" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="1668" y="568" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">+ withPhase(next): Competition</text>
+</g>
+<g data-class="Registration"><rect x="800" y="750" width="600" height="175" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="801" y="751" width="598" height="72" rx="8" fill="#EAF5F1"/>
+<text x="1100.0" y="776" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«record»</text>
+<text x="1100.0" y="807" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">Registration</text>
+<polyline points="800,824 1400,824" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="818" y="855" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− id, competitionId, teamId: String</text>
+</g>
+<g data-class="Submission"><rect x="70" y="750" width="610" height="235" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="71" y="751" width="608" height="72" rx="8" fill="#EAF5F1"/>
+<text x="375.0" y="776" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«record»</text>
+<text x="375.0" y="807" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">Submission</text>
+<polyline points="70,824 680,824" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="88" y="855" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− id, competitionId, teamId: String</text>
+<text x="88" y="884" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− title, description, url: String</text>
+<text x="88" y="913" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− submittedAt: LocalDateTime</text>
+</g>
+<g data-class="Evaluation"><rect x="800" y="1110" width="690" height="220" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="801" y="1111" width="688" height="72" rx="8" fill="#EAF5F1"/>
+<text x="1145.0" y="1136" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«record»</text>
+<text x="1145.0" y="1167" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">Evaluation</text>
+<polyline points="800,1184 1490,1184" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="818" y="1215" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− id, competitionId, teamId, judgeId: String</text>
+<text x="818" y="1244" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− a, b, c: int; feedback: String</text>
+</g>
+<g data-class="Match"><rect x="1650" y="820" width="680" height="365" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="1651" y="821" width="678" height="72" rx="8" fill="#EAF5F1"/>
+<text x="1990.0" y="846" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«record»</text>
+<text x="1990.0" y="877" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">Match</text>
+<polyline points="1650,894 2330,894" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="1668" y="925" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− id, competitionId: String; round: int</text>
+<text x="1668" y="954" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− leftTeamId, rightTeamId, winnerId: String</text>
+<text x="1668" y="983" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− leftScore, rightScore: Integer</text>
+<text x="1668" y="1012" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− drawn: boolean</text>
+<polyline points="1650,1031 2330,1031" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="1668" y="1061" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">+ result(left, right): Match</text>
+<text x="1668" y="1090" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">+ bye(), decided(): boolean</text>
+</g>
+<g data-class="State"><rect x="70" y="1370" width="610" height="350" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="71" y="1371" width="608" height="72" rx="8" fill="#EAF5F1"/>
+<text x="375.0" y="1396" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«class»</text>
+<text x="375.0" y="1427" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">State</text>
+<polyline points="70,1444 680,1444" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="88" y="1475" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− schema: int</text>
+<text x="88" y="1504" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− users, teams, competitions: Map</text>
+<text x="88" y="1533" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− registrations, submissions: Map</text>
+<text x="88" y="1562" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− evaluations, matches: Map</text>
+<text x="88" y="1591" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− audit: List&lt;Audit&gt;</text>
+<polyline points="70,1610 680,1610" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="88" y="1640" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">+ upgradeSchema(): void</text>
+</g>
+<g data-class="Audit"><rect x="800" y="1500" width="690" height="220" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="801" y="1501" width="688" height="72" rx="8" fill="#EAF5F1"/>
+<text x="1145.0" y="1526" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«record»</text>
+<text x="1145.0" y="1557" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">Audit</text>
+<polyline points="800,1574 1490,1574" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="818" y="1605" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− time: LocalDateTime</text>
+<text x="818" y="1634" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− actor, action: String</text>
+</g>
+<g data-class="Standing"><rect x="1650" y="1240" width="680" height="190" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="1651" y="1241" width="678" height="72" rx="8" fill="#EAF5F1"/>
+<text x="1990.0" y="1266" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«record»</text>
+<text x="1990.0" y="1297" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">Standing</text>
+<polyline points="1650,1314 2330,1314" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="1668" y="1345" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− rank: int; teamId, team: String</text>
+<text x="1668" y="1374" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− score: double; detail: String</text>
+</g>
+<g data-class="LeagueStanding"><rect x="1650" y="1480" width="680" height="260" rx="9" fill="white" stroke="#243043" stroke-width="2.2"/><rect x="1651" y="1481" width="678" height="72" rx="8" fill="#EAF5F1"/>
+<text x="1990.0" y="1506" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#5D6877" text-anchor="middle">«record»</text>
+<text x="1990.0" y="1537" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#243043" text-anchor="middle">LeagueStanding</text>
+<polyline points="1650,1554 2330,1554" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="1668" y="1585" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− rank, played, won, drawn, lost: int</text>
+<text x="1668" y="1614" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− scored, conceded, points: int</text>
+<text x="1668" y="1643" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">− teamId, team: String</text>
+<polyline points="1650,1662 2330,1662" fill="none" stroke="#C4CDD7" stroke-width="2"/>
+<text x="1668" y="1692" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#243043" text-anchor="start">+ difference(): int</text>
+</g>
+<polyline points="580,355 800,355" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="605" y="333" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#243043" text-anchor="start">1..8</text>
+<text x="740" y="333" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#243043" text-anchor="start">0..*</text>
+<text x="615" y="389" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#862C4C" text-anchor="start">members</text>
+<polyline points="310,240 310,202 1990,202 1990,240" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="780" y="195" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#862C4C" text-anchor="start">owner: 1 User / 0..* Competitions; judges: 1..* Users / 0..* Competitions</text>
+<polyline points="1100,475 1100,750" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="1120" y="515" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#243043" text-anchor="start">1 Team</text>
+<text x="1120" y="724" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#243043" text-anchor="start">0..* registrations</text>
+<polyline points="1650,600 1510,600 1510,830 1400,830" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="1518" y="575" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#243043" text-anchor="start">1 Competition</text>
+<text x="1415" y="855" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#243043" text-anchor="start">0..*</text>
+<polyline points="680,830 800,830" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="686" y="810" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#243043" text-anchor="start">0..1</text>
+<text x="766" y="810" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#243043" text-anchor="start">1</text>
+<polyline points="1145,926 1145,1110" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="1160" y="960" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#243043" text-anchor="start">1 Registration</text>
+<text x="1160" y="1080" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#243043" text-anchor="start">0..* evaluations</text>
+<polyline points="1990,680 1990,820" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="2010" y="717" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#243043" text-anchor="start">1 Competition</text>
+<text x="2010" y="790" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#243043" text-anchor="start">0..* matches</text>
+<polyline points="1400,400 1570,400 1570,945 1650,945" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="1405" y="430" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#862C4C" text-anchor="start">1..2 teams / match</text>
+<text x="1450" y="465" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#5D6877" text-anchor="start">1 when it is a bye</text>
+<polyline points="70,355 25,355 25,1260 800,1260" fill="none" stroke="#243043" stroke-width="2"/>
+<text x="40" y="1234" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#862C4C" text-anchor="start">judge: 1 User / 0..* Evaluations</text>
+<text x="735" y="1380" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="400" fill="#862C4C" text-anchor="start">State owns the stored maps and audit list.</text>
+<text x="735" y="1415" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="400" fill="#5D6877" text-anchor="start">Records link by IDs; no recursive object ownership.</text>
+<text x="75" y="1805" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#5D6877" text-anchor="start">Record components are private final fields with public accessors. Selected attributes are shown. Dashed dependencies and enumeration types appear on the overview.</text>
+<text x="75" y="1831" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#5D6877" text-anchor="start">A registration may have no submission (quiz or match event). Evaluations belong to entries; only project/programming score events require a submission.</text>
+</svg>

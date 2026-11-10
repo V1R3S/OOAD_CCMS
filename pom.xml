@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>edu.aau</groupId><artifactId>campus-ccms</artifactId><version>1.1.0</version>
+  <groupId>edu.aau</groupId><artifactId>arena</artifactId><version>2.0.0</version>
+  <name>Arena</name>
+  <description>Al Ain University competition management application</description>
   <properties>
     <maven.compiler.release>17</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <ccms.uiTests>false</ccms.uiTests>
+    <arena.uiTests>false</arena.uiTests>
   </properties>
   <dependencies><dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.11.4</version><scope>test</scope></dependency></dependencies>
   <build>
-    <finalName>campus-ccms</finalName>
+    <finalName>arena</finalName>
     <resources><resource><directory>${project.basedir}</directory><includes><include>aau.png</include></includes></resource></resources>
     <plugins>
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version></plugin>
-      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.5.2</version><configuration><systemPropertyVariables><ccms.uiTests>${ccms.uiTests}</ccms.uiTests></systemPropertyVariables><forkedProcessTimeoutInSeconds>180</forkedProcessTimeoutInSeconds></configuration></plugin>
-      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>3.4.2</version><configuration><archive><manifest><mainClass>edu.aau.ccms.ui.CampusApp</mainClass></manifest></archive></configuration></plugin>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.5.2</version><configuration><systemPropertyVariables><arena.uiTests>${arena.uiTests}</arena.uiTests></systemPropertyVariables><forkedProcessTimeoutInSeconds>180</forkedProcessTimeoutInSeconds></configuration></plugin>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>3.4.2</version><configuration><archive><manifest><mainClass>edu.aau.arena.ui.ArenaApp</mainClass></manifest></archive></configuration></plugin>
     </plugins>
   </build>
-  <profiles><profile><id>ui-tests</id><properties><ccms.uiTests>true</ccms.uiTests></properties></profile></profiles>
+  <profiles><profile><id>ui-tests</id><properties><arena.uiTests>true</arena.uiTests></properties></profile></profiles>
 </project>

@@ -535,6 +535,14 @@ main {
   color:#426e60;
 }
 
+.card-art.quiz { background:#f4edda; color:#83682d; }
+.card-art.league { background:#e4ece8; color:#426e60; }
+.tournament-label { color:var(--muted); font-size:10px; line-height:1.5; margin-bottom:9px; }
+.key-value strong { text-align:right; overflow-wrap:anywhere; }
+.page-heading > div, .detail-grid > * { min-width:0; }
+.button { white-space:normal; }
+[hidden] { display:none !important; }
+
 .format-symbol {
   font-family:Georgia,serif;
   font-size:45px;
@@ -1086,6 +1094,7 @@ dialog p {
   }
   .cards {
     gap:12px;
+    grid-template-columns:repeat(2,minmax(0,1fr));
   }
   .card-body {
     padding:18px 16px;
