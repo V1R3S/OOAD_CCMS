@@ -6,7 +6,9 @@ The guide assumes basic Java knowledge. Read it alongside the application and so
 
 The guide describes Arena as reviewed and tested on 10 November 2026. It explains the seven supported type/format combinations, quiz scoring, knockout byes, league tables, legacy-data migration and the current presentation.
 
-This folder is a personal study companion, separate from the submission package's allowlist. It does not alter the five academic reports, slides, app, or stored data.
+This folder is a personal study companion, separate from the submission package's allowlist. It does not alter the academic reports, slides, app, or stored data.
+
+The submission reports were consolidated on 11 November 2026 without rewriting their content. When this guide refers to the former five reports, use this map: System Analysis is now **Analysis**, with Interface Mockups in Appendix A; System Design is now **Design**; Implementation Report is now **Final Report**, with the User Guide in Appendix A and Testing Evidence in Appendix B.
 
 ## Editable source
 

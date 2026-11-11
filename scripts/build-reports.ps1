@@ -1,6 +1,6 @@
 param(
     [switch]$CachedOnly,
-    [ValidateSet('system-analysis','system-design','implementation-report','testing-report','interface-mockups')]
+    [ValidateSet('analysis','design','final-report')]
     [string[]]$Report
 )
 $ErrorActionPreference = 'Stop'
@@ -13,11 +13,9 @@ Push-Location $projectRoot
 try {
     New-Item -ItemType Directory -Force reports | Out-Null
     $reports = [ordered]@{
-        'system-analysis' = '01-system-analysis.pdf'
-        'system-design' = '02-system-design.pdf'
-        'implementation-report' = '03-implementation-report.pdf'
-        'testing-report' = '04-testing-report.pdf'
-        'interface-mockups' = '05-interface-mockups.pdf'
+        'analysis' = '01-analysis.pdf'
+        'design' = '02-design.pdf'
+        'final-report' = '03-final-report.pdf'
     }
     foreach ($name in $reports.Keys) {
         if ($Report -and $name -notin $Report) { continue }

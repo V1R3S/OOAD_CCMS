@@ -35,10 +35,14 @@ The app uses a single local process and trusted operating-system accounts. Snaps
 
 The browser prototype has temporary independent data and a role selector. Its creation dialog previews valid settings; Java performs persistent competition creation. It is clearly described as a prototype. Current screenshots are actual Java renders, separate from prototype captures and wireframes.
 
-The five report PDFs and the personal learning guide were rebuilt from LaTeX. The presentation uses the actual report UML and a complete 37-type Design Class Diagram. Its 20 main slides and four hidden backups follow the supplied redesigned presentation; the speaking guide and embedded notes use the same order. The earlier concept film was replaced with a current Java screen. The complete class overview is dense; focused application and record sheets in the Design Report provide readable detail.
+The three report PDFs and the personal learning guide were rebuilt from LaTeX. The presentation uses the actual report UML and a complete 37-type Design Class Diagram. Its 20 main slides and four hidden backups follow the supplied redesigned presentation; the speaking guide and embedded notes use the same order. The earlier concept film was replaced with a current Java screen. The complete class overview is dense; focused application and record sheets in the Design Report provide readable detail.
 
 Maintained text, exported PDF text and PowerPoint text were checked for Australian references; none were found. Academic identity and examples use Al Ain University / UAE context. The only old product abbreviation in the reports is the explicitly explained serialized compatibility namespace.
 
 ## Git and academic attribution
 
 No history was rewritten, no commits were fabricated and no push was performed. Prior reorganization appears as old tracked paths removed and new paths added until the group stages its work. Review the complete diff and commit necessary sources, tests, documents and assets together. Ignore caches, portable tools, builds, live data and archives. Individual contributions require the group's confirmation; speaking roles are not evidence of authorship.
+
+## Report organization (11 November 2026)
+
+The existing material is consolidated into three academic reports: Analysis (including interface illustrations), Design, and Final Report (implementation, user guide and testing evidence). Content and recorded test results are retained. The former five-report exports and sources are preserved privately in `.local-archive/2026-11-11-three-reports`, outside the submission. This was a documentation-only change; application tests were not rerun for it.

@@ -7,7 +7,8 @@ Dr. Yazeed Ghadi · Section 61D · Courses 0103430 / 0102331
 ## Start here
 
 - **Run Java:** double-click [start-app.cmd](start-app.cmd).
-- **Read the five reports:** open [reports](reports).
+- **Read the three reports:** [Analysis](reports/01-analysis.pdf), [Design](reports/02-design.pdf), and [Final Report](reports/03-final-report.pdf).
+  Analysis includes interface mockups/screenshots in Appendix A. Final Report includes the user guide in Appendix A and detailed testing evidence in Appendix B.
 - **Present:** open [the PowerPoint](presentation/Arena-presentation.pptx) and [speaking script / live-demo instructions](presentation/speaking-script-and-demo.md). The presentation follows the supplied redesigned deck: 20 main slides and four technical backup slides.
 - **Explore the prototype:** open [prototype/index.html](prototype/index.html).
 - **Understand every file:** read [PROJECT-FILES.md](PROJECT-FILES.md), including what to edit, keep, and rebuild.
@@ -74,7 +75,7 @@ Service checks enforce roles, ownership, roster locks, deadlines, score bounds, 
 
 | Folder | Contents |
 |---|---|
-| `reports/` | Five finished PDFs |
+| `reports/` | Three finished PDFs |
 | `reports/source/` | One named LaTeX source per report |
 | `reports/shared/` | AAU style and references |
 | `reports/assets/` | Necessary UML, Java/prototype screenshots, and wireframes |
@@ -92,11 +93,11 @@ The prototype's role switch does not authenticate users. Refresh resets its inde
 
 ## Edit and rebuild reports
 
-Edit a named file in `reports/source`, such as `system-analysis.tex`. Each contains both the compilation entry point and report text. The shared style is `reports/shared/aau-report-style.tex`. Keep `aau.png` at the root; the app, prototype, and covers use it.
+Edit a named file in `reports/source`, such as `analysis.tex`. Each contains both the compilation entry point and report text. The shared style is `reports/shared/aau-report-style.tex`. Keep `aau.png` at the root; the app, prototype, and covers use it.
 
 ```powershell
 .\scripts\build-reports.ps1 -CachedOnly
-.\scripts\build-reports.ps1 -CachedOnly -Report system-analysis,system-design
+.\scripts\build-reports.ps1 -CachedOnly -Report analysis,design
 ```
 
 The script uses local or installed Tectonic. On a fresh computer, omit `-CachedOnly` to obtain required TeX dependencies. Alternatively, compile a named source from `reports/source` twice using pdfLaTeX. Script-generated intermediates go in `build/latex`.

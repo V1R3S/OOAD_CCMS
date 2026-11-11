@@ -7,7 +7,7 @@ Keep the maintained files below. Generated folders are useful locally but do not
 | Folder | Purpose |
 |---|---|
 | `src/` | Production Java, automated tests and two historical data fixtures. |
-| `reports/` | Five finished academic PDFs, their LaTeX sources, required illustrations and recorded test evidence. |
+| `reports/` | Three finished academic PDFs, their LaTeX sources, required illustrations and recorded test evidence. |
 | `presentation/` | Arena PowerPoint and four-person speaking/demo script. |
 | `prototype/` | Independent HTML/CSS/JavaScript visual walkthrough. |
 | `requirements/` | University assignment outlines; the sample-data product name is updated only. |
@@ -74,11 +74,9 @@ Keep the maintained files below. Generated folders are useful locally but do not
 
 | File | Purpose |
 |---|---|
-| `reports/01-system-analysis.pdf` | Finished readable PDF generated from its LaTeX source. |
-| `reports/02-system-design.pdf` | Finished readable PDF generated from its LaTeX source. |
-| `reports/03-implementation-report.pdf` | Finished readable PDF generated from its LaTeX source. |
-| `reports/04-testing-report.pdf` | Finished readable PDF generated from its LaTeX source. |
-| `reports/05-interface-mockups.pdf` | Finished readable PDF generated from its LaTeX source. |
+| `reports/01-analysis.pdf` | Finished readable PDF generated from its LaTeX source. |
+| `reports/02-design.pdf` | Finished readable PDF generated from its LaTeX source. |
+| `reports/03-final-report.pdf` | Finished readable PDF generated from its LaTeX source. |
 | `reports/assets/prototype/01-overview.png` | Labelled browser-prototype capture; not a Java screenshot. |
 | `reports/assets/prototype/02-registration.png` | Labelled browser-prototype capture; not a Java screenshot. |
 | `reports/assets/prototype/03-scoring.png` | Labelled browser-prototype capture; not a Java screenshot. |
@@ -132,11 +130,9 @@ Keep the maintained files below. Generated folders are useful locally but do not
 | `reports/assets/wireframes/04-bracket.svg` | Editable low-fidelity layout. |
 | `reports/shared/aau-report-style.tex` | Editable LaTeX report, shared style or learning appendix; rebuild the corresponding PDF after edits. |
 | `reports/shared/references.tex` | Editable LaTeX report, shared style or learning appendix; rebuild the corresponding PDF after edits. |
-| `reports/source/implementation-report.tex` | Editable LaTeX report, shared style or learning appendix; rebuild the corresponding PDF after edits. |
-| `reports/source/interface-mockups.tex` | Editable LaTeX report, shared style or learning appendix; rebuild the corresponding PDF after edits. |
-| `reports/source/system-analysis.tex` | Editable LaTeX report, shared style or learning appendix; rebuild the corresponding PDF after edits. |
-| `reports/source/system-design.tex` | Editable LaTeX report, shared style or learning appendix; rebuild the corresponding PDF after edits. |
-| `reports/source/testing-report.tex` | Editable LaTeX report, shared style or learning appendix; rebuild the corresponding PDF after edits. |
+| `reports/source/final-report.tex` | Editable LaTeX report, shared style or learning appendix; rebuild the corresponding PDF after edits. |
+| `reports/source/analysis.tex` | Editable LaTeX report, shared style or learning appendix; rebuild the corresponding PDF after edits. |
+| `reports/source/design.tex` | Editable LaTeX report, shared style or learning appendix; rebuild the corresponding PDF after edits. |
 | `reports/test-evidence/arena-results-table.tex` | LaTeX table generated from executed evidence. |
 | `reports/test-evidence/arena-test-results.csv` | Executed test descriptions/results. |
 | `reports/test-evidence/arena-test-summary.txt` | Execution time and counts. |
@@ -177,7 +173,7 @@ Keep the maintained files below. Generated folders are useful locally but do not
 
 | File | Purpose |
 |---|---|
-| `scripts/build-reports.ps1` | Compiles the five named LaTeX reports with Tectonic. |
+| `scripts/build-reports.ps1` | Compiles the three named LaTeX reports with Tectonic. |
 | `scripts/generate-design-class-diagram.py` | Checks all 37 production type names and rebuilds the design/strategy SVGs. |
 | `scripts/generate-wireframes.py` | Rebuilds four editable wireframes and their PNG versions. |
 | `scripts/package-submission.py` | Creates a clean Arena ZIP and SHA-256 manifest, excluding private data/tools. |
