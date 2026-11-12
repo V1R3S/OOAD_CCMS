@@ -9,9 +9,9 @@ Dr. Yazeed Ghadi · Section 61D · Courses 0103430 / 0102331
 - **Run Java:** double-click [start-app.cmd](start-app.cmd).
 - **Read the three reports:** [Analysis](reports/01-analysis.pdf), [Design](reports/02-design.pdf), and [Final Report](reports/03-final-report.pdf).
   Analysis includes interface mockups/screenshots in Appendix A. Final Report includes the user guide in Appendix A and detailed testing evidence in Appendix B.
-- **Present:** open [the PowerPoint](presentation/Arena-presentation.pptx) and [speaking script / live-demo instructions](presentation/speaking-script-and-demo.md). The presentation follows the supplied redesigned deck: 20 main slides and four technical backup slides.
+- **Present:** open [the PowerPoint](presentation/Arena-presentation.pptx). The current edited deck contains 21 slides. The separate speaking script is retained in the working project for rehearsal and excluded from the submission ZIP.
 - **Explore the prototype:** open [prototype/index.html](prototype/index.html).
-- **Understand every file:** read [PROJECT-FILES.md](PROJECT-FILES.md), including what to edit, keep, and rebuild.
+- **Working-folder companions:** `PROJECT-FILES.md` explains every maintained file, and `study-guide` contains personal learning material. These are excluded from the submission ZIP.
 
 ## Build, run, and test
 
@@ -80,8 +80,8 @@ Service checks enforce roles, ownership, roster locks, deadlines, score bounds, 
 | `reports/shared/` | AAU style and references |
 | `reports/assets/` | Necessary UML, Java/prototype screenshots, and wireframes |
 | `reports/test-evidence/` | Preserved CSV results, timestamps, and LaTeX result tables |
-| `presentation/` | One slide deck and its speaking/demo script |
-| `project-notes/` | Current verification notes and demo-data explanation |
+| `presentation/` | Slide deck; the working folder also retains a private speaking script |
+| `project-notes/` | Demo-data explanation; the internal technical review stays in the working folder |
 | `requirements/` | Original assignment outlines; only the product name in the sample-data brief was updated |
 | `src/` | Application, tests, and two historical compatibility fixtures |
 | `prototype/` | Browser prototype with temporary sample data |
@@ -104,7 +104,7 @@ The script uses local or installed Tectonic. On a fresh computer, omit `-CachedO
 
 Report images are required illustrations. SVGs are editable artwork; matching PDF/PNG versions are embedded by LaTeX. See [UML notes](reports/assets/uml/README.md). These are not duplicate screenshots of report pages.
 
-Preserved evidence records 98 service checks, 22 Swing checks, and 17 additional browser-prototype checks passing on 10 November 2026. Fresh runs write results under `build`. `scripts/update-test-evidence.py` copies executed results into the reports. See [technical review](project-notes/technical-review.md) for commands and limits.
+Preserved evidence records 98 service checks, 22 Swing checks, and 17 additional browser-prototype checks passing on 10 November 2026. Fresh runs write results under `build`. `scripts/update-test-evidence.py` copies executed results into the reports. Final Report, Appendix B, describes the recorded checks and their limitations.
 
 Optional prototype verification requires Node.js and Playwright: `node scripts/test-prototype.cjs --browser "path/to/browser"`. Add `--capture` to rebuild its seven illustrations. Java report images come from `java -jar build/arena.jar --capture reports/assets/screenshots`.
 
@@ -116,7 +116,7 @@ Version-one serialized PROJECT and PROGRAMMING records map to score ranking, and
 python scripts/package-submission.py
 ```
 
-Python 3.10+ creates `dist/Arena-submission.zip` with the app source, tests, build configuration, logo, original outlines, reports and required sources/assets, prototype, presentation, notes, and SHA-256 manifest. Install a JDK separately to build it.
+Python 3.10+ creates `dist/Arena-submission.zip` with the app source, tests, build configuration, logo, original outlines, three reports and their required sources/assets, prototype, slide deck, demo-account reference, maintenance scripts, and SHA-256 manifest. Install a JDK separately to build it. The speaking script, internal technical review, file inventory, and personal study guides remain in the working folder and are excluded from the ZIP.
 
 `.tools`, `.local-archive`, `build`, `target`, `data`, and `dist` are ignored. The archive preserves the pre-cleanup files; it is not submitted. The group reviews changes and manages commits/pushes.
 

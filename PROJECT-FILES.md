@@ -148,7 +148,7 @@ Keep the maintained files below. Generated folders are useful locally but do not
 
 | File | Purpose |
 |---|---|
-| `presentation/Arena-presentation.pptx` | 20 main presentation slides and four hidden UML backups, with updated speaker notes. |
+| `presentation/Arena-presentation.pptx` | Current 21-slide deck; slides 9 and 11 use the supplied Analysis diagrams. |
 | `presentation/speaking-script-and-demo.md` | Slide-by-slide scripts, four speakers, live-demo clicks and professor-question preparation. |
 
 ## prototype
@@ -200,6 +200,6 @@ Keep the maintained files below. Generated folders are useful locally but do not
 
 ## What to submit
 
-Run `python scripts/package-submission.py`. The result is `dist/Arena-submission.zip`. It contains maintained sources, tests, reports, assets, slides, prototype, requirements and build instructions. The personal study guide remains outside the submission. A JDK must be installed separately.
+Run `python scripts/package-submission.py`. The result is `dist/Arena-submission.zip`. It contains maintained sources, tests, the three reports, assets, slides, prototype, requirements, demo-account reference, maintenance scripts and build instructions. The speaking script, internal technical review, this file inventory, and personal study guides remain in the working folder and are excluded from the submission. A JDK must be installed separately.
 
 The old Model namespace, legacy data filenames and fictional campus.test credentials are compatibility or university concepts, not product branding. Earlier files in the private archive are deliberately preserved. No commit or push was made.

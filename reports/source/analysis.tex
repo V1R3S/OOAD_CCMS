@@ -1,6 +1,6 @@
 \documentclass[12pt]{article}
 \input{../shared/aau-report-style}
-\renewcommand{\reportdate}{11 November 2026}
+\renewcommand{\reportdate}{12 November 2026}
 \begin{document}
 \projecttitle{Analysis}{Requirements, domain models, and interaction design}
 \section{Introduction}
@@ -102,32 +102,8 @@ Project and programming retain their submission and review workflows. Quiz requi
 \begin{umlpage}
 \section{System Models}
 \subsection{Use Case Model}
-\umlfigure{01_use_case}{Actor and use-case overview. All four roles share signed-in user capabilities. Authentication is a precondition for protected use cases.}
+\umlfigure{supplied/01_authentication_use_case}{Authentication use-case diagram showing selected role actions.}
 \end{umlpage}
-\begin{contentbox}[UC-01: Register a team]
-\textbf{Actor:} student captain. \textbf{Preconditions:} signed in, team exists, registration open, deadline not reached.\\
-\textbf{Main flow:} choose competition; choose own team; service verifies captain, phase, capacity, size, and overlapping members; store entry and audit event; refresh teams.\\
-\textbf{Alternatives:} duplicate, full, oversized, overlapping, or late entry produces an error and no mutation. A save failure restores the previous state.\\
-\textbf{Postcondition:} one registration exists and the roster is locked.
-\end{contentbox}
-\begin{contentbox}[UC-02: Evaluate a project]
-\textbf{Actor:} assigned judge. \textbf{Preconditions:} Judging phase; registered entry has submitted.\\
-\textbf{Main flow:} read submission; select team; enter three criteria and feedback; validate ranges; replace only this judge's previous evaluation; save.\\
-\textbf{Alternatives:} unassigned judge, missing work, invalid score, or wrong phase is rejected.\\
-\textbf{Postcondition:} exactly one evaluation for this judge and entry; results remain private until publication.
-\end{contentbox}
-\begin{contentbox}[UC-03: Decide a knockout match]
-\textbf{Actor:} assigned judge. \textbf{Preconditions:} Active knockout; undecided match.\\
-\textbf{Main flow:} choose one competing team as winner; confirm the final result; save winner; if the round is complete, pair winners into the next round.\\
-\textbf{Alternatives:} unrelated team, unassigned judge, already decided match, or wrong phase is rejected.\\
-\textbf{Postcondition:} winner is immutable; at most one next round is generated.
-\end{contentbox}
-\begin{contentbox}[UC-04: Publish results]
-\textbf{Actor:} owner or administrator. \textbf{Preconditions:} Judging phase.\\
-\textbf{Main flow:} request publication; verify every required review or certified bracket; advance phase; display official standings to all signed-in users.\\
-\textbf{Alternatives:} incomplete reviews leave the competition in Judging.\\
-\textbf{Postcondition:} published evaluations cannot be modified; CSV export is available.
-\end{contentbox}
 \begin{umlpage}
 \subsection{Dynamic Models}
 \umlfigure{02_registration_sequence}{Successful team registration. Validation failure returns before mutation; persistence failure restores the snapshot.}
@@ -138,7 +114,7 @@ Project and programming retain their submission and review workflows. Quiz requi
 \end{umlpage}
 \begin{umlpage}
 \subsection{Object and Class Model}
-\umlfigure{05_conceptual_domain}{Analysis class relationships. Stored relationships use stable identifiers. Each captain belongs to the team's members.}
+\umlfigure{supplied/05_core_domain}{Core domain class diagram with selected records and relationship multiplicities.}
 \end{umlpage}
 \clearpage\subsection{User Interface}
 The primary navigation is Sign in $\rightarrow$ Overview $\rightarrow$ Competitions $\rightarrow$ Competition workspace. A workspace contains Teams, relevant Submissions/Reviews, Bracket or Fixtures, and Leaderboard. My teams and Results are global destinations; People is administrator-only and Activity is available to organizers and administrators. Role-specific action buttons reflect, but do not replace, service authorization.

@@ -5,17 +5,20 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 ROOT_FILES = (
-    '.gitignore', '.gitattributes', 'README.md', 'PROJECT-FILES.md',
+    '.gitignore', '.gitattributes', 'README.md',
     'aau.png', 'pom.xml', 'build-app.ps1',
     'build-app.sh', 'start-app.ps1', 'start-app.cmd',
 )
-TREES = ('src', 'reports', 'presentation', 'project-notes', 'requirements', 'prototype', 'scripts')
+# Personal rehearsal, review and learning material stays in the working folder.
+SUPPORT_FILES = ('presentation/Arena-presentation.pptx',
+                 'project-notes/demo-accounts-and-data.md')
+TREES = ('src', 'reports', 'requirements', 'prototype', 'scripts')
 EXTENSIONS = {'.java', '.bin', '.md', '.tex', '.png', '.svg', '.csv', '.txt',
               '.pdf', '.pptx', '.py', '.ps1', '.html', '.css', '.js', '.cjs'}
 
 
 def collect_files():
-    files = [ROOT / name for name in ROOT_FILES]
+    files = [ROOT / name for name in (*ROOT_FILES, *SUPPORT_FILES)]
     for tree in TREES:
         for path in sorted((ROOT / tree).rglob('*')):
             if '__pycache__' in path.parts or not path.is_file():
