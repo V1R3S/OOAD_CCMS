@@ -8,7 +8,7 @@ Dr. Yazeed Ghadi · Section 61D · Courses 0103430 / 0102331
 
 - **Run Java:** double-click [start-app.cmd](start-app.cmd).
 - **Read the three reports:** [Analysis](reports/01-analysis.pdf), [Design](reports/02-design.pdf), and [Final Report](reports/03-final-report.pdf).
-  Analysis includes interface mockups/screenshots in Appendix A. Final Report includes the user guide in Appendix A and detailed testing evidence in Appendix B.
+  Analysis includes interface mockups/screenshots in Appendix A. Final Report includes a short testing summary and the user guide in Appendix A. Full testing evidence is retained in `reports/test-evidence`.
 - **Present:** open [the PowerPoint](presentation/Arena-presentation.pptx). The current edited deck contains 21 slides. The separate speaking script is retained in the working project for rehearsal and excluded from the submission ZIP.
 - **Explore the prototype:** open [prototype/index.html](prototype/index.html).
 - **Working-folder companions:** `PROJECT-FILES.md` explains every maintained file, and `study-guide` contains personal learning material. These are excluded from the submission ZIP.
@@ -104,7 +104,7 @@ The script uses local or installed Tectonic. On a fresh computer, omit `-CachedO
 
 Report images are required illustrations. SVGs are editable artwork; matching PDF/PNG versions are embedded by LaTeX. See [UML notes](reports/assets/uml/README.md). These are not duplicate screenshots of report pages.
 
-Preserved evidence records 98 service checks, 22 Swing checks, and 17 additional browser-prototype checks passing on 10 November 2026. Fresh runs write results under `build`. `scripts/update-test-evidence.py` copies executed results into the reports. Final Report, Appendix B, describes the recorded checks and their limitations.
+Preserved evidence records 98 service checks, 22 Swing checks, and 17 additional browser-prototype checks passing on 10 November 2026. Fresh runs write results under `build`. `scripts/update-test-evidence.py` copies executed results into the reports. The Final Report briefly summarizes the recorded results and limitations; full evidence remains in `reports/test-evidence`.
 
 Optional prototype verification requires Node.js and Playwright: `node scripts/test-prototype.cjs --browser "path/to/browser"`. Add `--capture` to rebuild its seven illustrations. Java report images come from `java -jar build/arena.jar --capture reports/assets/screenshots`.
 

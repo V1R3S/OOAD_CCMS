@@ -1,115 +1,102 @@
 \documentclass[12pt]{article}
 \input{../shared/aau-report-style}
-\renewcommand{\reportdate}{12 November 2026}
+\renewcommand{\reportdate}{13 November 2026}
+% Analysis-only layout and summary; the other reports retain their styling.
+\renewenvironment{umlpage}{\clearpage}{\clearpage}
+% Two UML figures per portrait page; preserve aspect ratio and captions.
+\renewcommand{\umlfigure}[2]{\begin{figure}[H]\centering
+\includegraphics[width=\linewidth,height=8cm,keepaspectratio]{../assets/uml/#1.pdf}
+\caption{#2}\end{figure}}
+\renewcommand{\projecttitle}[2]{%
+\hypersetup{pageanchor=false}\begin{titlepage}\centering\vspace*{-0.45cm}
+\noindent\begin{minipage}[c]{0.66\textwidth}\raggedright
+{\Large\bfseries Al Ain University (AAU)\par}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.28\textwidth}\raggedleft
+% The supplied PNG is unchanged; trim removes only its transparent margins.
+\includegraphics[width=3.1cm,trim=1731bp 871bp 1735bp 878bp,clip]{../../aau.png}
+\end{minipage}\par
+\vspace{0.45cm}
+{\scshape\large Object Oriented Analysis and Design\par}
+\vspace{0.10cm}
+{\normalsize System Analysis \& Design\par}
+\vspace{0.10cm}
+{\small Course codes: 0103430 \;|\; 0102331\par}
+\vspace{0.3cm}\noindent\rule{\linewidth}{0.5mm}\par\vspace{0.3cm}
+{\huge\bfseries Arena\par}
+\vspace{0.18cm}{\Large\color{aauRed}#1\par}
+\vspace{0.15cm}{\normalsize\color{darkGray}#2\par}
+\vspace{0.12cm}{\color{aauRed}\rule{\linewidth}{1.2pt}\par}
+\vspace{0.35cm}{\normalsize\bfseries Prepared by\par}\vspace{0.15cm}
+\begin{tabular}{@{}lr@{}}\textbf{Name}&\textbf{Student ID}\\\midrule
+Khaled Alkhawaldeh&202410091\\Abdulrahman Alnaqbi&202340042\\Yousif Alhammadi&202310707\\Ahmed Alsamma&202320192\end{tabular}\par
+\vspace{0.22cm}{\color{aauRed!55}\rule{0.6\textwidth}{1.2pt}\par}
+\vspace{0.15cm}{\normalsize\textbf{Section:} 61D\par}
+\vspace{0.15cm}{\normalsize\textbf{Submitted to:} Dr. Yazeed Ghadi\par}
+\vspace{0.3cm}
+\begin{tcolorbox}[colback=gray!5,colframe=black!70,title=\textbf{Project Summary},fonttitle=\bfseries,width=0.95\textwidth,boxrule=0.4mm,arc=3mm,left=7pt,right=7pt,top=4pt,bottom=4pt]
+We built an app to organize campus competitions. It coordinates teams, evaluates submissions, and publishes results. It offers formats such as knockout and score ranking for activities such as quizzes and programming. We applied several object-oriented concepts in this app.
+\end{tcolorbox}
+\vfill{\normalsize Fall, 2026--2027\par}{\small Version 2.0 \;|\; \reportdate\par}
+\end{titlepage}\pagenumbering{roman}\hypersetup{pageanchor=true}{\small\tableofcontents}\clearpage\pagenumbering{arabic}}
+
+% Tables rendered as images; each image already contains its own caption.
+\newcommand{\tableimage}[1]{\begin{table}[H]\centering
+\includegraphics[width=\linewidth]{../assets/tables/#1.png}\end{table}}
 \begin{document}
 \projecttitle{Analysis}{Requirements, domain models, and interaction design}
 \section{Introduction}
 \subsection{Project Background and Problem Statement}
-Campus competitions bring together students, organizers, and judges, but a collection of registration forms and spreadsheets does not express how different competitions actually operate. A hackathon needs a project submission and independent rubric reviews. A programming contest needs an official solved-problem count and a time penalty. A robotics tournament needs opponents, winners, and progression through rounds.
-
-\textbf{Arena} provides one coherent workspace for those variations. The instructor accepted the idea and specifically requested a scope beyond basic registration and scheduling. This analysis therefore treats format-dependent rules, guarded workflows, and fair result calculation as the central problem.
+Campus competitions bring together students, judges, and organizers with their creativity. However, registration forms and spreadsheets can become a bottleneck. For example, a hackathon needs a project submission and rubric reviews. A programming contest needs a solved-problem count and a time penalty. These competitions have different needs, so we propose \textbf{Arena}.
 \subsection{Project Objectives}
-\begin{objectivebox}
-Deliver a runnable Java application that coordinates teams, validates entries, collects work, separates competition types from tournament formats, and publishes reproducible results. Demonstrate encapsulation, immutable domain objects, polymorphic rule strategies, explicit lifecycle states, and separation of interface, application logic, and persistence.
-\end{objectivebox}
-The implementation must reject invalid actions in the application service even when the graphical interface is bypassed. Its reports must describe the delivered implementation and distinguish executed tests from future validation.
+We were asked to deliver a runnable Java application. We used an AI agent to build the app from the requirements and information we supplied; an AI assistance disclosure appears at the end of this report. We were required to apply object-oriented concepts, including encapsulation, polymorphism, and inheritance where appropriate.
 \subsection{Project Scope}
-Included: local account management; four roles; team creation and self-service membership; captain-led registration and withdrawal; configurable draft rules; submission links and descriptions; assigned judging; project, programming, quiz, and general-match types; score ranking, knockout, and round-robin formats; publication; CSV export; persistent storage; audit history; and supporting UML and interface artifacts.
-
-Excluded from this release: institutional single sign-on, email delivery, cloud synchronization, automatic code execution, payment processing, venue reservations, file uploads, automatic disqualification, and a production deployment. Competition deadlines and bracket rounds are supported; a calendar with resource-conflict scheduling is not implemented.
+The app includes local account management, 16 demonstration accounts, four roles (organizer, student, judge, and administrator), and different competition types and formats. Passwords are stored as salted cryptographic derivations rather than readable text. We excluded university-wide login integration, venue reservations, and file uploads.
 \subsection{Proposed Technologies}
-Java 17 language/API compatibility, Java Swing/AWT for the desktop interface, Java NIO for local storage and file locking, Java cryptography for salted password derivation, and LaTeX with vector UML illustrations for documentation. A portable JDK 21 was used to compile with \command{--release 17}. Build and test scripts require no external application libraries.
-\subsection{Team Members}
-\begin{tabularx}{\linewidth}{Yr}\toprule Name & Student ID\\\midrule
-Khaled Alkhawaldeh & 202410091\\ Abdulrahman Alnaqbi & 202340042\\ Yousif Alhammadi & 202310707\\ Ahmed Alsamma & 202320192\\\bottomrule\end{tabularx}
-Course names: Object Oriented Analysis and Design / System Analysis \& Design. Course codes: 0103430 / 0102331. Section: 61D. Instructor: Dr. Yazeed Ghadi.
-
+We used Java, as requested, and Swing for the graphical interface. We used ChatGPT's image generator to improve the appearance of supplied UML illustrations. UML diagrams describe the system's structure and behavior. We used LaTeX to prepare and render the requested documents.
 \section{Overview}
 \subsection{System Description}
-A user signs into a single-machine competition workspace. Organizers configure draft competitions, assign judges, open registration, and advance the lifecycle. Students form teams and captains enter competitions. Depending on the selected format, work is submitted and evaluated, or matches are decided and winners advance. Published results are visible to every authenticated role.
+A user signs into the system to view the workspace. Organizers can configure draft competitions, assign judges, and advance to the next stage. Captains enter competitions on behalf of their teams. Depending on the selected competition type and format, work is submitted and evaluated differently, or teams compete through matches.
 \subsection{Target Users and Stakeholders}
-\begin{tabularx}{\linewidth}{lY}\toprule Stakeholder & Interest and responsibility\\\midrule
-Student & Find events, collaborate, enter as a team, submit work, and see official results.\\
-Captain & A student who created a team; registers, withdraws, and submits for that team.\\
-Organizer & Own competitions, set rules and judges, enforce readiness, and publish results.\\
-Judge & Review only assigned competitions and record scores or match winners.\\
-Administrator & Create accounts and manage any competition; inspect audit history.\\
-Instructor & Assess completeness and the connection between models, code, and tests.\\\bottomrule\end{tabularx}
+\tableimage{01-stakeholders}
 \subsection{System Features}
-\begin{tabularx}{\linewidth}{lY}\toprule Capability & Delivered behavior\\\midrule
-Project ranking & Submission; 40/35/25 rubric; mean of all assigned reviews.\\
-Programming ranking & Submission; solved count first, then lower penalty; one official result.\\
-Quiz ranking & Points out of a configured maximum; no submission; equal points share rank.\\
-Knockout & General match or quiz; 2--16 entrants with byes; automatic next rounds.\\
-Round robin & General match or quiz; every pair once; 3/1/0 points and deterministic ties.\\\bottomrule\end{tabularx}
-\subsection{Assumptions and Constraints}
-The application is used by one process on one trusted computer. Different people sign in sequentially; it is not a multi-client server. Local operating-system access controls protect the data file. Competition deadlines use the computer's local time; documents use the team's UAE context. Roster membership is voluntary self-joining and is frozen once a team has any registration. Team size is a maximum, not an exact minimum. Each competition needs at least two teams to start.
-
+\tableimage{02-features}
 \section{Functional Requirements}
 \subsection{User Management}
-\textbf{FR-01 Authentication.} The system shall verify an email/password pair, support sign-out, and clear an existing session after a failed login. Email matching shall be case insensitive.\par
-\textbf{FR-02 Accounts and credentials.} Only administrators shall create accounts and assign roles. Email addresses shall be unique, passwords shall have at least eight characters, and authenticated users shall be able to change their own password after verifying the old password.
+\textbf{FR-01 Authentication.} The system checks an email/password pair and supports signing out.\par
+\textbf{FR-02 Creating accounts.} Only administrators can make new accounts and assign roles.
 \subsection{Competition Management}
-\textbf{FR-03 Competition lifecycle.} Organizers and administrators shall create draft competitions with title, description, competition type, compatible tournament format, quiz maximum where relevant, maximum entries, maximum team size, deadline, and assigned judges. Only the owning organizer or an administrator shall edit or advance a competition. Rule editing shall stop when registration opens. Stages shall advance in order: Draft, Registration, Active, Judging, Published, Archived.
-
-\textbf{Acceptance guards:} registration must open before the deadline; starting requires at least two entries; project/programming ranking events must start before their submission deadline; entering Judging requires all required submissions or all match fixtures completed. Quiz ranking requires no submission. Publication requires every assigned project review or one official programming/quiz result per entry; match formats must already be certified.
+\textbf{FR-03 States of competitions.} Competitions have a fixed lifecycle. They begin as drafts, where the organizer enters the required information. They then enter Registration, where captains can register their teams. The remaining stages are Active, Judging, Published, and Archived. Only the owning organizer or an administrator can advance a competition when the requirements for the next stage are met.
 \subsection{Registration and Team Management}
-\textbf{FR-04 Entry validation.} Only a team captain shall register or withdraw a team during registration. The system shall reject a full competition, an oversized team, repeated team registration, or a student appearing in two teams within the same competition. Entry after the deadline shall be rejected.\par
-\textbf{FR-05 Team membership.} Students shall create uniquely named teams, join unregistered teams, and leave teams they do not captain. A team shall contain at most eight members. Registered rosters shall be locked to preserve eligibility. Captains cannot leave their own team in this release.
-\subsection{Submission Management}
-\textbf{FR-06 Submissions.} Captains of registered teams shall submit a title, description, and HTTP(S) project link during the Active phase and strictly before the deadline. Resubmission shall replace that entry's earlier submission. Quiz and all match formats shall reject submissions. Students shall only see submissions belonging to their own teams; assigned judges and competition managers shall see all entries in their competition.
+\textbf{FR-04 Entry validation.} The captain can register or withdraw the team during Registration. Registration is rejected if the event is full, the team is too large, the team is already enrolled, a member is already entered through another team, or the registration deadline has passed.\par
+\textbf{FR-05 Team membership.} Students can create and join teams. Members can leave if they are not the captain and the roster is not locked by registration. Teams can have a maximum of eight members.
 \subsection{Judging and Evaluation}
-\textbf{FR-07 Assigned review.} Only assigned judges shall record evaluations during Judging. The system shall require a submission for project/programming ranking only, score ranges appropriate to the type, and nonempty feedback. A judge may revise their own score before publication. Published scores shall be immutable.\par
-\textbf{FR-09 Programming results.} A result shall contain solved problems from 0--10, elapsed minutes from 0--300, and wrong attempts from 0--100. One assigned judge owns the official result for each team; a second judge cannot replace it. No submitted code is executed.\par
-\textbf{FR-10 Knockout workflow.} Starting shall require 2--16 registered teams, seeded by registration order. The opening bracket is rounded up to the next power of two; early seeds receive automatic first-round byes. Assigned judges shall record winners only while Active. A winner must be a participant in that match. General knockout events use winner selection; quiz knockout events use bounded points for both teams and reject draws until an external tie-break produces a decisive result. Results are final; when every match in a round is complete, winners are paired for the next round.
-\subsection{Results and Leaderboard}
-\textbf{FR-08 Results and export.} The system shall publish rankings only after the relevant completeness checks. Organizers and administrators may preview provisional standings; other roles wait for publication. Equal score-ranking results share a rank, using competition ranking (1, 1, 3). Knockout ranks use the round reached, with the champion first. League ranks follow their deterministic tie-break order. Export shall produce CSV and neutralize leading spreadsheet formula characters in text cells.\par
-\textbf{FR-11 Audit.} Successful changes shall record actor, local timestamp, and action. Administrators and organizers shall see the most recent 2,000 events. Failed operations shall not appear as successful events.
-
-\subsection*{Scoring Policies}
-For a project scored by judge $j$, with three scores between 0 and 100:
-\[S_j=0.40I_j+0.35E_j+0.25P_j,\qquad S_{team}=\frac{1}{n}\sum_{j=1}^{n}S_j.\]
-All assigned judges must score all entries before publication. Scores are averaged without rounding internally and displayed to two decimal places. Equality uses a $10^{-6}$ tolerance.
-
-For programming, sort solved count descending and penalty ascending:
-\[\mathrm{penalty}=\mathrm{elapsed\ minutes}+20\times\mathrm{wrong\ attempts}.\]
-This is an intentionally simplified coursework policy, not a claim to implement all ICPC rules. Tied solved counts and penalties share a rank. Knockout standings rank the champion first and then use the round reached; teams eliminated at the same depth share rank. The displayed score counts played-match wins and excludes byes, so a bye cannot distort the champion's rank.
-
+\textbf{FR-07 Assigned review.} An assigned judge evaluates submissions while the competition is in Judging. Published scores are immutable, meaning they cannot be changed after publication.\par
+\textbf{FR-09 Programming results.} A result contains solved problems from 0--10, elapsed time from 0--300 minutes, and wrong attempts from 0--100. One assigned judge owns a team's official result. That judge can revise it before publication, but another judge cannot overwrite it.\par
+\textbf{FR-10 Knockout workflow.} The bracket supports 2--16 teams, seeded by registration order. When the number of teams does not fit a power-of-two bracket, some early seeds receive first-round byes. Winners advance automatically until a champion is determined.
 \subsection{Arena Extensions: Competition Type and Tournament Format}
-The following extension requirements record the requested Arena update. They supplement the original academic deliverables; they do not replace the assignment instructions.
+\textbf{FR-13 Round-robin league.} Every team plays every other team once, giving a total of $n(n-1)/2$ matches for $n$ teams. No team plays twice within the same round. A win earns three points, a draw one, and a loss zero.
 
-\textbf{FR-12 Quiz scoring.} A quiz ranking event shall record one official integer points result per registered team, from zero to a configured maximum of 1--10,000. Extra scoring inputs shall be zero. The owning judge may revise that result while Judging. Equal points share a rank and tied first-place entries share the win. Questions and any knockout tie-break are administered outside the application.
-
-\textbf{FR-13 Round-robin league.} Starting shall generate exactly $n(n-1)/2$ fixtures for $n=2,\ldots,16$ teams. Each pair meets once and no team appears twice in one round; odd counts include rest rounds. Assigned judges record nonnegative integer scores, bounded by the quiz maximum or 10,000 for general matches. Wins award 3 points, draws 1, losses 0. Rank by points, wins, score difference, and scores for (descending), then case-insensitive team name and stable team ID (ascending). Every fixture must finish before certification and publication. Confirmed match results cannot be revised.
-
-\textbf{FR-14 Compatible configurations.} Creation and draft editing shall enforce this matrix in the service, and the UI shall offer only supported choices:
-\begin{tabularx}{\linewidth}{Yccc}\toprule Type & Score ranking & Knockout & Round robin\\\midrule
-Project & Yes & No & No\\ Programming & Yes & No & No\\ Quiz / academic & Yes & Yes & Yes\\ General match & No & Yes & Yes\\\bottomrule\end{tabularx}
+\textbf{FR-14 Compatible configurations.} Not every competition type can run in every tournament format. The table below shows the supported combinations.
+\tableimage{03-type-format-support}
 Project and programming retain their submission and review workflows. Quiz requires no project submission. A general-match type preserves the original generic knockout functionality.
 
 \section{Nonfunctional Requirements}
 \subsection{Performance}
-\textbf{NFR-01:} interactive operation is intended for small campus datasets (up to 64 teams per score-ranking competition and 16 per match tournament). A target of under one second for routine navigation is a design goal, not a measured benchmark. Password derivation and disk writes can briefly block the Swing thread; large-scale performance testing remains future work.
+\textbf{NFR-01:} We expect small datasets: up to 64 teams in a ranking competition and 16 in a match tournament. We aim for routine navigation to take under one second. This is a design target, not a measured performance result.
 \subsection{Security}
-\textbf{NFR-02:} passwords shall be stored as salted PBKDF2-HMAC-SHA256 derivations, never plaintext; service methods shall enforce roles and ownership. Serialized reads shall use class and size limits. The local file is not encrypted and protection against a malicious user who can modify it is outside scope.
+\textbf{NFR-02:} Passwords are stored as salted cryptographic derivations rather than readable text. Service methods enforce role and ownership restrictions.
 \subsection{Usability}
-\textbf{NFR-03:} visible phase indicators, consistent navigation, labeled controls, clear empty states, and actionable validation errors shall support users without technical knowledge. The application shall support a minimum 1100 by 720 window. Visual checks at the default size are recorded; formal accessibility and participant usability studies have not been performed.
-\subsection{Reliability}
-\textbf{NFR-04:} successful updates shall persist; failed saves shall restore the in-memory state; an exclusive file lock shall reject a second process. Corrupt data shall trigger an error rather than silently reset. Atomic replacement is used where the filesystem supports it, with normal replacement as fallback.
-\subsection{Maintainability}
-\textbf{NFR-05:} business policies shall be testable without the UI. Strategies shall encapsulate format validation and scoring. Requirements shall map to executable checks.
-
+\textbf{NFR-03:} Users should know where they are and understand what to do next. Visible phase indicators, consistent navigation, and labeled controls help them do this.
 \begin{umlpage}
 \section{System Models}
 \subsection{Use Case Model}
 \umlfigure{supplied/01_authentication_use_case}{Authentication use-case diagram showing selected role actions.}
-\end{umlpage}
-\begin{umlpage}
 \subsection{Dynamic Models}
 \umlfigure{02_registration_sequence}{Successful team registration. Validation failure returns before mutation; persistence failure restores the snapshot.}
 \clearpage\subsubsection*{Competition Lifecycle}
 \umlfigure{03_competition_state}{Competition state machine and transition guards.}
-\clearpage\subsubsection*{Format-Specific Workflow}
+\subsubsection*{Format-Specific Workflow}
 \umlfigure{04_competition_activity}{Activity overview separating score-ranking, knockout, and league workflows.}
 \end{umlpage}
 \begin{umlpage}
@@ -117,35 +104,21 @@ Project and programming retain their submission and review workflows. Quiz requi
 \umlfigure{supplied/05_core_domain}{Core domain class diagram with selected records and relationship multiplicities.}
 \end{umlpage}
 \clearpage\subsection{User Interface}
-The primary navigation is Sign in $\rightarrow$ Overview $\rightarrow$ Competitions $\rightarrow$ Competition workspace. A workspace contains Teams, relevant Submissions/Reviews, Bracket or Fixtures, and Leaderboard. My teams and Results are global destinations; People is administrator-only and Activity is available to organizers and administrators. Role-specific action buttons reflect, but do not replace, service authorization.
-Appendix A includes the complete wireframe set, seven browser-prototype captures and thirteen rendered application screens and dialogs.
+Users move through Arena using this navigation: Sign in $\rightarrow$ Overview $\rightarrow$ Competitions $\rightarrow$ Competition workspace. Inside an event, the available tabs depend on its activity and tournament format. For example, a project competition needs submissions and reviews. My teams and Results are global navigation destinations, with actions and data restricted by role and ownership. Activity is available to organizers and administrators. People is administrator-only.
+
+Appendix A contains the wireframes, browser prototype captures, and actual application screens.
 \screenpair{prototype/01-overview.png}{Clickable browser prototype dashboard. Demo data resets on refresh.}{screenshots/04-competition.png}{Implemented competition workspace with format policy and lifecycle indicator.}
 
-\clearpage\section{Glossary \& References}
-\begin{tabularx}{\linewidth}{lY}\toprule Term & Meaning\\\midrule
-Entry & One team's registration in one competition.\\
-Captain & Student responsible for registering and submitting for a team.\\
-Strategy & Interchangeable object encapsulating format-specific behavior.\\
-Phase guard & Condition checked before the lifecycle advances.\\
-Official result & The single judge-owned programming or quiz ranking score for a team.\\
-Provisional standings & Manager-only rankings before publication.\\
-Atomic replacement & Replacing the saved file in one filesystem operation where supported.\\\bottomrule\end{tabularx}
-\input{../shared/references}
+\clearpage
+% The image carries the "6 Glossary & References" heading; keep the section number and TOC entry.
+\refstepcounter{section}\addcontentsline{toc}{section}{\protect\numberline{\thesection}Glossary \& References}
+\noindent\includegraphics[width=\linewidth]{../assets/tables/06-glossary-references.png}
 \clearpage\appendix
 \section{Interface Mockups and Implemented Screens}
 \subsection{Design Direction}
-The Java app and clickable browser prototype share a white navigation rail, burgundy primary actions, warm neutral surfaces, pale green feature panels, serif page headings, and restrained gold accents. A clear page title, a small context label, and a short description establish hierarchy. Tables handle comparison; cards provide entry points without hiding essential rules.
-
-Wireframes are intentionally monochrome. They describe information placement and interaction intent. The screenshot section shows the implemented Swing interface, which adapts the judging wireframe into a submission reader and an evaluation dialog rather than a permanent split pane.
-Open \code{prototype/index.html} in a browser for an interactive walkthrough. Its role switch is a demonstration control; the Java app uses authenticated accounts. Both use ten programming problems, a 40/35/25 project rubric, bounded quiz points, and knockout/league match decisions during Active followed by certification and publication. The browser creation form is explicitly a preview; actual creation, account permissions, and persistence are implemented in Java. Their sample events and accounts are independent.
-
+Wireframes and a clickable prototype guided our interface design. We built low-fidelity wireframes to sketch the layout and chose interface patterns suited to the application. We also built a high-fidelity clickable prototype to illustrate how a running program would behave. The clickable prototype and Java app share colors, fonts, and the overall design. A key difference is account access: the prototype has a role-switching control, while the Java app requires sign-in.
 \subsection{Navigation and Role Paths}
-\begin{tabularx}{\linewidth}{lY}\toprule User & Primary path\\\midrule
-Student captain & Sign in $\rightarrow$ My teams $\rightarrow$ create team $\rightarrow$ Competition $\rightarrow$ register $\rightarrow$ submit work $\rightarrow$ Results.\\
-Student member & Sign in $\rightarrow$ My teams $\rightarrow$ join team before registration $\rightarrow$ view own work and published results.\\
-Organizer & Sign in $\rightarrow$ Competitions $\rightarrow$ create draft $\rightarrow$ assign judges $\rightarrow$ open/start/judge/publish.\\
-Judge & Sign in $\rightarrow$ Judging studio $\rightarrow$ assigned competition $\rightarrow$ read submission $\rightarrow$ evaluate, or Bracket $\rightarrow$ record winner.\\
-Administrator & Sign in $\rightarrow$ People $\rightarrow$ add accounts; Competitions $\rightarrow$ manage any event; Activity $\rightarrow$ review changes.\\\bottomrule\end{tabularx}
+\tableimage{05-navigation-paths}
 \clearpage\subsection{Low-Fidelity Skeletons}
 Editable SVG files are in \code{reports/assets/wireframes}. PNG previews are generated by \code{scripts/generate-wireframes.py}; they are schematic assets, not screenshots.
 \screenpair{wireframes/01-overview.png}{Dashboard: featured call to action, metrics, and competition cards.}{wireframes/02-competition.png}{Competition workspace: persistent rules, stage strip, role action, and detail tabs.}
@@ -153,7 +126,7 @@ Editable SVG files are in \code{reports/assets/wireframes}. PNG previews are gen
 \subsubsection*{Evaluation and bracket views}
 \screenpair{wireframes/03-judging.png}{Judging concept: review context alongside scoring fields. The implementation uses separate reader and scoring dialogs.}{wireframes/04-bracket.png}{Bracket concept: seeded opponents, next-round progression, and champion.}
 \clearpage\subsection{Clickable Browser Prototype}
-These captures come from the local HTML/CSS/JavaScript prototype at a 1440-pixel browser viewport. The prototype demonstrates the visual design and interaction flow. It uses a role switch and temporary in-memory sample data; it does not authenticate users or connect to the Java repository. Dates, locations, and event names are illustrative. The Java app implements the service rules and persistence described in the reports.
+We built a prototype using HTML, CSS, and JavaScript to confirm the application's design. Instead of logging in, users switch roles with a button; the prototype already shows a signed-in workspace. Dates, locations, and event names are illustrative. It uses temporary sample data and does not connect to the Java application's saved data.
 \screenpair{prototype/01-overview.png}{Browser prototype: overview and discovery cards.}{prototype/02-registration.png}{Browser prototype: project registration workspace.}
 \clearpage
 \subsubsection*{Scoring and knockout interactions}
@@ -163,7 +136,7 @@ These captures come from the local HTML/CSS/JavaScript prototype at a 1440-pixel
 \clearpage\subsubsection*{Creation Preview}
 \begin{figure}[H]\centering\includegraphics[width=0.90\linewidth,height=0.68\textheight,keepaspectratio]{../assets/prototype/07-creation.png}\caption{Browser creation preview filters formats by competition type. It explicitly directs actual saving to the Java application.}\end{figure}
 \clearpage\subsection{Implemented Screens}
-The following images were rendered directly from the actual Swing component tree at a 1440 by 1150 documentation window size using the demonstration dataset. They verify the layout of these screens; they do not constitute a user study or proof that every mouse interaction was manually exercised.
+The following images were captured from actual Java Swing components at a 1440 by 1150 window size. These pictures show the interface layout; they do not, by themselves, test the application's behavior.
 \screenpair{screenshots/01-sign-in.png}{Sign-in screen with a visible local demonstration account.}{screenshots/02-overview.png}{Organizer overview with competition and team metrics.}
 \clearpage
 \subsubsection*{Competition discovery and workspace}
@@ -181,7 +154,8 @@ The following images were rendered directly from the actual Swing component tree
 \clearpage\subsubsection*{Competition Creation}
 \begin{figure}[H]\centering\includegraphics[width=0.90\linewidth,height=0.58\textheight,keepaspectratio]{../assets/screenshots/13-create-competition.png}\caption{Actual creation dialog with separate type and tournament selectors, relevant settings, assigned judges, and rule explanations.}\end{figure}
 \subsection{Interaction States and Accessibility}
-Empty result views explain that publication is pending. Missing selections prompt users to choose a row. Invalid input displays a descriptive message without treating the operation as successful. Draft rules become read-only after registration opens. Judges see scoring controls only for assigned events and the appropriate phase.
+The interface should show when something is incomplete or unusual. An empty results view explains that publication is still pending. Missing selections prompt the user to choose a row. Invalid input displays a descriptive message and prevents the action from continuing. Tooltips reveal long values.
 
-Controls have descriptive text, Swing keyboard focus, labeled form fields, and table row selection. Textual phase labels supplement color. Long table values have tooltips and submission descriptions can be read in a dedicated dialog. Twenty-two automated Swing checks exercise controls and dialogs, including a live weighted-score preview. Formal screen-reader testing, high-DPI checks, and a usability study remain outstanding.
+\subsection*{AI Assistance Disclosure}
+We used an AI agent to generate and revise application code and documentation from the requirements, information, and feedback we supplied. This report includes wording revised by the team. AI assistance does not establish individual contributions; those must be confirmed by the group.
 \end{document}
