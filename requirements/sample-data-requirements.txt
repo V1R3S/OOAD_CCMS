@@ -1,8 +1,0 @@
-For your Arena, it could contain:
-- Users: 10 students, 3 judges, 2 organizers, 1 admin.
-- Competitions: Hackathon 2026, Programming Contest, Robotics Challenge.
-- Teams: Team Alpha, Code Warriors, Innovators.
-- Registrations: Students and teams registered for competitions.
-- Submissions: Sample project descriptions and GitHub links.
-- Evaluations: Judges' scores for submissions.
-- Results: Generated rankings based on evaluations.
