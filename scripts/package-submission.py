@@ -5,14 +5,13 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 ROOT_FILES = (
-    '.gitignore', '.gitattributes', 'README.md',
+    '.gitignore', '.gitattributes',
     'aau.png', 'pom.xml', 'build-app.ps1',
     'build-app.sh', 'start-app.ps1', 'start-app.cmd',
 )
 # Personal rehearsal, review and learning material stays in the working folder.
-SUPPORT_FILES = ('presentation/Arena-presentation.pptx',
-                 'project-notes/demo-accounts-and-data.md')
-TREES = ('src', 'reports', 'requirements', 'prototype', 'scripts')
+SUPPORT_FILES = ('pptx/Arena-presentation.pptx',)
+TREES = ('src', 'reports', 'prototype', 'scripts')
 EXTENSIONS = {'.java', '.bin', '.md', '.tex', '.png', '.svg', '.csv', '.txt',
               '.pdf', '.pptx', '.py', '.ps1', '.html', '.css', '.js', '.cjs'}
 
