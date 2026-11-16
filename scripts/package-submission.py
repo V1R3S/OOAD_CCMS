@@ -14,7 +14,7 @@ SUPPORT_FILES = ('presentation/Arena-presentation.pptx',
                  'project-notes/demo-accounts-and-data.md')
 TREES = ('src', 'reports', 'requirements', 'prototype', 'scripts')
 EXTENSIONS = {'.java', '.bin', '.md', '.tex', '.png', '.svg', '.csv', '.txt',
-              '.pdf', '.pptx', '.py', '.ps1', '.html', '.css', '.js', '.cjs'}
+              '.pdf', '.docx', '.pptx', '.py', '.ps1', '.html', '.css', '.js', '.cjs'}
 
 
 def collect_files():
