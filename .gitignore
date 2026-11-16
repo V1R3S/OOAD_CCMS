@@ -57,3 +57,4 @@ node_modules/
 # Intentional fictional-data fixture for serialization compatibility
 !src/test/resources/legacy-campus-v1.bin
 !src/test/resources/legacy-active-v1.bin
+reports/source/analysis.tex
