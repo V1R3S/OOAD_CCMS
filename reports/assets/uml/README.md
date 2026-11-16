@@ -31,4 +31,4 @@ The Design Class Diagram includes every named production type, with selected rea
 node scripts/render-uml.cjs --font "path/to/DejaVuSans.ttf" --browser "path/to/browser"
 ```
 
-This optional authoring step needs Node.js, Playwright and Chromium/Edge. It removes only poster headers and footers, keeps the full horizontal drawing, embeds the font and creates vector PDFs. Ordinary LaTeX builds use the included PDFs without these tools. Rebuild the reports after editing diagrams.
+This optional authoring step needs Node.js, Playwright and Chromium/Edge. It removes only poster headers and footers, keeps the full horizontal drawing, embeds the font and creates vector PDFs. The Word report uses images of the included PDFs, so these tools are not needed to read it. Replace the figure in the Word report after editing a diagram.

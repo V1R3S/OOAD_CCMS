@@ -7,8 +7,8 @@ Dr. Yazeed Ghadi · Section 61D · Courses 0103430 / 0102331
 ## Start here
 
 - **Run Java:** double-click [start-app.cmd](start-app.cmd).
-- **Read the three reports:** [Analysis](reports/01-analysis.pdf), [Design](reports/02-design.pdf), and [Final Report](reports/03-final-report.pdf).
-  Analysis includes interface mockups/screenshots in Appendix A. Final Report includes a short testing summary and the user guide in Appendix A. Full testing evidence is retained in `reports/test-evidence`.
+- **Read the reports:** [Arena-Combined-Report.docx](reports/Arena-Combined-Report.docx) contains the Analysis, Design, and Final Report as Parts I–III.
+  Analysis includes interface mockups/screenshots in Appendix A. Final Report includes the user guide in Appendix A.
 - **Present:** open [the PowerPoint](presentation/Arena-presentation.pptx). The current edited deck contains 21 slides. The separate speaking script is retained in the working project for rehearsal and excluded from the submission ZIP.
 - **Explore the prototype:** open [prototype/index.html](prototype/index.html).
 - **Working-folder companions:** `PROJECT-FILES.md` explains every maintained file, and `study-guide` contains personal learning material. These are excluded from the submission ZIP.
@@ -34,9 +34,9 @@ mvn package
 java -jar target/arena.jar
 ```
 
-`mvn test` runs 98 service checks (70 original checks and 28 Arena regressions). The UI profile adds 22 real Swing checks and requires a graphical desktop. Maven reports three wrapper methods around these suites, with the Swing wrapper skipped by default. The 120 checks are not 120 independent JUnit methods. The first Maven build downloads build/test dependencies; the app has no external runtime libraries.
+The `ui-tests` profile needs a graphical desktop and is skipped by default. The first Maven build downloads build dependencies; the app has no external runtime libraries.
 
-Use `sh build-app.sh test` or `sh build-app.sh ui-test` on a POSIX shell. This route was verified through Git shell on Windows; native Linux/macOS runtime behavior remains unverified. Java targets release 17; recorded builds used JDK 21.
+Use `sh build-app.sh test` or `sh build-app.sh ui-test` on a POSIX shell. Java targets release 17.
 
 ## Demo accounts and behavior
 
@@ -75,11 +75,8 @@ Service checks enforce roles, ownership, roster locks, deadlines, score bounds, 
 
 | Folder | Contents |
 |---|---|
-| `reports/` | Three finished PDFs |
-| `reports/source/` | One named LaTeX source per report |
-| `reports/shared/` | AAU style and references |
+| `reports/` | Combined Word report (Analysis, Design, Final Report) |
 | `reports/assets/` | Necessary UML, Java/prototype screenshots, and wireframes |
-| `reports/test-evidence/` | Preserved CSV results, timestamps, and LaTeX result tables |
 | `presentation/` | Slide deck; the working folder also retains a private speaking script |
 | `project-notes/` | Demo-data explanation; the internal technical review stays in the working folder |
 | `requirements/` | Original assignment outlines; only the product name in the sample-data brief was updated |
@@ -91,24 +88,15 @@ The personal learning companion is kept in `study-guide/` in the working project
 
 The prototype's role switch does not authenticate users. Refresh resets its independent sample data. Java is the persistent implementation used for the live demonstration.
 
-## Edit and rebuild reports
+## Edit reports
 
-Edit a named file in `reports/source`, such as `analysis.tex`. Each contains both the compilation entry point and report text. The shared style is `reports/shared/aau-report-style.tex`. Keep `aau.png` at the root; the app, prototype, and covers use it.
+The reports are maintained in [reports/Arena-Combined-Report.docx](reports/Arena-Combined-Report.docx). Edit it directly in Word. Keep `aau.png` at the root; the app and prototype use it.
 
-```powershell
-.\scripts\build-reports.ps1 -CachedOnly
-.\scripts\build-reports.ps1 -CachedOnly -Report analysis,design
-```
-
-The script uses local or installed Tectonic. On a fresh computer, omit `-CachedOnly` to obtain required TeX dependencies. Alternatively, compile a named source from `reports/source` twice using pdfLaTeX. Script-generated intermediates go in `build/latex`.
-
-Report images are required illustrations. SVGs are editable artwork; matching PDF/PNG versions are embedded by LaTeX. See [UML notes](reports/assets/uml/README.md). These are not duplicate screenshots of report pages.
-
-Preserved evidence records 98 service checks, 22 Swing checks, and 17 additional browser-prototype checks passing on 10 November 2026. Fresh runs write results under `build`. `scripts/update-test-evidence.py` copies executed results into the reports. The Final Report briefly summarizes the recorded results and limitations; full evidence remains in `reports/test-evidence`.
+Report images are required illustrations. SVGs are editable artwork; matching PDF/PNG versions are the report figures. See [UML notes](reports/assets/uml/README.md). These are not duplicate screenshots of report pages.
 
 Optional prototype verification requires Node.js and Playwright: `node scripts/test-prototype.cjs --browser "path/to/browser"`. Add `--capture` to rebuild its seven illustrations. Java report images come from `java -jar build/arena.jar --capture reports/assets/screenshots`.
 
-Version-one serialized PROJECT and PROGRAMMING records map to score ranking, and KNOCKOUT maps to general match plus knockout. The persisted `edu.aau.ccms.Model` names and legacy filename are intentional compatibility identifiers, not visible product branding. Two genuine version-one fixtures test loading, continued operation, saving, and restarting. Never open upgraded data in the older application.
+Version-one serialized PROJECT and PROGRAMMING records map to score ranking, and KNOCKOUT maps to general match plus knockout. The persisted `edu.aau.ccms.Model` names and legacy filename are intentional compatibility identifiers, not visible product branding. Never open upgraded data in the older application.
 
 ## Submission and Git
 
@@ -116,7 +104,7 @@ Version-one serialized PROJECT and PROGRAMMING records map to score ranking, and
 python scripts/package-submission.py
 ```
 
-Python 3.10+ creates `dist/Arena-submission.zip` with the app source, tests, build configuration, logo, original outlines, three reports and their required sources/assets, prototype, slide deck, demo-account reference, maintenance scripts, and SHA-256 manifest. Install a JDK separately to build it. The speaking script, internal technical review, file inventory, and personal study guides remain in the working folder and are excluded from the ZIP.
+Python 3.10+ creates `dist/Arena-submission.zip` with the app source, tests, build configuration, logo, original outlines, the combined Word report and its assets, prototype, slide deck, demo-account reference, maintenance scripts, and SHA-256 manifest. Install a JDK separately to build it. The speaking script, internal technical review, file inventory, and personal study guides remain in the working folder and are excluded from the ZIP.
 
 `.tools`, `.local-archive`, `build`, `target`, `data`, and `dist` are ignored. The archive preserves the pre-cleanup files; it is not submitted. The group reviews changes and manages commits/pushes.
 

@@ -7,7 +7,7 @@ Keep the maintained files below. Generated folders are useful locally but do not
 | Folder | Purpose |
 |---|---|
 | `src/` | Production Java, automated tests and two historical data fixtures. |
-| `reports/` | Three finished academic PDFs, their LaTeX sources, required illustrations and recorded test evidence. |
+| `reports/` | Combined Word report and required illustrations. |
 | `presentation/` | Arena PowerPoint and four-person speaking/demo script. |
 | `prototype/` | Independent HTML/CSS/JavaScript visual walkthrough. |
 | `requirements/` | University assignment outlines; the sample-data product name is updated only. |
@@ -74,9 +74,7 @@ Keep the maintained files below. Generated folders are useful locally but do not
 
 | File | Purpose |
 |---|---|
-| `reports/01-analysis.pdf` | Finished readable PDF generated from its LaTeX source. |
-| `reports/02-design.pdf` | Finished readable PDF generated from its LaTeX source. |
-| `reports/03-final-report.pdf` | Finished readable PDF generated from its LaTeX source. |
+| `reports/Arena-Combined-Report.docx` | Combined Analysis, Design and Final Report in Word; the maintained report document. |
 | `reports/assets/prototype/01-overview.png` | Labelled browser-prototype capture; not a Java screenshot. |
 | `reports/assets/prototype/02-registration.png` | Labelled browser-prototype capture; not a Java screenshot. |
 | `reports/assets/prototype/03-scoring.png` | Labelled browser-prototype capture; not a Java screenshot. |
@@ -128,21 +126,6 @@ Keep the maintained files below. Generated folders are useful locally but do not
 | `reports/assets/wireframes/03-judging.svg` | Editable low-fidelity layout. |
 | `reports/assets/wireframes/04-bracket.png` | Matching wireframe illustration. |
 | `reports/assets/wireframes/04-bracket.svg` | Editable low-fidelity layout. |
-| `reports/shared/aau-report-style.tex` | Editable LaTeX report, shared style or learning appendix; rebuild the corresponding PDF after edits. |
-| `reports/shared/references.tex` | Editable LaTeX report, shared style or learning appendix; rebuild the corresponding PDF after edits. |
-| `reports/source/final-report.tex` | Editable LaTeX report, shared style or learning appendix; rebuild the corresponding PDF after edits. |
-| `reports/source/analysis.tex` | Editable LaTeX report, shared style or learning appendix; rebuild the corresponding PDF after edits. |
-| `reports/source/design.tex` | Editable LaTeX report, shared style or learning appendix; rebuild the corresponding PDF after edits. |
-| `reports/test-evidence/arena-results-table.tex` | LaTeX table generated from executed evidence. |
-| `reports/test-evidence/arena-test-results.csv` | Executed test descriptions/results. |
-| `reports/test-evidence/arena-test-summary.txt` | Execution time and counts. |
-| `reports/test-evidence/prototype-test-summary.txt` | Execution time and counts. |
-| `reports/test-evidence/service-results-table.tex` | LaTeX table generated from executed evidence. |
-| `reports/test-evidence/service-test-results.csv` | Executed test descriptions/results. |
-| `reports/test-evidence/service-test-summary.txt` | Execution time and counts. |
-| `reports/test-evidence/swing-results-table.tex` | LaTeX table generated from executed evidence. |
-| `reports/test-evidence/ui-test-results.csv` | Executed test descriptions/results. |
-| `reports/test-evidence/ui-test-summary.txt` | Execution time and counts. |
 
 ## presentation
 
@@ -173,13 +156,11 @@ Keep the maintained files below. Generated folders are useful locally but do not
 
 | File | Purpose |
 |---|---|
-| `scripts/build-reports.ps1` | Compiles the three named LaTeX reports with Tectonic. |
 | `scripts/generate-design-class-diagram.py` | Checks all 37 production type names and rebuilds the design/strategy SVGs. |
 | `scripts/generate-wireframes.py` | Rebuilds four editable wireframes and their PNG versions. |
 | `scripts/package-submission.py` | Creates a clean Arena ZIP and SHA-256 manifest, excluding private data/tools. |
 | `scripts/render-uml.cjs` | Converts editable report SVG diagrams to font-embedded vector PDFs. |
 | `scripts/test-prototype.cjs` | Runs 17 browser checks and optionally captures seven report illustrations. |
-| `scripts/update-test-evidence.py` | Copies executed logs and builds report result tables. |
 
 ## project-notes
 
@@ -200,6 +181,6 @@ Keep the maintained files below. Generated folders are useful locally but do not
 
 ## What to submit
 
-Run `python scripts/package-submission.py`. The result is `dist/Arena-submission.zip`. It contains maintained sources, tests, the three reports, assets, slides, prototype, requirements, demo-account reference, maintenance scripts and build instructions. The speaking script, internal technical review, this file inventory, and personal study guides remain in the working folder and are excluded from the submission. A JDK must be installed separately.
+Run `python scripts/package-submission.py`. The result is `dist/Arena-submission.zip`. It contains maintained sources, tests, the combined Word report, assets, slides, prototype, requirements, demo-account reference, maintenance scripts and build instructions. The speaking script, internal technical review, this file inventory, and personal study guides remain in the working folder and are excluded from the submission. A JDK must be installed separately.
 
 The old Model namespace, legacy data filenames and fictional campus.test credentials are compatibility or university concepts, not product branding. Earlier files in the private archive are deliberately preserved. No commit or push was made.
